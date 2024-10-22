@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Tienda</title>
 </head>
-<body>
+<body>    
+    <div id="appVue">
+        <br><br>
+            <div class="superior">
+                <button @click="canviarDiv('portada')">Inicio</button>
+                <button @click="canviarDiv('botiga')">Categorias</button>
+                <button id="signup">Sign up</button>
+                <button id="login">Login</button>
+                <input type="text" placeholder="Buscar...">
+                <button @click="canviarDiv('checkout')">Cesta</button>
+            </div>
+        <div v-if="mostrarDiv('portada')" id="portada">
+            <h1>portada</h1>
+        </div>
+        <div v-if="mostrarDiv('botiga')" id="botiga">
+            
+            <ul>
+                <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id" @click="mostrarCategorias(index)">
+                    {{ categoria.nombre }} 
+                </button>
+            </ul>   
+        </div>
+
+        <div v-if="mostrar" id="prendas">
+            <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+            <div v-for="prenda in infoTotal.data.categorias[activeIndex].prendas" :key="prenda.id">
+                <h2>{{ prenda.nombre }}</h2>
+                <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}" />
+                <p>Tallas: {{ prenda.tallas.join(', ') }}</p>
+            </div>
+        </div>
+        <div v-if="mostrarDiv('checkout')" id="checkout" >
+            <h1>Cesta</h1>
+        </div>
+    </div>
     
+
+    <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
+    <script type="module" src="./js/comunicationManager.js"></script>
+    <script type="module" src="./js/functions.js"></script>
 </body>
 </html>
