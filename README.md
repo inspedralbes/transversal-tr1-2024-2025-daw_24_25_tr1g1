@@ -13,8 +13,8 @@ El objectiu principal per la nostra botiga en línia és realitzar compres als n
 *aun por definir*
 ## Adreça web de la documentació phpdoc
 *@ aun por definir*
-## Adreça web del projecte desplegat
-*@ aun por definir*
+## Adreça web del projecte penpot
+https://design.penpot.app/#/view/5e250d03-b345-8112-8005-26c9b51905c9?page-id=5e250d03-b345-8112-8005-26c9b51905ca&section=interactions&index=0&share-id=9cff1166-2265-80f2-8005-273ce1bcc2c7
 
 
 
