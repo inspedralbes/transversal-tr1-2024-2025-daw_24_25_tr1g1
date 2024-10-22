@@ -9,13 +9,13 @@
         {
             Schema::create('prenda', function (Blueprint $table) {
                 $table->id('id_prenda');
+                $table->string('sexo', 100);
                 $table->string('nombre', 255);
                 $table->decimal('precio', 10, 2);
-                $table->unsignedBigInteger('stock');
                 $table->unsignedBigInteger('talla_id');
                 $table->unsignedBigInteger('color_id');
-                $table->unsignedBigInteger('categoria_id');
                 $table->text('descripcion')->nullable();
+                $table->unsignedBigInteger('categoria_id');
                 $table->decimal('descuento', 5, 2)->nullable();
                 $table->timestamps();
             });

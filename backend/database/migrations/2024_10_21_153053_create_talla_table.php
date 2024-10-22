@@ -9,6 +9,7 @@
         {
             Schema::create('talla', function (Blueprint $table) {
                 $table->id('id_talla');
+                $table->unsignedBigInteger('stockPorPrenda');
                 $table->string('nombre', 50);
                 $table->timestamps();
             });
