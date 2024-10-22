@@ -8,7 +8,7 @@
 </head>
 <body>    
     <div id="appVue">
-        <div class="anuncio"> <!-- Cambié id a class aquí -->
+        <div class="anuncio"> 
             <p>Anuncio que va de derecha a izquierda</p>
         </div>
         <div class="superior">
@@ -38,21 +38,28 @@
         </div>
         <div v-if="mostrarDiv('botiga')" id="botiga">            
             <ul>
-                <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id" @click="mostrarCategorias(index)">
+                <button id="cate" v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id" @click="mostrarCategorias(index)">
                     {{ categoria.nombre }} 
                 </button>
             </ul>   
         </div>
-
+        
         <div v-if="mostrar" id="prendas">
+            <div id="navPrendas">
+                <button id="butHomes">Novetats</button>
+                <button id="butHomes">Homes</button>
+                <button id="butDones">Dones</button>
+            </div>
             <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-            <div v-for="prenda in infoTotal.data.categorias[activeIndex].prendas" :key="prenda.id">
+            <div v-for="prenda in infoTotal.data.categorias[activeIndex].prendas" :key="prenda.id" class="prenda">
                 <h2>{{ prenda.nombre }}</h2>
-                <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="aqui van las imagenes"/>
+                <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="aqui van las imagenes" />
                 <p>Tallas: {{ prenda.tallas.join(', ') }}</p>
+                <p>Sexo: {{ prenda.sexo }}</p>
+                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
             </div>
         </div>
-        <div v-if="mostrarDiv('checkout')" id="checkout" >
+        <div v-if="mostrarDiv('checkout')" id="checkout">
             <h1>Cesta</h1>
         </div>
     </div>

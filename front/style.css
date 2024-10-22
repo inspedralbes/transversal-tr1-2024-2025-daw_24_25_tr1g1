@@ -42,6 +42,11 @@ body {
     align-items: center;
 }
 
+#cate {
+    position: absolute;
+    top: auto;
+}
+
 #navDer {
     margin-left: auto;
     display: flex;
@@ -69,7 +74,10 @@ body {
 }
 
 .dropdown {
-    position: relative;
+    position: absolute; /* Cambiado a absolute para que se posicione correctamente */
     background-color: white; 
+    border: 1px solid #ccc;
+    padding: 20px 20px 10px 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Añadido z-index para asegurar que el dropdown esté encima de otros elementos */
 }
