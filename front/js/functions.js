@@ -6,18 +6,21 @@ createApp({
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
-        const divActual = ref('portada');       
+        const divActual = ref('portada');   
+        const dropdownVisible = ref(false);    
 
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             console.log(infoTotal.data.categorias);
         });
+        
 
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
-                mostrar.value = true;  // Cambiar a true para mostrar prendas
+                mostrar.value = true; 
+                divActual.value = 'prendas'; 
             }
         }
 
@@ -27,8 +30,13 @@ createApp({
 
         function canviarDiv(nouDiv) {
             divActual.value = nouDiv;
-            mostrar.value = false; // Al cambiar de div, oculta las prendas
+            mostrar.value = false;
         }       
+
+        function toggleDropdownAndNavigate() {
+            dropdownVisible.value = !dropdownVisible.value;
+            this.canviarDiv('botiga');
+        }   
 
         return {
             infoTotal,
@@ -37,6 +45,8 @@ createApp({
             mostrarDiv,
             mostrar,
             activeIndex,
+            dropdownVisible,
+            toggleDropdownAndNavigate
         };
     },
 }).mount("#appVue");

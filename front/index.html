@@ -8,20 +8,35 @@
 </head>
 <body>    
     <div id="appVue">
-        <br><br>
-            <div class="superior">
+        <div class="anuncio"> <!-- Cambié id a class aquí -->
+            <p>Anuncio que va de derecha a izquierda</p>
+        </div>
+        <div class="superior">
+            <div id="navIzq">
                 <button @click="canviarDiv('portada')">Inicio</button>
-                <button @click="canviarDiv('botiga')">Categorias</button>
+                <button @click="toggleDropdownAndNavigate">Categorías</button>
+                <div v-if="dropdownVisible" class="dropdown">
+                    <ul>
+                        <li v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id">
+                            <button @click="mostrarCategorias(index)">
+                                {{ categoria.nombre }} 
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="navDer">
+                <input type="text" placeholder="Buscar...">
                 <button id="signup">Sign up</button>
                 <button id="login">Login</button>
-                <input type="text" placeholder="Buscar...">
                 <button @click="canviarDiv('checkout')">Cesta</button>
             </div>
+        </div>
+        <br><br>
         <div v-if="mostrarDiv('portada')" id="portada">
             <h1>portada</h1>
         </div>
-        <div v-if="mostrarDiv('botiga')" id="botiga">
-            
+        <div v-if="mostrarDiv('botiga')" id="botiga">            
             <ul>
                 <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id" @click="mostrarCategorias(index)">
                     {{ categoria.nombre }} 
@@ -33,7 +48,7 @@
             <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
             <div v-for="prenda in infoTotal.data.categorias[activeIndex].prendas" :key="prenda.id">
                 <h2>{{ prenda.nombre }}</h2>
-                <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}" />
+                <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="aqui van las imagenes"/>
                 <p>Tallas: {{ prenda.tallas.join(', ') }}</p>
             </div>
         </div>
