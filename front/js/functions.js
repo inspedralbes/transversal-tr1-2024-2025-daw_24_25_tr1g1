@@ -7,7 +7,8 @@ createApp({
         const mostrar = ref(false);
         const activeIndex = ref(0);
         const divActual = ref('portada');   
-        const dropdownVisible = ref(false);    
+        const dropdownVisible = ref(false);
+        const filtroSexo = ref('null');    
 
         onBeforeMount(async () => {
             const data = await getProductes();
@@ -15,6 +16,12 @@ createApp({
             console.log(infoTotal.data.categorias);
         });
         
+        function filtrarPrendas(sexo) {
+            divActual.value = 'prendas';
+            activeIndex.value = 0; 
+            mostrar.value = true;  
+            filtroSexo.value = sexo;  
+        }
 
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
@@ -46,6 +53,8 @@ createApp({
             mostrar,
             activeIndex,
             dropdownVisible,
+            filtroSexo,
+            filtrarPrendas,
             toggleDropdownAndNavigate
         };
     },
