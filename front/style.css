@@ -1,33 +1,27 @@
 /* Estilos Generales */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: rgb(250, 250, 250);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: white;
 }
 
 /* Anuncio */
 .anuncio {
-    left: 0; 
-    width: 100%; 
-    overflow: hidden; 
-    border: 1px solid black; 
+    width: 100%;
+    border: 1px solid black;
+    overflow: hidden;
 }
 
 .anuncio p {
-    white-space: nowrap; 
+    white-space: nowrap;
+    margin: 0;
+    padding: 5px;
     animation: moverAnuncio 30s linear infinite;
-    margin: 0; 
-    padding: 5px; 
 }
 
-/* Animación del Anuncio */
 @keyframes moverAnuncio {
-    0% {
-        transform: translateX(100%); 
-    }
-    100% {
-        transform: translateX(-100%); 
-    }
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 
 /* Panel Superior */
@@ -35,150 +29,90 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgb(250, 250, 250);
+    background-color:white;
 }
 
-/* Contenedor Superior */
-.superior {
+/* Navegación de Usuario */
+.navUser {
     display: flex;
     align-items: center;
-    padding: 10px;
-    justify-content: center;
-    background-color: rgb(250, 250, 250);
+    justify-content: space-between;
+    padding: 20px;
 }
 
-/* Navegación del Usuario */
-.navUser {
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    padding: 20px; 
-}
-
-.navUser img {
-    cursor: pointer;
-    height: auto;
-    width: auto;
-    margin: 0 auto;
-}
-
-.navUser button {
-    margin: 0 5px; 
-    padding: 8px 12px; 
-    border: none;
-    cursor: pointer;
+.navUser button, .superior button {
+    margin: 0 5px;
+    padding: 8px 12px;
     border-radius: 5px;
-    transition: background-color 0.3s;
-    min-width: 60px; 
-    font-size: 14px; 
-    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
 }
 
-/* Navegación Central */
+.navUser button:hover, .superior button:hover, #navPrendas button:hover {
+    background-color: #ffffff;
+}
+
+/* Navegación */
+.navIzq { 
+    flex: 1;
+ }
+
 .navCentro {
-    flex: 1; 
-    display: flex;
-    justify-content: center; 
+    flex: 1;
+    text-align: center;
 }
 
 .navCentro img {
     cursor: pointer;
-    height: auto;
-    width: 50%; 
-    margin: 0; 
-    max-width: 200px; 
-    display: block; 
-    margin-left: auto; 
-    margin-right: auto; 
+    width: 50%;
+    max-width: 200px;
 }
 
-/* Navegación Izquierda */
-.navIzq {
-    display: flex; 
-    justify-content: flex-start; 
-    flex: 0; 
-}
-
-/* Navegación Derecha */
-#navDer {
+.navDer {
     display: flex;
     align-items: center;
-    flex: 0; 
 }
 
-/* Botones Superiores */
-.superior button {
-    margin: 0 5px; 
-    padding: 8px 12px; 
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    min-width: 60px; 
-    font-size: 14px; 
-    justify-content: center;
-}
-
-.superior button:hover {
-    background-color: #ffffff;    
-}
-
-/* Input de Búsqueda */
-.superior input[type="text"] {
-    margin-left: 10px;
+.navDer input[type="text"] {
     padding: 10px;
-    border: 1px solid #ffffff;
     border-radius: 5px;
 }
 
-/* Contenedor de Categorías */
-.categorias-container {
-    position: relative;
-}
-
-/* Dropdown */
-.dropdown {
-    position: absolute; 
-    background-color: white; 
-    top: 2em;
-    left: 0;
-    border: 1px solid #000000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000; 
-}
-
-/* Sección de Botiga */
-#botiga {
+/* Navegación Categorías */
+#navCat {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    padding: 10px;
+}
+
+.categoria-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Contenido de Botiga */
+#botiga, #portada {
     text-align: center;
     margin: 20px 0;
-}
-
-#separador {
-    align-items: center;
-    display: flex;
 }
 
 /* Sección de Prendas */
 #prendas {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-gap: 10px;
-    justify-items: center; 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     text-align: center;
 }
-
 #prendas h1 {
     grid-column: span 3;
     text-align: center;
 }
 
-/* Estilos de Prenda */
 .prenda {
-    border: 1px solid #ccc;
+    border: 1px solid white;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -186,7 +120,6 @@ body {
 
 .prenda img {
     width: 80%;
-    height: auto;
     display: block;
     margin: 0 auto;
 }
@@ -199,20 +132,29 @@ body {
 }
 
 #navPrendas button {
-    margin: 0 10px;
     padding: 10px 15px;
+    margin: 0 10px;
     border: none;
-    cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-#navPrendas button:hover {
-    background-color: #ffffff;
+    cursor: pointer;
 }
 
 /* Sección de Checkout */
 #checkout {
     text-align: center;
     margin: 20px;
+}
+
+.cesta {
+    border: 1px solid wheat;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.cesta img {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
 }
