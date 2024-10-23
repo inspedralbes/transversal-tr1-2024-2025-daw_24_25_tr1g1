@@ -18,10 +18,12 @@
             <!-- Navegación de usuario -->
             <div class="navUser">
                 <div class="navIzq">
-                    <button @click="canviarDiv('contactUs')">Contactanos</button>
+                    <div class="contact">
+                        <button @click="canviarDiv('contactUs')">Contactanos</button>
+                    </div>
                 </div>
                 <div class="navCentro">
-                    <img src="./img/images.jpeg" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio"> <!-- Cambia la ruta de la imagen -->
+                    <img src="./img/images.jpeg" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
                 </div>
                 <div id="navDer">
                     <input type="text" placeholder="Buscar...">
@@ -49,7 +51,7 @@
         
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada">
-            <h1>portada</h1>
+            <h1>Portada</h1>
         </div>
 
         <div v-if="mostrarDiv('botiga')" id="botiga">            
@@ -76,18 +78,25 @@
                 <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
                 <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
                     <h2>{{ prenda.nombre }}</h2>
-                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="aqui van las imagenes" />
-                    <p>Tallas: {{ prenda.tallas.join(', ') }}</p>
+                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}" />
+                    <p>Tallas: {{ prenda.talla.nombre }}</p>
                     <p>Sexo: {{ prenda.sexo }}</p>
-                    <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
+                    <button @click="agregarACesta(prenda)">Agregar a la cesta</button> <!-- Asegúrate de que este botón está presente -->
                 </div>
             </div>
-        </div>
-        
-
+        </div>       
         <!-- Sección de Checkout -->
         <div v-if="mostrarDiv('checkout')" id="checkout">
             <h1>Cesta</h1>
+            <div id="cesta">
+                <div v-for="(item, index) in carrito" :key="index" class="cesta">
+                    <h2>{{ item.nombre }}</h2>
+                    <img v-if="item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre }}" />
+                    <p>Tallas: {{ item.talla.nombre }}</p>
+                    <p>Sexo: {{ item.sexo }}</p>
+                    <button @click="quitarCesta(item)">Quitar</button> 
+                </div>
+            </div>
         </div>
     </div>
     

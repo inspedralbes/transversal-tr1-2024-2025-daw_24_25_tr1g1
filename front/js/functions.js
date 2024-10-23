@@ -9,14 +9,16 @@ createApp({
         const divActual = ref('portada');   
         const dropdownVisible = ref(false);
         const filtroSexo = ref(null);  
-        const productosFiltrados = ref([]);  
+        const productosFiltrados = ref([]); 
+        const carrito = reactive([]); 
+        const divisa = '€';
 
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
-            infoTotal.data.productos = data.productos; // Asegúrate de que productos se cargue correctamente
+            infoTotal.data.productos = data.productos; 
             console.log(infoTotal.data.categorias);
-            console.log(infoTotal.data.productos); // Verificar que se cargan correctamente
+            console.log(infoTotal.data.productos); 
         });
         
         function filtrarPrendas(sexo) {
@@ -24,20 +26,18 @@ createApp({
             activeIndex.value = 0; 
             mostrar.value = true;  
             filtroSexo.value = sexo;  
-            
-            // Filtrar las prendas según el sexo seleccionado
             productosFiltrados.value = infoTotal.data.productos.filter(producto => producto.sexo === sexo);
-            console.log(productosFiltrados.value); // Mostrar los productos filtrados en consola para depuración
+            console.log(productosFiltrados.value); 
         }
+
 
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
                 mostrar.value = true; 
                 divActual.value = 'prendas'; 
-                // Cargar las prendas de la categoría seleccionada
                 productosFiltrados.value = infoTotal.data.categorias[index].prendas; 
-                console.log(productosFiltrados.value); // Verificar que se cargan correctamente
+                console.log(productosFiltrados.value);
             }
         }
 
@@ -52,8 +52,22 @@ createApp({
 
         function toggleDropdownAndNavigate() {
             dropdownVisible.value = !dropdownVisible.value;
-            canviarDiv('botiga'); // Usar referencia directa a la función
+            canviarDiv('botiga');
         }   
+
+        function agregarACesta(prenda) {
+            carrito.push(prenda); 
+            console.log(carrito); 
+        }
+
+        function quitarCesta(prenda) {
+            for (let i = 0; i < carrito.length; i++) {
+                if (carrito[i] === prenda) {
+                    carrito.splice(i, 1); 
+                }
+            }
+            console.log(carrito);
+        }        
 
         return {
             infoTotal,
@@ -66,7 +80,10 @@ createApp({
             filtroSexo,
             filtrarPrendas,
             toggleDropdownAndNavigate,
-            productosFiltrados // Asegúrate de devolver los productos filtrados
+            productosFiltrados,
+            agregarACesta,
+            quitarCesta,
+            carrito
         };
     },
 }).mount("#appVue");

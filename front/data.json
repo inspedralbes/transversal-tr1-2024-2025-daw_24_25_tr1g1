@@ -1,351 +1,540 @@
 {
     "categorias": [
+        
         {
-            "id": 1,
+            "id_categoria": 1,
             "nombre": "Camisetas",
             "prendas": [
                 {
-                    "id": 101,
-                    "nombre": "Camiseta Básica Blanca",
-                    "sexo": "unisex",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 1,
+                    "nombre": "Camiseta Deportiva",
+                    "precio": "19.99",
+                    "descripcion": "Camiseta deportiva para entrenamiento",
+                    "descuento": "10.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 1,
+                        "nombre": "S",
+                        "stock": 50
+                    },
                     "imagenes": [
-                        "https://example.com/camiseta_basica_blanca_1.jpg",
-                        "https://example.com/camiseta_basica_blanca_2.jpg",
-                        "https://example.com/camiseta_basica_blanca_3.jpg"
+                        "https://imgs.search.brave.com/E-Nun_FtihNzY5Xf-aYuRmjLlnKgo4JLf9aOM07gcwE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9yZXNp/emUuc3ByaW50ZXJj/ZG4uY29tL2YvMTQ0/MHgxNDQwL3Byb2R1/Y3RzLzAzODgwOTUv/Y2FtaXNldGEtbmlr/ZV8wMzg4MDk1XzAw/XzRfMzI3Mzk1MDgx/Ny5qcGc_dz0xNDQw/JnE9Nz"
                     ]
                 },
                 {
-                    "id": 102,
-                    "nombre": "Camiseta Mujer Slim Fit",
-                    "sexo": "mujer",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 3,
+                    "nombre": "Camiseta Básica",
+                    "precio": "9.99",
+                    "descripcion": "Camiseta básica de algodón",
+                    "descuento": "2.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 3,
+                        "nombre": "L",
+                        "stock": 20
+                    },
                     "imagenes": [
-                        "https://example.com/camiseta_mujer_slim_1.jpg",
-                        "https://example.com/camiseta_mujer_slim_2.jpg",
-                        "https://example.com/camiseta_mujer_slim_3.jpg"
+                        "https://example.com/camiseta_basica.jpg"
                     ]
                 },
                 {
-                    "id": 103,
-                    "nombre": "Camiseta Hombre Casual",
-                    "sexo": "hombre",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 4,
+                    "nombre": "Camiseta Casual",
+                    "precio": "14.99",
+                    "descripcion": "Camiseta casual para uso diario",
+                    "descuento": "3.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 4,
+                        "nombre": "M",
+                        "stock": 35
+                    },
                     "imagenes": [
-                        "https://example.com/camiseta_hombre_casual_1.jpg",
-                        "https://example.com/camiseta_hombre_casual_2.jpg",
-                        "https://example.com/camiseta_hombre_casual_3.jpg"
+                        "https://example.com/camiseta_casual.jpg"
                     ]
                 },
                 {
-                    "id": 104,
-                    "nombre": "Camiseta Niño Gráfica",
-                    "sexo": "niño",
-                    "tallas": ["S", "M", "L"],
+                    "id_prenda": 5,
+                    "nombre": "Camiseta de Manga Larga",
+                    "precio": "24.99",
+                    "descripcion": "Camiseta de manga larga ideal para otoño",
+                    "descuento": "5.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 5,
+                        "nombre": "M",
+                        "stock": 30
+                    },
                     "imagenes": [
-                        "https://example.com/camiseta_nino_grafica_1.jpg",
-                        "https://example.com/camiseta_nino_grafica_2.jpg",
-                        "https://example.com/camiseta_nino_grafica_3.jpg"
+                        "https://example.com/camiseta_manga_larga.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 6,
+                    "nombre": "Camiseta de Rayas",
+                    "precio": "15.99",
+                    "descripcion": "Camiseta de rayas clásica",
+                    "descuento": "2.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 6,
+                        "nombre": "S",
+                        "stock": 25
+                    },
+                    "imagenes": [
+                        "https://example.com/camiseta_rayas.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 7,
+                    "nombre": "Camiseta Gráfica",
+                    "precio": "18.99",
+                    "descripcion": "Camiseta con diseño gráfico moderno",
+                    "descuento": "3.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 7,
+                        "nombre": "L",
+                        "stock": 15
+                    },
+                    "imagenes": [
+                        "https://example.com/camiseta_grafica.jpg"
                     ]
                 }
             ]
         },
         {
-            "id": 2,
+            "id_categoria": 2,
             "nombre": "Pantalones",
             "prendas": [
                 {
-                    "id": 201,
-                    "nombre": "Jeans Azul Clásico",
-                    "sexo": "unisex",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 2,
+                    "nombre": "Pantalón de Yoga",
+                    "precio": "29.99",
+                    "descripcion": "Pantalón elástico y cómodo para yoga",
+                    "descuento": "5.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 2,
+                        "nombre": "M",
+                        "stock": 40
+                    },
                     "imagenes": [
-                        "https://example.com/jeans_azul_1.jpg",
-                        "https://example.com/jeans_azul_2.jpg",
-                        "https://example.com/jeans_azul_3.jpg"
+                        "https://imgs.search.brave.com/54unfad3K3e6HlWJ2kfs2I1__Kzt9nUPJ4r3iSd6DNQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9wYW50YWxvbi1t/dWplcl8xMDU2MDU1/LTQxMy5qcGc_c2l6/ZT02MjYmZXh0PWpw/Zw"
                     ]
                 },
                 {
-                    "id": 202,
-                    "nombre": "Pantalón Chino Mujer",
-                    "sexo": "mujer",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 8,
+                    "nombre": "Pantalón Deportivo",
+                    "precio": "24.99",
+                    "descripcion": "Pantalón ligero para entrenamiento",
+                    "descuento": "4.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 8,
+                        "nombre": "XL",
+                        "stock": 30
+                    },
                     "imagenes": [
-                        "https://example.com/pantalon_chino_mujer_1.jpg",
-                        "https://example.com/pantalon_chino_mujer_2.jpg",
-                        "https://example.com/pantalon_chino_mujer_3.jpg"
+                        "https://example.com/pantalon_deportivo.jpg"
                     ]
                 },
                 {
-                    "id": 203,
-                    "nombre": "Pantalón Deportivo Hombre",
-                    "sexo": "hombre",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 9,
+                    "nombre": "Pantalón Cargo",
+                    "precio": "39.99",
+                    "descripcion": "Pantalón estilo cargo con bolsillos",
+                    "descuento": "6.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 9,
+                        "nombre": "L",
+                        "stock": 25
+                    },
                     "imagenes": [
-                        "https://example.com/pantalon_deportivo_hombre_1.jpg",
-                        "https://example.com/pantalon_deportivo_hombre_2.jpg",
-                        "https://example.com/pantalon_deportivo_hombre_3.jpg"
+                        "https://example.com/pantalon_cargo.jpg"
                     ]
                 },
                 {
-                    "id": 204,
-                    "nombre": "Short Niño Casual",
-                    "sexo": "niño",
-                    "tallas": ["S", "M", "L"],
+                    "id_prenda": 10,
+                    "nombre": "Jeans Ajustados",
+                    "precio": "49.99",
+                    "descripcion": "Jeans ajustados de mezclilla",
+                    "descuento": "10.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 10,
+                        "nombre": "S",
+                        "stock": 20
+                    },
                     "imagenes": [
-                        "https://example.com/short_nino_casual_1.jpg",
-                        "https://example.com/short_nino_casual_2.jpg",
-                        "https://example.com/short_nino_casual_3.jpg"
+                        "https://example.com/jeans_ajustados.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 11,
+                    "nombre": "Pantalón Chino",
+                    "precio": "34.99",
+                    "descripcion": "Pantalón chino clásico y elegante",
+                    "descuento": "5.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 11,
+                        "nombre": "M",
+                        "stock": 15
+                    },
+                    "imagenes": [
+                        "https://example.com/pantalon_chino.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 12,
+                    "nombre": "Pantalón Corto",
+                    "precio": "19.99",
+                    "descripcion": "Pantalón corto cómodo para verano",
+                    "descuento": "3.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 12,
+                        "nombre": "L",
+                        "stock": 40
+                    },
+                    "imagenes": [
+                        "https://example.com/pantalon_corto.jpg"
                     ]
                 }
             ]
         },
         {
-            "id": 3,
+            "id_categoria": 3,
             "nombre": "Chaquetas",
             "prendas": [
                 {
-                    "id": 301,
-                    "nombre": "Chaqueta Unisex Acolchada",
-                    "sexo": "unisex",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 13,
+                    "nombre": "Chaqueta de Cuero",
+                    "precio": "99.99",
+                    "descripcion": "Chaqueta de cuero genuino",
+                    "descuento": "15.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 13,
+                        "nombre": "M",
+                        "stock": 10
+                    },
                     "imagenes": [
-                        "https://example.com/chaqueta_acolchada_1.jpg",
-                        "https://example.com/chaqueta_acolchada_2.jpg",
-                        "https://example.com/chaqueta_acolchada_3.jpg"
+                        "https://example.com/chaqueta_cuero.jpg"
                     ]
                 },
                 {
-                    "id": 302,
-                    "nombre": "Chaqueta de Cuero Mujer",
-                    "sexo": "mujer",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 14,
+                    "nombre": "Chaqueta de Plumas",
+                    "precio": "89.99",
+                    "descripcion": "Chaqueta abrigada para el invierno",
+                    "descuento": "12.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 14,
+                        "nombre": "S",
+                        "stock": 15
+                    },
                     "imagenes": [
-                        "https://example.com/chaqueta_cuero_mujer_1.jpg",
-                        "https://example.com/chaqueta_cuero_mujer_2.jpg",
-                        "https://example.com/chaqueta_cuero_mujer_3.jpg"
+                        "https://example.com/chaqueta_plumas.jpg"
                     ]
                 },
                 {
-                    "id": 303,
-                    "nombre": "Chaqueta de Invierno Hombre",
-                    "sexo": "hombre",
-                    "tallas": ["S", "M", "L", "XL"],
+                    "id_prenda": 15,
+                    "nombre": "Chaqueta de Denim",
+                    "precio": "59.99",
+                    "descripcion": "Chaqueta de denim clásico",
+                    "descuento": "8.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 15,
+                        "nombre": "L",
+                        "stock": 25
+                    },
                     "imagenes": [
-                        "https://example.com/chaqueta_invierno_hombre_1.jpg",
-                        "https://example.com/chaqueta_invierno_hombre_2.jpg",
-                        "https://example.com/chaqueta_invierno_hombre_3.jpg"
+                        "https://example.com/chaqueta_denim.jpg"
                     ]
                 },
                 {
-                    "id": 304,
-                    "nombre": "Chaqueta Niño Impermeable",
-                    "sexo": "niño",
-                    "tallas": ["S", "M", "L"],
+                    "id_prenda": 16,
+                    "nombre": "Chaqueta Ligera",
+                    "precio": "49.99",
+                    "descripcion": "Chaqueta ligera para primavera",
+                    "descuento": "7.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 16,
+                        "nombre": "XL",
+                        "stock": 20
+                    },
                     "imagenes": [
-                        "https://example.com/chaqueta_nino_impermeable_1.jpg",
-                        "https://example.com/chaqueta_nino_impermeable_2.jpg",
-                        "https://example.com/chaqueta_nino_impermeable_3.jpg"
+                        "https://example.com/chaqueta_ligera.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 17,
+                    "nombre": "Cazadora",
+                    "precio": "79.99",
+                    "descripcion": "Cazadora estilo militar",
+                    "descuento": "10.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 17,
+                        "nombre": "M",
+                        "stock": 30
+                    },
+                    "imagenes": [
+                        "https://example.com/cazadora.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 18,
+                    "nombre": "Chaqueta de Trekking",
+                    "precio": "69.99",
+                    "descripcion": "Chaqueta resistente al agua para actividades al aire libre",
+                    "descuento": "9.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 18,
+                        "nombre": "L",
+                        "stock": 15
+                    },
+                    "imagenes": [
+                        "https://example.com/chaqueta_trekking.jpg"
                     ]
                 }
             ]
         },
         {
-            "id": 4,
+            "id_categoria": 4,
             "nombre": "Zapatos",
             "prendas": [
                 {
-                    "id": 401,
-                    "nombre": "Zapatillas Unisex",
-                    "sexo": "unisex",
-                    "tallas": ["36", "37", "38", "39", "40"],
+                    "id_prenda": 19,
+                    "nombre": "Zapatillas de Deporte",
+                    "precio": "59.99",
+                    "descripcion": "Zapatillas ligeras para correr",
+                    "descuento": "10.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 19,
+                        "nombre": "42",
+                        "stock": 25
+                    },
                     "imagenes": [
-                        "https://example.com/zapatillas_unisex_1.jpg",
-                        "https://example.com/zapatillas_unisex_2.jpg",
-                        "https://example.com/zapatillas_unisex_3.jpg"
+                        "https://example.com/zapatillas_de_deporte.jpg"
                     ]
                 },
                 {
-                    "id": 402,
-                    "nombre": "Bailarinas Mujer",
-                    "sexo": "mujer",
-                    "tallas": ["35", "36", "37", "38", "39"],
+                    "id_prenda": 20,
+                    "nombre": "Botas de Montaña",
+                    "precio": "89.99",
+                    "descripcion": "Botas resistentes para senderismo",
+                    "descuento": "15.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 20,
+                        "nombre": "40",
+                        "stock": 20
+                    },
                     "imagenes": [
-                        "https://example.com/bailarinas_mujer_1.jpg",
-                        "https://example.com/bailarinas_mujer_2.jpg",
-                        "https://example.com/bailarinas_mujer_3.jpg"
+                        "https://example.com/botas_de_montana.jpg"
                     ]
                 },
                 {
-                    "id": 403,
-                    "nombre": "Botas Hombre",
-                    "sexo": "hombre",
-                    "tallas": ["40", "41", "42", "43", "44"],
+                    "id_prenda": 21,
+                    "nombre": "Zapatos de Vestir",
+                    "precio": "79.99",
+                    "descripcion": "Zapatos elegantes para ocasiones formales",
+                    "descuento": "10.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 21,
+                        "nombre": "38",
+                        "stock": 15
+                    },
                     "imagenes": [
-                        "https://example.com/botas_hombre_1.jpg",
-                        "https://example.com/botas_hombre_2.jpg",
-                        "https://example.com/botas_hombre_3.jpg"
+                        "https://example.com/zapatos_de_vestir.jpg"
                     ]
                 },
                 {
-                    "id": 404,
-                    "nombre": "Zapatillas Niño",
-                    "sexo": "niño",
-                    "tallas": ["28", "29", "30"],
+                    "id_prenda": 22,
+                    "nombre": "Zapatillas Urbanas",
+                    "precio": "49.99",
+                    "descripcion": "Zapatillas cómodas para uso diario",
+                    "descuento": "8.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 22,
+                        "nombre": "41",
+                        "stock": 30
+                    },
                     "imagenes": [
-                        "https://example.com/zapatillas_nino_1.jpg",
-                        "https://example.com/zapatillas_nino_2.jpg",
-                        "https://example.com/zapatillas_nino_3.jpg"
+                        "https://example.com/zapatillas_urbanas.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 23,
+                    "nombre": "Sandalias",
+                    "precio": "29.99",
+                    "descripcion": "Sandalias cómodas para el verano",
+                    "descuento": "4.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 23,
+                        "nombre": "37",
+                        "stock": 40
+                    },
+                    "imagenes": [
+                        "https://example.com/sandalias.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 24,
+                    "nombre": "Bailarinas",
+                    "precio": "39.99",
+                    "descripcion": "Bailarinas elegantes y cómodas",
+                    "descuento": "6.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 24,
+                        "nombre": "38",
+                        "stock": 35
+                    },
+                    "imagenes": [
+                        "https://example.com/bailarinas.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 25,
+                    "nombre": "Botines",
+                    "precio": "69.99",
+                    "descripcion": "Botines de cuero para el invierno",
+                    "descuento": "12.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 25,
+                        "nombre": "39",
+                        "stock": 20
+                    },
+                    "imagenes": [
+                        "https://example.com/botines.jpg"
                     ]
                 }
             ]
         },
         {
-            "id": 5,
+            "id_categoria": 3,
+            "nombre": "Abrigos",
+            "prendas": [
+                {
+                    "id_prenda": 3,
+                    "nombre": "Abrigo de Invierno",
+                    "precio": "89.99",
+                    "descripcion": "Abrigo grueso ideal para climas fríos",
+                    "descuento": "15.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 3,
+                        "nombre": "L",
+                        "stock": 30
+                    },
+                    "imagenes": [
+                        "https://imgs.search.brave.com/9MZ6S2uMllhVnF2-CVnJp9iLn1BQH_M9k3TQmx7lL3s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/YWRhY3Rpb25hdHMu/Y29tL2Ficm9ncy1l/c2hvcGVzL0ltYWdl/cG1wL0Ficmlnby1k/ZS1pbXBhY3RvLmpw/Zz9zdG9yZV9hbGxv/d2l5PWhvbWUgU29s/dW11LmltZyZzaXpl/PjQ3Nzg1ODk4NzMy/MzUwMDY2Nzc1MzQ4/NjMxMzQ4NTczMw"
+                    ]
+                },
+                {
+                    "id_prenda": 4,
+                    "nombre": "Chaleco Térmico",
+                    "precio": "49.99",
+                    "descripcion": "Chaleco ligero, perfecto para superponer",
+                    "descuento": "5.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 4,
+                        "nombre": "M",
+                        "stock": 25
+                    },
+                    "imagenes": [
+                        "https://imgs.search.brave.com/Rl0F5Bex_qrv3S-8U75c_Fp4iZNP9j8aDeN3AkcQ-Jg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/YWRhY3Rpb25hdHMu/Y29tL2Ficm9ncy1l/c2hvcGVzL0ltYWdl/cG1wL0NoYWxlY29t/ZGVyaWxlLmpwZw"
+                    ]
+                }
+            ]
+        },
+        {
+            "id_categoria": 4,
+            "nombre": "Calzado",
+            "prendas": [
+                {
+                    "id_prenda": 5,
+                    "nombre": "Zapatillas Deportivas",
+                    "precio": "59.99",
+                    "descripcion": "Zapatillas cómodas para el entrenamiento",
+                    "descuento": "10.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 5,
+                        "nombre": "42",
+                        "stock": 20
+                    },
+                    "imagenes": [
+                        "https://imgs.search.brave.com/V8GpEu8-0MwHybZuyLfHXEzPFLIFM3CErrwY_EuHvjU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/YWRhY3Rpb25hdHMu/Y29tL2Ficm9ncy1l/c2hvcGVzL0ltYWdl/cG1wL0ZhaXJfY2hh/bGV0cy5qcGc"
+                    ]
+                },
+                {
+                    "id_prenda": 6,
+                    "nombre": "Botas de Invierno",
+                    "precio": "79.99",
+                    "descripcion": "Botas impermeables y cálidas para el invierno",
+                    "descuento": "15.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 6,
+                        "nombre": "38",
+                        "stock": 15
+                    },
+                    "imagenes": [
+                        "https://imgs.search.brave.com/YDHe6sU2OwctPQkXCUHj_sAGuEn4NPvFq3TIQxZsDgA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/YWRhY3Rpb25hdHMu/Y29tL2Ficm9ncy1l/c2hvcGVzL0ltYWdl/cG1wL0ZhaXJfZGVu/YXNhcy5qcGc"
+                    ]
+                }
+            ]
+        },
+        {
+            "id_categoria": 5,
             "nombre": "Accesorios",
             "prendas": [
                 {
-                    "id": 501,
-                    "nombre": "Gorra Unisex",
-                    "sexo": "unisex",
-                    "tallas": ["Única"],
+                    "id_prenda": 7,
+                    "nombre": "Gorra de Beisbol",
+                    "precio": "15.99",
+                    "descripcion": "Gorra ajustable para uso diario",
+                    "descuento": "2.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 7,
+                        "nombre": "Única",
+                        "stock": 50
+                    },
                     "imagenes": [
-                        "https://example.com/gorra_unisex_1.jpg",
-                        "https://example.com/gorra_unisex_2.jpg",
-                        "https://example.com/gorra_unisex_3.jpg"
+                        "https://imgs.search.brave.com/GHG_Suy7CiJdQlsc9vVtSQw1UV4H6FZ-9Onah1_gENg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/YWRhY3Rpb25hdHMu/Y29tL2Ficm9ncy1l/c2hvcGVzL0ltYWdl/cG1wL0dvcnJhLmpw/Zw"
                     ]
                 },
                 {
-                    "id": 502,
-                    "nombre": "Bufanda Mujer",
-                    "sexo": "mujer",
-                    "tallas": ["Única"],
+                    "id_prenda": 8,
+                    "nombre": "Bufanda de Lana",
+                    "precio": "24.99",
+                    "descripcion": "Bufanda suave y cálida para el invierno",
+                    "descuento": "3.00",
+                    "sexo": "Unisex",
+                    "talla": {
+                        "id_talla": 8,
+                        "nombre": "Única",
+                        "stock": 35
+                    },
                     "imagenes": [
-                        "https://example.com/bufanda_mujer_1.jpg",
-                        "https://example.com/bufanda_mujer_2.jpg",
-                        "https://example.com/bufanda_mujer_3.jpg"
-                    ]
-                },
-                {
-                    "id": 503,
-                    "nombre": "Cinturón Hombre",
-                    "sexo": "hombre",
-                    "tallas": ["S", "M", "L"],
-                    "imagenes": [
-                        "https://example.com/cinturon_hombre_1.jpg",
-                        "https://example.com/cinturon_hombre_2.jpg",
-                        "https://example.com/cinturon_hombre_3.jpg"
-                    ]
-                },
-                {
-                    "id": 504,
-                    "nombre": "Mochila Niño",
-                    "sexo": "niño",
-                    "tallas": ["Única"],
-                    "imagenes": [
-                        "https://example.com/mochila_nino_1.jpg",
-                        "https://example.com/mochila_nino_2.jpg",
-                        "https://example.com/mochila_nino_3.jpg"
-                    ]
-                }
-            ]
-        },
-        {
-            "id": 6,
-            "nombre": "Ropa de Deporte",
-            "prendas": [
-                {
-                    "id": 601,
-                    "nombre": "Sudadera Unisex",
-                    "sexo": "unisex",
-                    "tallas": ["S", "M", "L", "XL"],
-                    "imagenes": [
-                        "https://example.com/sudadera_unisex_1.jpg",
-                        "https://example.com/sudadera_unisex_2.jpg",
-                        "https://example.com/sudadera_unisex_3.jpg"
-                    ]
-                },
-                {
-                    "id": 602,
-                    "nombre": "Mallas Deportivas Mujer",
-                    "sexo": "mujer",
-                    "tallas": ["S", "M", "L", "XL"],
-                    "imagenes": [
-                        "https://example.com/mallas_deportivas_mujer_1.jpg",
-                        "https://example.com/mallas_deportivas_mujer_2.jpg",
-                        "https://example.com/mallas_deportivas_mujer_3.jpg"
-                    ]
-                },
-                {
-                    "id": 603,
-                    "nombre": "Pantalones Cortos de Deporte Hombre",
-                    "sexo": "hombre",
-                    "tallas": ["S", "M", "L", "XL"],
-                    "imagenes": [
-                        "https://example.com/pantalones_cortos_deporte_hombre_1.jpg",
-                        "https://example.com/pantalones_cortos_deporte_hombre_2.jpg",
-                        "https://example.com/pantalones_cortos_deporte_hombre_3.jpg"
-                    ]
-                },
-                {
-                    "id": 604,
-                    "nombre": "Camiseta Niño Deportiva",
-                    "sexo": "niño",
-                    "tallas": ["S", "M", "L"],
-                    "imagenes": [
-                        "https://example.com/camiseta_nino_deportiva_1.jpg",
-                        "https://example.com/camiseta_nino_deportiva_2.jpg",
-                        "https://example.com/camiseta_nino_deportiva_3.jpg"
-                    ]
-                }
-            ]
-        },
-        {
-            "id": 7,
-            "nombre": "Pijamas",
-            "prendas": [
-                {
-                    "id": 701,
-                    "nombre": "Pijama Unisex de Algodón",
-                    "sexo": "unisex",
-                    "tallas": ["S", "M", "L", "XL"],
-                    "imagenes": [
-                        "https://example.com/pijama_unisex_1.jpg",
-                        "https://example.com/pijama_unisex_2.jpg",
-                        "https://example.com/pijama_unisex_3.jpg"
-                    ]
-                },
-                {
-                    "id": 702,
-                    "nombre": "Pijama Mujer Estampado",
-                    "sexo": "mujer",
-                    "tallas": ["S", "M", "L", "XL"],
-                    "imagenes": [
-                        "https://example.com/pijama_mujer_estampado_1.jpg",
-                        "https://example.com/pijama_mujer_estampado_2.jpg",
-                        "https://example.com/pijama_mujer_estampado_3.jpg"
-                    ]
-                },
-                {
-                    "id": 703,
-                    "nombre": "Pijama Hombre Clásico",
-                    "sexo": "hombre",
-                    "tallas": ["S", "M", "L", "XL"],
-                    "imagenes": [
-                        "https://example.com/pijama_hombre_clasico_1.jpg",
-                        "https://example.com/pijama_hombre_clasico_2.jpg",
-                        "https://example.com/pijama_hombre_clasico_3.jpg"
-                    ]
-                },
-                {
-                    "id": 704,
-                    "nombre": "Pijama Niño Divertido",
-                    "sexo": "niño",
-                    "tallas": ["S", "M", "L"],
-                    "imagenes": [
-                        "https://example.com/pijama_nino_divertido_1.jpg",
-                        "https://example.com/pijama_nino_divertido_2.jpg",
-                        "https://example.com/pijama_nino_divertido_3.jpg"
+                        "https://imgs.search.brave.com/N0tH2dM04zW4N4tPZ1T2FZjLY-9Jf5AXFfRYbxm0rU8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/YWRhY3Rpb25hdHMu/Y29tL2Ficm9ncy1l/c2hvcGVzL0ltYWdl/cG1wL0J1ZmFuZGEuanBn"
                     ]
                 }
             ]
