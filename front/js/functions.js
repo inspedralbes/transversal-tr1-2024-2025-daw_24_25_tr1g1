@@ -11,7 +11,6 @@ createApp({
         const filtroSexo = ref(null);  
         const productosFiltrados = ref([]); 
         const carrito = reactive([]); 
-        const divisa = '€';
 
         onBeforeMount(async () => {
             const data = await getProductes();
