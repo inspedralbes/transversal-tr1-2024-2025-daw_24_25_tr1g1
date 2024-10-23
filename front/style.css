@@ -1,25 +1,26 @@
+/* Estilos Generales */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
 }
 
+/* Anuncio */
 .anuncio {
-    position: fixed; 
-    top: 0; 
     left: 0; 
     width: 100%; 
-    background-color:white;    
     overflow: hidden; 
+    border: 1px solid black; 
 }
 
 .anuncio p {
     white-space: nowrap; 
-    animation: moverAnuncio 15s linear infinite; 
+    animation: moverAnuncio 30s linear infinite;
     margin: 0; 
     padding: 5px; 
 }
 
+/* Animación del Anuncio */
 @keyframes moverAnuncio {
     0% {
         transform: translateX(100%); 
@@ -29,39 +30,100 @@ body {
     }
 }
 
+/* Panel Superior */
+.panelSuperior {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgb(250, 250, 250);
+}
+
+/* Contenedor Superior */
 .superior {
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color:   #ffffff;
-    border: 1px black solid;
-    margin-top: 30px; 
+    justify-content: center;
+    background-color: rgb(250, 250, 250);
 }
 
-#navIzq {
-    display: flex;
-    align-items: center;
-    position: relative;
+/* Navegación del Usuario */
+.navUser {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px; 
 }
 
-#navDer {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
+.navUser img {
+    cursor: pointer;
+    height: auto;
+    width: auto;
+    margin: 0 auto;
 }
-.superior button {
-    margin: 0 10px;
-    padding: 10px 15px;
+
+.navUser button {
+    margin: 0 5px; 
+    padding: 8px 12px; 
     border: none;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s;
+    min-width: 60px; 
+    font-size: 14px; 
+    justify-content: center;
+}
+
+/* Navegación Central */
+.navCentro {
+    flex: 1; 
+    display: flex;
+    justify-content: center; 
+}
+
+.navCentro img {
+    cursor: pointer;
+    height: auto;
+    width: 50%; 
+    margin: 0; 
+    max-width: 200px; 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+/* Navegación Izquierda */
+.navIzq {
+    display: flex; 
+    justify-content: flex-start; 
+    flex: 0; 
+}
+
+/* Navegación Derecha */
+#navDer {
+    display: flex;
+    align-items: center;
+    flex: 0; 
+}
+
+/* Botones Superiores */
+.superior button {
+    margin: 0 5px; 
+    padding: 8px 12px; 
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    min-width: 60px; 
+    font-size: 14px; 
+    justify-content: center;
 }
 
 .superior button:hover {
     background-color: #ffffff;    
 }
 
+/* Input de Búsqueda */
 .superior input[type="text"] {
     margin-left: 10px;
     padding: 10px;
@@ -69,10 +131,12 @@ body {
     border-radius: 5px;
 }
 
+/* Contenedor de Categorías */
 .categorias-container {
     position: relative;
 }
 
+/* Dropdown */
 .dropdown {
     position: absolute; 
     background-color: white; 
@@ -83,6 +147,7 @@ body {
     z-index: 1000; 
 }
 
+/* Sección de Botiga */
 #botiga {
     display: flex;
     flex-direction: column;
@@ -97,7 +162,7 @@ body {
     display: flex;
 }
 
-
+/* Sección de Prendas */
 #prendas {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr; 
@@ -111,7 +176,7 @@ body {
     text-align: center;
 }
 
-
+/* Estilos de Prenda */
 .prenda {
     border: 1px solid #ccc;
     padding: 10px;
@@ -126,6 +191,7 @@ body {
     margin: 0 auto;
 }
 
+/* Navegación de Prendas */
 #navPrendas {
     display: flex;
     justify-content: center;
@@ -145,6 +211,7 @@ body {
     background-color: #ffffff;
 }
 
+/* Sección de Checkout */
 #checkout {
     text-align: center;
     margin: 20px;
