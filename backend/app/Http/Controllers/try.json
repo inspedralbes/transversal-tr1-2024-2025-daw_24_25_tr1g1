@@ -1,0 +1,48 @@
+{
+    "categorias": [
+        {
+            "id_categoria": 1,
+            "nombre": "Camisetas",
+            "prendas": [
+                {
+                    "id_prenda": 1,
+                    "nombre": "Camiseta Deportiva",
+                    "precio": "19.99",
+                    "descripcion": "Camiseta deportiva para entrenamiento",
+                    "descuento": "10.00",
+                    "sexo": "Hombre",
+                    "talla": {
+                        "id_talla": 1,
+                        "nombre": "S",
+                        "stock": 50
+                    },
+                    "imagenes": [
+                        "https:\/\/imgs.search.brave.com\/E-Nun_FtihNzY5Xf-aYuRmjLlnKgo4JLf9aOM07gcwE\/rs:fit:860:0:0:0\/g:ce\/aHR0cHM6Ly9yZXNp\/emUuc3ByaW50ZXJj\/ZG4uY29tL2YvMTQ0\/MHgxNDQwL3Byb2R1\/Y3RzLzAzODgwOTUv\/Y2FtaXNldGEtbmlr\/ZV8wMzg4MDk1XzAw\/XzRfMzI3Mzk1MDgx\/Ny5qcGc_dz0xNDQw\/JnE9Nz"
+                    ]
+                }
+            ]
+        },
+        {
+            "id_categoria": 2,
+            "nombre": "Pantalones",
+            "prendas": [
+                {
+                    "id_prenda": 2,
+                    "nombre": "Pantal\u00f3n de Yoga",
+                    "precio": "29.99",
+                    "descripcion": "Pantal\u00f3n el\u00e1stico y c\u00f3modo para yoga",
+                    "descuento": "5.00",
+                    "sexo": "Mujer",
+                    "talla": {
+                        "id_talla": 2,
+                        "nombre": "M",
+                        "stock": 40
+                    },
+                    "imagenes": [
+                        "https:\/\/imgs.search.brave.com\/54unfad3K3e6HlWJ2kfs2I1__Kzt9nUPJ4r3iSd6DNQ\/rs:fit:860:0:0:0\/g:ce\/aHR0cHM6Ly9pbWcu\/ZnJlZXBpay5jb20v\/Zm90b3MtcHJlbWl1\/bS9wYW50YWxvbi1t\/dWplcl8xMDU2MDU1\/LTQxMy5qcGc_c2l6\/ZT02MjYmZXh0PWpw\/Zw"
+                    ]
+                }
+            ]
+        }
+    ]
+}
