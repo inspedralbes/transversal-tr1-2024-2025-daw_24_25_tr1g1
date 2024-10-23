@@ -7,12 +7,8 @@
                 {
                     "id": 101,
                     "nombre": "Camiseta Básica Blanca",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "sexo": "unisex",
+                    "tallas": ["S", "M", "L", "XL"],
                     "imagenes": [
                         "https://example.com/camiseta_basica_blanca_1.jpg",
                         "https://example.com/camiseta_basica_blanca_2.jpg",
@@ -21,137 +17,35 @@
                 },
                 {
                     "id": 102,
-                    "nombre": "Camiseta Negra Slim Fit",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "nombre": "Camiseta Mujer Slim Fit",
+                    "sexo": "mujer",
+                    "tallas": ["S", "M", "L", "XL"],
                     "imagenes": [
-                        "https://example.com/camiseta_negra_slim_1.jpg",
-                        "https://example.com/camiseta_negra_slim_2.jpg",
-                        "https://example.com/camiseta_negra_slim_3.jpg"
+                        "https://example.com/camiseta_mujer_slim_1.jpg",
+                        "https://example.com/camiseta_mujer_slim_2.jpg",
+                        "https://example.com/camiseta_mujer_slim_3.jpg"
                     ]
                 },
                 {
                     "id": 103,
-                    "nombre": "Camiseta Gráfica Vintage",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "nombre": "Camiseta Hombre Casual",
+                    "sexo": "hombre",
+                    "tallas": ["S", "M", "L", "XL"],
                     "imagenes": [
-                        "https://example.com/camiseta_vintage_1.jpg",
-                        "https://example.com/camiseta_vintage_2.jpg",
-                        "https://example.com/camiseta_vintage_3.jpg"
+                        "https://example.com/camiseta_hombre_casual_1.jpg",
+                        "https://example.com/camiseta_hombre_casual_2.jpg",
+                        "https://example.com/camiseta_hombre_casual_3.jpg"
                     ]
                 },
                 {
                     "id": 104,
-                    "nombre": "Camiseta Deportiva Azul",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "nombre": "Camiseta Niño Gráfica",
+                    "sexo": "niño",
+                    "tallas": ["S", "M", "L"],
                     "imagenes": [
-                        "https://example.com/camiseta_deportiva_azul_1.jpg",
-                        "https://example.com/camiseta_deportiva_azul_2.jpg",
-                        "https://example.com/camiseta_deportiva_azul_3.jpg"
-                    ]
-                },
-                {
-                    "id": 105,
-                    "nombre": "Camiseta Rayas Blanco y Negro",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/camiseta_rayas_bn_1.jpg",
-                        "https://example.com/camiseta_rayas_bn_2.jpg",
-                        "https://example.com/camiseta_rayas_bn_3.jpg"
-                    ]
-                },
-                {
-                    "id": 106,
-                    "nombre": "Camiseta Cuello V Verde",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/camiseta_v_verde_1.jpg",
-                        "https://example.com/camiseta_v_verde_2.jpg",
-                        "https://example.com/camiseta_v_verde_3.jpg"
-                    ]
-                },
-                {
-                    "id": 107,
-                    "nombre": "Camiseta Manga Larga Roja",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/camiseta_manga_larga_roja_1.jpg",
-                        "https://example.com/camiseta_manga_larga_roja_2.jpg",
-                        "https://example.com/camiseta_manga_larga_roja_3.jpg"
-                    ]
-                },
-                {
-                    "id": 108,
-                    "nombre": "Camiseta Casual Amarilla",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/camiseta_casual_amarilla_1.jpg",
-                        "https://example.com/camiseta_casual_amarilla_2.jpg",
-                        "https://example.com/camiseta_casual_amarilla_3.jpg"
-                    ]
-                },
-                {
-                    "id": 109,
-                    "nombre": "Camiseta Polo Gris",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/camiseta_polo_gris_1.jpg",
-                        "https://example.com/camiseta_polo_gris_2.jpg",
-                        "https://example.com/camiseta_polo_gris_3.jpg"
-                    ]
-                },
-                {
-                    "id": 110,
-                    "nombre": "Camiseta Estampada Tropical",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/camiseta_tropical_1.jpg",
-                        "https://example.com/camiseta_tropical_2.jpg",
-                        "https://example.com/camiseta_tropical_3.jpg"
+                        "https://example.com/camiseta_nino_grafica_1.jpg",
+                        "https://example.com/camiseta_nino_grafica_2.jpg",
+                        "https://example.com/camiseta_nino_grafica_3.jpg"
                     ]
                 }
             ]
@@ -163,12 +57,8 @@
                 {
                     "id": 201,
                     "nombre": "Jeans Azul Clásico",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "sexo": "unisex",
+                    "tallas": ["S", "M", "L", "XL"],
                     "imagenes": [
                         "https://example.com/jeans_azul_1.jpg",
                         "https://example.com/jeans_azul_2.jpg",
@@ -177,137 +67,35 @@
                 },
                 {
                     "id": 202,
-                    "nombre": "Pantalón Chino Beige",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "nombre": "Pantalón Chino Mujer",
+                    "sexo": "mujer",
+                    "tallas": ["S", "M", "L", "XL"],
                     "imagenes": [
-                        "https://example.com/pantalon_chino_beige_1.jpg",
-                        "https://example.com/pantalon_chino_beige_2.jpg",
-                        "https://example.com/pantalon_chino_beige_3.jpg"
+                        "https://example.com/pantalon_chino_mujer_1.jpg",
+                        "https://example.com/pantalon_chino_mujer_2.jpg",
+                        "https://example.com/pantalon_chino_mujer_3.jpg"
                     ]
                 },
                 {
                     "id": 203,
-                    "nombre": "Pantalón Deportivo Negro",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "nombre": "Pantalón Deportivo Hombre",
+                    "sexo": "hombre",
+                    "tallas": ["S", "M", "L", "XL"],
                     "imagenes": [
-                        "https://example.com/pantalon_deportivo_negro_1.jpg",
-                        "https://example.com/pantalon_deportivo_negro_2.jpg",
-                        "https://example.com/pantalon_deportivo_negro_3.jpg"
+                        "https://example.com/pantalon_deportivo_hombre_1.jpg",
+                        "https://example.com/pantalon_deportivo_hombre_2.jpg",
+                        "https://example.com/pantalon_deportivo_hombre_3.jpg"
                     ]
                 },
                 {
                     "id": 204,
-                    "nombre": "Pantalón Cargo Verde",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "nombre": "Short Niño Casual",
+                    "sexo": "niño",
+                    "tallas": ["S", "M", "L"],
                     "imagenes": [
-                        "https://example.com/pantalon_cargo_verde_1.jpg",
-                        "https://example.com/pantalon_cargo_verde_2.jpg",
-                        "https://example.com/pantalon_cargo_verde_3.jpg"
-                    ]
-                },
-                {
-                    "id": 205,
-                    "nombre": "Jeans Negros Skinny",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/jeans_negros_skinny_1.jpg",
-                        "https://example.com/jeans_negros_skinny_2.jpg",
-                        "https://example.com/jeans_negros_skinny_3.jpg"
-                    ]
-                },
-                {
-                    "id": 206,
-                    "nombre": "Pantalón de Vestir Gris",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/pantalon_vestir_gris_1.jpg",
-                        "https://example.com/pantalon_vestir_gris_2.jpg",
-                        "https://example.com/pantalon_vestir_gris_3.jpg"
-                    ]
-                },
-                {
-                    "id": 207,
-                    "nombre": "Short Deportivo Azul",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/short_deportivo_azul_1.jpg",
-                        "https://example.com/short_deportivo_azul_2.jpg",
-                        "https://example.com/short_deportivo_azul_3.jpg"
-                    ]
-                },
-                {
-                    "id": 208,
-                    "nombre": "Pantalón Cargo Negro",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/pantalon_cargo_negro_1.jpg",
-                        "https://example.com/pantalon_cargo_negro_2.jpg",
-                        "https://example.com/pantalon_cargo_negro_3.jpg"
-                    ]
-                },
-                {
-                    "id": 209,
-                    "nombre": "Pantalón Chándal Gris",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/pantalon_chandal_gris_1.jpg",
-                        "https://example.com/pantalon_chandal_gris_2.jpg",
-                        "https://example.com/pantalon_chandal_gris_3.jpg"
-                    ]
-                },
-                {
-                    "id": 210,
-                    "nombre": "Jeans Rotos Azul Claro",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/jeans_rotos_azul_1.jpg",
-                        "https://example.com/jeans_rotos_azul_2.jpg",
-                        "https://example.com/jeans_rotos_azul_3.jpg"
+                        "https://example.com/short_nino_casual_1.jpg",
+                        "https://example.com/short_nino_casual_2.jpg",
+                        "https://example.com/short_nino_casual_3.jpg"
                     ]
                 }
             ]
@@ -318,28 +106,9 @@
             "prendas": [
                 {
                     "id": 301,
-                    "nombre": "Chaqueta Vaquera Azul",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
-                    "imagenes": [
-                        "https://example.com/chaqueta_vaquera_1.jpg",
-                        "https://example.com/chaqueta_vaquera_2.jpg",
-                        "https://example.com/chaqueta_vaquera_3.jpg"
-                    ]
-                },
-                {
-                    "id": 302,
-                    "nombre": "Chaqueta Acolchada Verde",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "nombre": "Chaqueta Unisex Acolchada",
+                    "sexo": "unisex",
+                    "tallas": ["S", "M", "L", "XL"],
                     "imagenes": [
                         "https://example.com/chaqueta_acolchada_1.jpg",
                         "https://example.com/chaqueta_acolchada_2.jpg",
@@ -347,108 +116,236 @@
                     ]
                 },
                 {
-                    "id": 303,
-                    "nombre": "Chaqueta Parka Beige",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "id": 302,
+                    "nombre": "Chaqueta de Cuero Mujer",
+                    "sexo": "mujer",
+                    "tallas": ["S", "M", "L", "XL"],
                     "imagenes": [
-                        "https://example.com/chaqueta_parka_1.jpg",
-                        "https://example.com/chaqueta_parka_2.jpg",
-                        "https://example.com/chaqueta_parka_3.jpg"
+                        "https://example.com/chaqueta_cuero_mujer_1.jpg",
+                        "https://example.com/chaqueta_cuero_mujer_2.jpg",
+                        "https://example.com/chaqueta_cuero_mujer_3.jpg"
+                    ]
+                },
+                {
+                    "id": 303,
+                    "nombre": "Chaqueta de Invierno Hombre",
+                    "sexo": "hombre",
+                    "tallas": ["S", "M", "L", "XL"],
+                    "imagenes": [
+                        "https://example.com/chaqueta_invierno_hombre_1.jpg",
+                        "https://example.com/chaqueta_invierno_hombre_2.jpg",
+                        "https://example.com/chaqueta_invierno_hombre_3.jpg"
                     ]
                 },
                 {
                     "id": 304,
-                    "nombre": "Blazer Azul Marino",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "nombre": "Chaqueta Niño Impermeable",
+                    "sexo": "niño",
+                    "tallas": ["S", "M", "L"],
                     "imagenes": [
-                        "https://example.com/blazer_azul_1.jpg",
-                        "https://example.com/blazer_azul_2.jpg",
-                        "https://example.com/blazer_azul_3.jpg"
+                        "https://example.com/chaqueta_nino_impermeable_1.jpg",
+                        "https://example.com/chaqueta_nino_impermeable_2.jpg",
+                        "https://example.com/chaqueta_nino_impermeable_3.jpg"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "nombre": "Zapatos",
+            "prendas": [
+                {
+                    "id": 401,
+                    "nombre": "Zapatillas Unisex",
+                    "sexo": "unisex",
+                    "tallas": ["36", "37", "38", "39", "40"],
+                    "imagenes": [
+                        "https://example.com/zapatillas_unisex_1.jpg",
+                        "https://example.com/zapatillas_unisex_2.jpg",
+                        "https://example.com/zapatillas_unisex_3.jpg"
                     ]
                 },
                 {
-                    "id": 305,
-                    "nombre": "Chaqueta Bomber Roja",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "id": 402,
+                    "nombre": "Bailarinas Mujer",
+                    "sexo": "mujer",
+                    "tallas": ["35", "36", "37", "38", "39"],
                     "imagenes": [
-                        "https://example.com/chaqueta_bomber_roja_1.jpg",
-                        "https://example.com/chaqueta_bomber_roja_2.jpg",
-                        "https://example.com/chaqueta_bomber_roja_3.jpg"
+                        "https://example.com/bailarinas_mujer_1.jpg",
+                        "https://example.com/bailarinas_mujer_2.jpg",
+                        "https://example.com/bailarinas_mujer_3.jpg"
                     ]
                 },
                 {
-                    "id": 306,
-                    "nombre": "Chaqueta Impermeable Negra",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "id": 403,
+                    "nombre": "Botas Hombre",
+                    "sexo": "hombre",
+                    "tallas": ["40", "41", "42", "43", "44"],
                     "imagenes": [
-                        "https://example.com/chaqueta_impermeable_negra_1.jpg",
-                        "https://example.com/chaqueta_impermeable_negra_2.jpg",
-                        "https://example.com/chaqueta_impermeable_negra_3.jpg"
+                        "https://example.com/botas_hombre_1.jpg",
+                        "https://example.com/botas_hombre_2.jpg",
+                        "https://example.com/botas_hombre_3.jpg"
                     ]
                 },
                 {
-                    "id": 307,
-                    "nombre": "Chaqueta Cuello Alto Gris",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "id": 404,
+                    "nombre": "Zapatillas Niño",
+                    "sexo": "niño",
+                    "tallas": ["28", "29", "30"],
                     "imagenes": [
-                        "https://example.com/chaqueta_cuello_alto_gris_1.jpg",
-                        "https://example.com/chaqueta_cuello_alto_gris_2.jpg",
-                        "https://example.com/chaqueta_cuello_alto_gris_3.jpg"
+                        "https://example.com/zapatillas_nino_1.jpg",
+                        "https://example.com/zapatillas_nino_2.jpg",
+                        "https://example.com/zapatillas_nino_3.jpg"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "nombre": "Accesorios",
+            "prendas": [
+                {
+                    "id": 501,
+                    "nombre": "Gorra Unisex",
+                    "sexo": "unisex",
+                    "tallas": ["Única"],
+                    "imagenes": [
+                        "https://example.com/gorra_unisex_1.jpg",
+                        "https://example.com/gorra_unisex_2.jpg",
+                        "https://example.com/gorra_unisex_3.jpg"
                     ]
                 },
                 {
-                    "id": 308,
-                    "nombre": "Chaqueta Deportiva Blanca",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "id": 502,
+                    "nombre": "Bufanda Mujer",
+                    "sexo": "mujer",
+                    "tallas": ["Única"],
                     "imagenes": [
-                        "https://example.com/chaqueta_deportiva_blanca_1.jpg",
-                        "https://example.com/chaqueta_deportiva_blanca_2.jpg",
-                        "https://example.com/chaqueta_deportiva_blanca_3.jpg"
+                        "https://example.com/bufanda_mujer_1.jpg",
+                        "https://example.com/bufanda_mujer_2.jpg",
+                        "https://example.com/bufanda_mujer_3.jpg"
                     ]
                 },
                 {
-                    "id": 309,
-                    "nombre": "Chaqueta Gabardina Marrón",
-                    "tallas": [
-                        "S",
-                        "M",
-                        "L",
-                        "XL"
-                    ],
+                    "id": 503,
+                    "nombre": "Cinturón Hombre",
+                    "sexo": "hombre",
+                    "tallas": ["S", "M", "L"],
                     "imagenes": [
-                        "https://example.com/chaqueta_gabardina_marron_1.jpg",
-                        "https://example.com/chaqueta_gabardina_marron_2.jpg",
-                        "https://example.com/chaqueta_gabardina_marron_3.jpg"
+                        "https://example.com/cinturon_hombre_1.jpg",
+                        "https://example.com/cinturon_hombre_2.jpg",
+                        "https://example.com/cinturon_hombre_3.jpg"
+                    ]
+                },
+                {
+                    "id": 504,
+                    "nombre": "Mochila Niño",
+                    "sexo": "niño",
+                    "tallas": ["Única"],
+                    "imagenes": [
+                        "https://example.com/mochila_nino_1.jpg",
+                        "https://example.com/mochila_nino_2.jpg",
+                        "https://example.com/mochila_nino_3.jpg"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "nombre": "Ropa de Deporte",
+            "prendas": [
+                {
+                    "id": 601,
+                    "nombre": "Sudadera Unisex",
+                    "sexo": "unisex",
+                    "tallas": ["S", "M", "L", "XL"],
+                    "imagenes": [
+                        "https://example.com/sudadera_unisex_1.jpg",
+                        "https://example.com/sudadera_unisex_2.jpg",
+                        "https://example.com/sudadera_unisex_3.jpg"
+                    ]
+                },
+                {
+                    "id": 602,
+                    "nombre": "Mallas Deportivas Mujer",
+                    "sexo": "mujer",
+                    "tallas": ["S", "M", "L", "XL"],
+                    "imagenes": [
+                        "https://example.com/mallas_deportivas_mujer_1.jpg",
+                        "https://example.com/mallas_deportivas_mujer_2.jpg",
+                        "https://example.com/mallas_deportivas_mujer_3.jpg"
+                    ]
+                },
+                {
+                    "id": 603,
+                    "nombre": "Pantalones Cortos de Deporte Hombre",
+                    "sexo": "hombre",
+                    "tallas": ["S", "M", "L", "XL"],
+                    "imagenes": [
+                        "https://example.com/pantalones_cortos_deporte_hombre_1.jpg",
+                        "https://example.com/pantalones_cortos_deporte_hombre_2.jpg",
+                        "https://example.com/pantalones_cortos_deporte_hombre_3.jpg"
+                    ]
+                },
+                {
+                    "id": 604,
+                    "nombre": "Camiseta Niño Deportiva",
+                    "sexo": "niño",
+                    "tallas": ["S", "M", "L"],
+                    "imagenes": [
+                        "https://example.com/camiseta_nino_deportiva_1.jpg",
+                        "https://example.com/camiseta_nino_deportiva_2.jpg",
+                        "https://example.com/camiseta_nino_deportiva_3.jpg"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "nombre": "Pijamas",
+            "prendas": [
+                {
+                    "id": 701,
+                    "nombre": "Pijama Unisex de Algodón",
+                    "sexo": "unisex",
+                    "tallas": ["S", "M", "L", "XL"],
+                    "imagenes": [
+                        "https://example.com/pijama_unisex_1.jpg",
+                        "https://example.com/pijama_unisex_2.jpg",
+                        "https://example.com/pijama_unisex_3.jpg"
+                    ]
+                },
+                {
+                    "id": 702,
+                    "nombre": "Pijama Mujer Estampado",
+                    "sexo": "mujer",
+                    "tallas": ["S", "M", "L", "XL"],
+                    "imagenes": [
+                        "https://example.com/pijama_mujer_estampado_1.jpg",
+                        "https://example.com/pijama_mujer_estampado_2.jpg",
+                        "https://example.com/pijama_mujer_estampado_3.jpg"
+                    ]
+                },
+                {
+                    "id": 703,
+                    "nombre": "Pijama Hombre Clásico",
+                    "sexo": "hombre",
+                    "tallas": ["S", "M", "L", "XL"],
+                    "imagenes": [
+                        "https://example.com/pijama_hombre_clasico_1.jpg",
+                        "https://example.com/pijama_hombre_clasico_2.jpg",
+                        "https://example.com/pijama_hombre_clasico_3.jpg"
+                    ]
+                },
+                {
+                    "id": 704,
+                    "nombre": "Pijama Niño Divertido",
+                    "sexo": "niño",
+                    "tallas": ["S", "M", "L"],
+                    "imagenes": [
+                        "https://example.com/pijama_nino_divertido_1.jpg",
+                        "https://example.com/pijama_nino_divertido_2.jpg",
+                        "https://example.com/pijama_nino_divertido_3.jpg"
                     ]
                 }
             ]

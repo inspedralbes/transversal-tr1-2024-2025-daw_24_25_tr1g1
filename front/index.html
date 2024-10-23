@@ -3,9 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Tienda</title>
 </head>
-<body>
+<body>    
+    <div id="appVue">
+        <!-- Anuncio en la parte superior -->
+        <div class="anuncio"> 
+            <p>Anuncio que va de derecha a izquierda</p>
+        </div>
+
+        <!-- Panel superior -->
+        <div class="panelSuperior">            
+            <!-- Navegación de usuario -->
+            <div class="navUser">
+                <div class="navIzq">
+                    <button @click="canviarDiv('contactUs')">Contactanos</button>
+                </div>
+                <div class="navCentro">
+                    <img src="./img/images.jpeg" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio"> <!-- Cambia la ruta de la imagen -->
+                </div>
+                <div id="navDer">
+                    <input type="text" placeholder="Buscar...">
+                    <button id="login">Login</button>
+                    <button @click="canviarDiv('checkout')">Cesta</button>
+                </div>
+            </div>
+            
+            <!-- Navegación de categorías -->
+            <div class="superior">
+                <div id="navCat">
+                    <div id="categorias">
+                        <button v-for="(categoria, index) in infoTotal.data.categorias" 
+                                :key="categoria.id" 
+                                @click="mostrarCategorias(index)" 
+                                class="categoria-btn">
+                            {{ categoria.nombre }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        
+        <!-- Contenido de la tienda -->
+        <div v-if="mostrarDiv('portada')" id="portada">
+            <h1>portada</h1>
+        </div>
+
+        <div v-if="mostrarDiv('botiga')" id="botiga">            
+            <ul>
+                <button id="cate" v-for="(categoria, index) in infoTotal.data.categorias" 
+                        :key="categoria.id" 
+                        @click="mostrarCategorias(index)">
+                    {{ categoria.nombre }} 
+                </button>
+            </ul>   
+        </div>        
+
+        <div v-if="mostrar">
+            <!-- Navegación de prendas -->
+            <div id="navPrendas">
+                <button id="butNov" @click="filtrarPrendas('novedades')">Novedades</button>
+                <button id="butHome" @click="filtrarPrendas('hombre')">Hombre</button>
+                <button id="butDona" @click="filtrarPrendas('mujer')">Mujer</button>
+                <button id="butnens" @click="filtrarPrendas('niños')">Niños</button>               
+            </div>            
+            <!-- Listado de prendas filtradas -->
+            <div id="prendas">
+                <br>
+                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+                <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
+                    <h2>{{ prenda.nombre }}</h2>
+                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="aqui van las imagenes" />
+                    <p>Tallas: {{ prenda.tallas.join(', ') }}</p>
+                    <p>Sexo: {{ prenda.sexo }}</p>
+                    <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Sección de Checkout -->
+        <div v-if="mostrarDiv('checkout')" id="checkout">
+            <h1>Cesta</h1>
+        </div>
+    </div>
     
+    <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
+    <script type="module" src="./js/comunicationManager.js"></script>
+    <script type="module" src="./js/functions.js"></script>
 </body>
 </html>
