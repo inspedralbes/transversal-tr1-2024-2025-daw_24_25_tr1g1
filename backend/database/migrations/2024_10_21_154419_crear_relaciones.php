@@ -11,7 +11,6 @@ class CrearRelaciones extends Migration
         // Relaciones de "prenda"
         Schema::table('prenda', function (Blueprint $table) {
             $table->foreign('talla_id')->references('id_talla')->on('talla')->onDelete('cascade');
-            $table->foreign('color_id')->references('id_color')->on('color')->onDelete('cascade');
             $table->foreign('categoria_id')->references('id_categoria')->on('categoria')->onDelete('cascade');
         });
 
@@ -26,7 +25,6 @@ class CrearRelaciones extends Migration
         // Eliminar relaciones de "prenda"
         Schema::table('prenda', function (Blueprint $table) {
             $table->dropForeign(['talla_id']);
-            $table->dropForeign(['color_id']);
             $table->dropForeign(['categoria_id']);
         });
 

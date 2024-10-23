@@ -13,7 +13,6 @@
                 $table->string('nombre', 255);
                 $table->decimal('precio', 10, 2);
                 $table->unsignedBigInteger('talla_id');
-                $table->unsignedBigInteger('color_id');
                 $table->text('descripcion')->nullable();
                 $table->unsignedBigInteger('categoria_id');
                 $table->decimal('descuento', 5, 2)->nullable();
