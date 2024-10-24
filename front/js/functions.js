@@ -7,29 +7,17 @@ createApp({
         const mostrar = ref(false);
         const activeIndex = ref(0);
         const divActual = ref('portada');   
-        const dropdownVisible = ref(false);
-        const filtroSexo = ref(null);  
         const productosFiltrados = ref([]); 
         const carrito = reactive([]); 
 
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
-            nfoTotal.data.producitos = data.productos; 
+            infoTotal.data.productos = data.productos; 
             console.log(infoTotal.data.categorias);
             console.log(infoTotal.data.productos); 
         });
         
-        function filtrarPrendas(sexo) {
-            divActual.value = 'prendas';
-            activeIndex.value = 0; 
-            mostrar.value = true;  
-            filtroSexo.value = sexo;  
-            productosFiltrados.value = infoTotal.data.productos.filter(producto => producto.sexo === sexo);
-            console.log(productosFiltrados.value); 
-        }
-
-
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
@@ -49,28 +37,27 @@ createApp({
             mostrar.value = false;
         }       
 
-        function toggleDropdownAndNavigate() {
-            dropdownVisible.value = !dropdownVisible.value;
-            canviarDiv('botiga');
-        }   
-
         function agregarACesta(prenda) {
             carrito.push(prenda); 
-            console.log(carrito); 
+            console.log("Producto añadido al carrito:", prenda);
+            console.log("Estado actual del carrito:", carrito); 
         }
-
+        
         function quitarCesta(prenda) {
-            for (let i = 0; i < carrito.length; i++) {
-                if (carrito[i] === prenda) {
-                    carrito.splice(i, 1); 
-                }
+            const index = carrito.findIndex(item => item.id === prenda.id); 
+            if (index !== -1) {
+                carrito.splice(index, 1); 
+                console.log("Producto eliminado del carrito:", prenda);
+            } else {
+                console.log("Producto no encontrado en el carrito:", prenda);
             }
-            console.log(carrito);
+            console.log("Estado actual del carrito:", carrito);
         }        
 
         function comprovarCarrito() {
+            divActual.value = 'carritoLateral';
+            mostrar.value = true;
             return carrito.length > 0;
-
         }
 
         return {
@@ -80,10 +67,6 @@ createApp({
             mostrarDiv,
             mostrar,
             activeIndex,
-            dropdownVisible,
-            filtroSexo,
-            filtrarPrendas,
-            toggleDropdownAndNavigate,
             productosFiltrados,
             agregarACesta,
             quitarCesta,
