@@ -8,13 +8,17 @@ class CrearRelaciones extends Migration
 {
     public function up()
     {
-        // Relaciones de "prenda"
+        // Relación con "prenda" y "categoria"
         Schema::table('prenda', function (Blueprint $table) {
-            $table->foreign('talla_id')->references('id_talla')->on('talla')->onDelete('cascade');
             $table->foreign('categoria_id')->references('id_categoria')->on('categoria')->onDelete('cascade');
         });
 
-        // Relaciones de "imagenes"
+        // Relación con "talla" y "prenda"
+        Schema::table('talla', function (Blueprint $table) {
+            $table->foreign('prenda_id')->references('id_prenda')->on('prenda')->onDelete('cascade');
+        });
+
+        // Relación con "imagenes" y "prenda"
         Schema::table('imagenes', function (Blueprint $table) {
             $table->foreign('prenda_id')->references('id_prenda')->on('prenda')->onDelete('cascade');
         });
@@ -24,8 +28,12 @@ class CrearRelaciones extends Migration
     {
         // Eliminar relaciones de "prenda"
         Schema::table('prenda', function (Blueprint $table) {
-            $table->dropForeign(['talla_id']);
             $table->dropForeign(['categoria_id']);
+        });
+
+        // Eliminar relaciones de "talla"
+        Schema::table('talla', function (Blueprint $table) {
+            $table->dropForeign(['prenda_id']);
         });
 
         // Eliminar relaciones de "imagenes"
