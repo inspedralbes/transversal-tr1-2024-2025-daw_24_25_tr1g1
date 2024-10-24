@@ -12,7 +12,6 @@ createApp({
         const prendaFiltrados = ref([]);
         const carrito = reactive([]);
         const currentPage = ref(0);
-        const maxPage = ref(0);
         const prendaAleatorios = ref([]);  // Nueva propiedad para prenda aleatorios
 
 
@@ -27,7 +26,6 @@ createApp({
 
             console.log(infoTotal.data.prendas);
             console.log(infoTotal.data.categorias);
-            maxPage.value = Math.ceil(infoTotal.data.categorias.length / 1) - 1;
             getProductoAleatorios();
         });
 
@@ -52,17 +50,7 @@ createApp({
         });
 
 
-        function prevPage() {
-            if (currentPage.value > 0) {
-                currentPage.value--;
-            }
-        }
 
-        function nextPage() {
-            if (currentPage.value < maxPage.value) {
-                currentPage.value++;
-            }
-        }
 
 
         function filtrarPrendas(sexo) {
@@ -118,8 +106,7 @@ createApp({
             categoriaActual,
             prendaAleatorios,
             getProductoAleatorios,
-            prevPage,
-            nextPage,
+           
             mostrarCategorias,
             canviarDiv,
             mostrarDiv,
