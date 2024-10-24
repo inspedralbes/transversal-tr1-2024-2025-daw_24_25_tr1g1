@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Tienda</title>
 </head>
-<body>    
+
+<body>
     <div id="appVue">
         <!-- Anuncio superior -->
         <div class="anuncio">
@@ -31,10 +33,8 @@
             </div>
             <!-- Navegación de categorías -->
             <div id="navCat">
-                <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                        :key="categoria.id" 
-                        @click="mostrarCategorias(index)" 
-                        class="categoria-btn">
+                <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id"
+                    @click="mostrarCategorias(index)" class="categoria-btn">
                     {{ categoria.nombre }}
                 </button>
             </div>
@@ -42,14 +42,60 @@
 
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada">
-            <h1>Portada</h1>
+            <div class="descripcion-portada">
+                <div class="div-portada"></div>
+                <p id="id-descripcion">Descripción de la portada</p>
+            </div>
+
+            <div class="categorias-contenedor">
+                <div class="tarjetas-container">
+                    <div class="pagination">
+                        <button @click="prevPage" :disabled="currentPage === 0"> < </button>
+                        <button @click="nextPage" :disabled="currentPage >= maxPage"> > </button>
+                    </div>
+
+                    <div class="tarjetas-prendas">
+                        <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+                            <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
+                            <div class="contenido-tarjeta">
+                                <h3>{{ prenda.nombre }}</h3>
+                                <p>Precio: {{ prenda.precio }}€</p>
+                                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="descripcion-portada">
+                <div class="div-portada"></div>
+                <p id="id-descripcion">Descripción de la portada</p>
+            </div>
+
+            <div class="categorias-contenedor">
+                <div class="tarjetas-container">
+                    <div class="pagination">
+                        <button @click="prevPage" :disabled="currentPage === 0"> < </button>
+                        <button @click="nextPage" :disabled="currentPage >= maxPage"> > </button>
+                    </div>
+
+                    <div class="tarjetas-prendas">
+                        <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+                            <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
+                            <div class="contenido-tarjeta">
+                                <h3>{{ prenda.nombre }}</h3>
+                                <p>Precio: {{ prenda.precio }}€</p>
+                                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div v-if="mostrarDiv('botiga')" id="botiga">
-            <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                    :key="categoria.id" 
-                    @click="mostrarCategorias(index)">
-                {{ categoria.nombre }} 
+            <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id"
+                @click="mostrarCategorias(index)">
+                {{ categoria.nombre }}
             </button>
         </div>
 
@@ -63,7 +109,7 @@
             </div>
             <div id="prendas">
                 <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-                <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
+                <div v-for="prenda in prendaFiltrados" :key="prenda.id" class="prenda">
                     <h2>{{ prenda.nombre }}</h2>
                     <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                     <p>Tallas: {{ prenda.talla.nombre }}</p>
@@ -85,9 +131,10 @@
             </div>
         </div>
     </div>
-    
+
     <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
     <script type="module" src="./js/comunicationManager.js"></script>
     <script type="module" src="./js/functions.js"></script>
 </body>
+
 </html>
