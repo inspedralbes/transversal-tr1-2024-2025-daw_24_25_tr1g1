@@ -46,11 +46,26 @@
         </div>
 
         <div v-if="mostrarDiv('botiga')" id="botiga">
-            <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                    :key="categoria.id" 
-                    @click="mostrarCategorias(index)">
-                {{ categoria.nombre }} 
-            </button>
+            <div id="prendas">
+                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+                <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
+                    <h2>{{ prenda.nombre }}</h2>
+                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
+                    <p>Tallas: {{ prenda.talla.nombre }}</p>
+                    <p>Sexo: {{ prenda.sexo }}</p>
+                    <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
+                </div>
+            </div>
+
+            <!-- Carrito lateral -->
+            <div v-if="carrito.length > 0" id="carritoLateral">
+                <h1>Carrito</h1>
+                <div v-for="(producto, index) in carrito" :key="index" class="cesta">
+                    <p>{{ producto.nombre }}</p>
+                    <button @click="quitarCesta(producto)">Quitar</button>
+                </div>
+                <button @click="canviarDiv('checkout')">Ir al checkout</button> 
+            </div>
         </div>
 
         <!-- Navegación y listado de prendas filtradas -->
@@ -72,9 +87,9 @@
                 </div>
             </div>
         </div>
-
-        <!-- Sección de Checkout -->
-        <div v-if="mostrarDiv('checkout')" id="checkout">
+        
+         <!-- Sección de Checkout -->
+         <div v-if="mostrarDiv('checkout')" id="checkout">
             <h1>Cesta</h1>
             <div v-for="(item, index) in carrito" :key="index" class="cesta">
                 <h2>{{ item.nombre }}</h2>
@@ -84,8 +99,9 @@
                 <button @click="quitarCesta(item)">Eliminar</button>
             </div>
         </div>
-    </div>
-    
+    </div>  
+    <footer id="footer">Aqui va el footer</footer>
+
     <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
     <script type="module" src="./js/comunicationManager.js"></script>
     <script type="module" src="./js/functions.js"></script>

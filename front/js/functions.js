@@ -15,7 +15,7 @@ createApp({
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
-            infoTotal.data.productos = data.productos; 
+            nfoTotal.data.producitos = data.productos; 
             console.log(infoTotal.data.categorias);
             console.log(infoTotal.data.productos); 
         });
@@ -68,6 +68,11 @@ createApp({
             console.log(carrito);
         }        
 
+        function comprovarCarrito() {
+            return carrito.length > 0;
+
+        }
+
         return {
             infoTotal,
             mostrarCategorias,
@@ -82,7 +87,8 @@ createApp({
             productosFiltrados,
             agregarACesta,
             quitarCesta,
-            carrito
+            carrito,
+            comprovarCarrito
         };
     },
 }).mount("#appVue");
