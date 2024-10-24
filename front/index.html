@@ -1,107 +1,170 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title>Tienda</title>
-    </head>
-    <body>    
-        <div id="appVue">
-            <!-- Anuncio superior -->
-            <div class="anuncio">
-                <p>Anuncio que va de derecha a izquierda</p>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tienda</title>
+</head>
+<body>    
+    <div id="appVue">
+        <!-- Anuncio superior -->
+        <div class="anuncio">
+            <p>Anuncio que va de derecha a izquierda</p>
+        </div>
 
-            <!-- Panel superior -->
-            <div class="panelSuperior">
-
-                <!-- Navegación de usuario -->
-                <div class="navUser">
-                    <div class="navIzq">
-                        <button @click="canviarDiv('contactUs')">Contactanos</button>
-                    </div>
-                    <div class="navCentro">
-                        <img src="./img/images.jpeg" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
-                    </div>
-                    <div class="navDer">
-                        <input type="text" placeholder="Buscar...">
-                        <button id="login">Login</button>
-                        <button @click="canviarDiv('checkout')">Cesta</button>
-                    </div>
+        <!-- Panel superior -->
+        <div class="panelSuperior">
+            <!-- Navegación de usuario -->
+            <div class="navUser">
+                <div class="navIzq">
+                    <button @click="canviarDiv('contactUs')">Contactanos</button>
                 </div>
-
-                <!-- Navegación de categorías -->
-                <div id="navCat">
-                    <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                            :key="categoria.id" 
-                            @click="mostrarCategorias(index)" 
-                            class="categoria-btn">
-                        {{ categoria.nombre }}
-                    </button>
+                <div class="navCentro">
+                    <img src="./img/images.jpeg" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
+                </div>
+                <div class="navDer">
+                    <input type="text" placeholder="Buscar...">
+                    <button id="login">Login</button>
+                    <button @click="canviarDiv('checkout')">Cesta</button>
                 </div>
             </div>
+            <!-- Navegación de categorías -->
+            <div id="navCat">
+                <button v-for="(categoria, index) in infoTotal.data.categorias" 
+                        :key="categoria.id" 
+                        @click="mostrarCategorias(index)" 
+                        class="categoria-btn">
+                    {{ categoria.nombre }}
+                </button>
+            </div>
+        </div>
 
-        <!-- ----------------------------------------------------------------------- --> 
+        <!-- Contenido de la tienda -->
+        <div v-if="mostrarDiv('portada')" id="portada">
+            <div class="descripcion-portada">
+                <div class="div-portada"></div>
+                <p id="id-descripcion">Descripción de la portada</p>
+            </div>
 
-            <!-- Contenido de la tienda -->
-            <div v-if="mostrarDiv('botiga')" id="botiga">
-                    <!-- Carrito lateral -->
-                    <div v-if="carrito.length > 0 "id="carritoLateral">
-                        <h1>Carrito</h1>
-                        <div v-for="(producto, index) in carrito" :key="index" class="cesta">
-                            <p>{{ producto.nombre }}</p>
-                            <button @click="quitarCesta(producto)">Quitar</button>
+            <div class="categorias-contenedor">
+                <div class="tarjetas-container">
+                  
+
+                    <div class="tarjetas-prendas">
+                        <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+                            <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
+                            <div class="contenido-tarjeta">
+                                <h3>{{ prenda.nombre }}</h3>
+                                <p>Precio: {{ prenda.precio }}€</p>
+                                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
+                            </div>
                         </div>
-                        <button @click="canviarDiv('checkout')">Ir al checkout</button> 
                     </div>
-                    
-
-                    <!-- Sección de Prendas -->
-                    <div id="prendas">
-                        <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-                        <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
-                            <h2>{{ prenda.nombre }}</h2>
-                            <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
-                            <p>Tallas: {{ prenda.talla.nombre }}</p>
-                            <p>Sexo: {{ prenda.sexo }}</p>
-                            <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
-                        </div>
-                    </div>                
                 </div>
+            </div>
+            <div class="descripcion-portada">
+                <div class="div-portada"></div>
+                <p id="id-descripcion">Descripción de la portada</p>
+            </div>
 
-        <!------------------------------------------------------------------------------->
- 
+            <div class="categorias-contenedor">
+                <div class="tarjetas-container">
+
+
+                    <div class="tarjetas-prendas">
+                        <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+                            <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
+                            <div class="contenido-tarjeta">
+                                <h3>{{ prenda.nombre }}</h3>
+                                <p>Precio: {{ prenda.precio }}€</p>
+                                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="mostrarDiv('botiga')" id="botiga">
+            <button v-for="(categoria, index) in infoTotal.data.categorias" 
+                    :key="categoria.id" 
+                    @click="mostrarCategorias(index)">
+                {{ categoria.nombre }} 
+            </button>
+        </div>
+
         <!-- Navegación y listado de prendas filtradas -->
-            <div v-if="mostrar">                
-                <div id="prendas">
-                    <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-                    <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
-                        <h2>{{ prenda.nombre }}</h2>
-                        <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
-                        <p>Tallas: {{ prenda.talla.nombre }}</p>
-                        <p>Sexo: {{ prenda.sexo }}</p>
-                        <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
-                    </div>
+        <div v-if="mostrar">
+            <div id="navPrendas">
+                <button @click="filtrarPrendas('novedades')">Novedades</button>
+                <button @click="filtrarPrendas('hombre')">Hombre</button>
+                <button @click="filtrarPrendas('mujer')">Mujer</button>
+                <button @click="filtrarPrendas('niños')">Niños</button>
+            </div>
+            <div id="prendas">
+                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+                <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
+                    <h2>{{ prenda.nombre }}</h2>
+                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
+                    <p>Tallas: {{ prenda.talla.nombre }}</p>
+                    <p>Sexo: {{ prenda.sexo }}</p>
+                    <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
                 </div>
             </div>
-            
-            <!-- Sección de Checkout -->
-            <div v-if="mostrarDiv('checkout')" id="checkout">
-                <h1>Cesta</h1>
-                <div v-for="(item, index) in carrito" :key="index" class="cesta">
-                    <h2>{{ item.nombre }}</h2>
-                    <img v-if="item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre }}">
-                    <p>Tallas: {{ item.talla.nombre }}</p>
-                    <p>Sexo: {{ item.sexo }}</p>
-                    <button @click="quitarCesta(item)">Eliminar</button>
-                </div>
-            </div>
-        </div>  
-        <footer id="footer">Aqui va el footer</footer>
+        </div>
 
-        <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
-        <script type="module" src="./js/comunicationManager.js"></script>
-        <script type="module" src="./js/functions.js"></script>
-    </body>
-    </html>
+        <!-- Sección de Checkout -->
+        <div v-if="mostrarDiv('checkout')" id="checkout">
+            <h1>Cesta</h1>
+            <div v-for="(item, index) in carrito" :key="index" class="cesta">
+                <h2>{{ item.nombre }}</h2>
+                <img v-if="item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre }}">
+                <p>Tallas: {{ item.talla.nombre }}</p>
+                <p>Sexo: {{ item.sexo }}</p>
+                <button @click="quitarCesta(item)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    <div v-if="mostrarDiv('contacto')" id="contacto">
+        <h1>Contacto</h1>
+        <form>
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" placeholder="Ingresa tu nombre" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Ingresa tu email" required>
+            </div>
+            <div>
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" placeholder="Escribe tu mensaje aquí" required></textarea>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#about">Sobre nosotros</a>
+                <a href="#contact">Contacto</a>
+                <a href="#privacy">Política de privacidad</a>
+                <a href="#terms">Términos de servicio</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="Twitter">Twitter</a>
+                <a href="#" aria-label="Instagram">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Tienda. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
+    <script type="module" src="./js/comunicationManager.js"></script>
+    <script type="module" src="./js/functions.js"></script>
+</body>
+</html>
