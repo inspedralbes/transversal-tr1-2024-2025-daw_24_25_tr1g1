@@ -18,15 +18,15 @@
             <!-- Navegación de usuario -->
             <div class="navUser">
                 <div class="navIzq">
-                    <button @click="canviarDiv('contactUs')">Contactanos</button>
+                    <button @click="cambiarDiv('contacto')">Contáctanos</button>
                 </div>
                 <div class="navCentro">
-                    <img src="./img/images.jpeg" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
+                    <img src="./img/images.jpeg" alt="Inicio" @click="cambiarDiv('portada')" class="img-inicio">
                 </div>
                 <div class="navDer">
                     <input type="text" placeholder="Buscar...">
                     <button id="login">Login</button>
-                    <button @click="canviarDiv('checkout')">Cesta</button>
+                    <button @click="cambiarDiv('checkout')">Cesta</button>
                 </div>
             </div>
             <!-- Navegación de categorías -->
@@ -49,29 +49,6 @@
 
             <div class="categorias-contenedor">
                 <div class="tarjetas-container">
-                  
-
-                    <div class="tarjetas-prendas">
-                        <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
-                            <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
-                            <div class="contenido-tarjeta">
-                                <h3>{{ prenda.nombre }}</h3>
-                                <p>Precio: {{ prenda.precio }}€</p>
-                                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="descripcion-portada">
-                <div class="div-portada"></div>
-                <p id="id-descripcion">Descripción de la portada</p>
-            </div>
-
-            <div class="categorias-contenedor">
-                <div class="tarjetas-container">
-
-
                     <div class="tarjetas-prendas">
                         <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
                             <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
@@ -86,31 +63,16 @@
             </div>
         </div>
 
-        <div v-if="mostrarDiv('botiga')" id="botiga">
-            <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                    :key="categoria.id" 
-                    @click="mostrarCategorias(index)">
-                {{ categoria.nombre }} 
-            </button>
-        </div>
-
-        <!-- Navegación y listado de prendas filtradas -->
-        <div v-if="mostrar">
-            <div id="navPrendas">
-                <button @click="filtrarPrendas('novedades')">Novedades</button>
-                <button @click="filtrarPrendas('hombre')">Hombre</button>
-                <button @click="filtrarPrendas('mujer')">Mujer</button>
-                <button @click="filtrarPrendas('niños')">Niños</button>
-            </div>
-            <div id="prendas">
-                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-                <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
-                    <h2>{{ prenda.nombre }}</h2>
-                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
-                    <p>Tallas: {{ prenda.talla.nombre }}</p>
-                    <p>Sexo: {{ prenda.sexo }}</p>
-                    <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
-                </div>
+        <!-- Contenido de categorías filtradas -->
+        <div v-if="mostrar" id="prendas">
+           
+            <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+            <div v-for="prenda in prendaFiltrados" :key="prenda.id" class="prenda">
+                <h2>{{ prenda.nombre }}</h2>
+                <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
+                <p>Tallas: {{ prenda.talla.nombre }}</p>
+                <p>Sexo: {{ prenda.sexo }}</p>
+                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
             </div>
         </div>
 
@@ -125,25 +87,29 @@
                 <button @click="quitarCesta(item)">Eliminar</button>
             </div>
         </div>
+
+        <!-- Sección de Contacto -->
+        <div v-if="mostrarDiv('contacto')" id="contacto">
+            <h1>Contacto</h1>
+            <form>
+                <div>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" placeholder="Ingresa tu nombre" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Ingresa tu email" required>
+                </div>
+                <div>
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" placeholder="Escribe tu mensaje aquí" required></textarea>
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
     </div>
-    <div v-if="mostrarDiv('contacto')" id="contacto">
-        <h1>Contacto</h1>
-        <form>
-            <div>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" placeholder="Ingresa tu nombre" required>
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="Ingresa tu email" required>
-            </div>
-            <div>
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" placeholder="Escribe tu mensaje aquí" required></textarea>
-            </div>
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-links">
@@ -162,7 +128,8 @@
             <p>&copy; 2024 Tienda. Todos los derechos reservados.</p>
         </div>
     </footer>
-    
+
+    <!-- Scripts -->
     <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
     <script type="module" src="./js/comunicationManager.js"></script>
     <script type="module" src="./js/functions.js"></script>
