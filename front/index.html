@@ -1,27 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Tienda</title>
 </head>
-
 <body>
     <div id="appVue">
-        <!-- Anuncio superior -->
-        <div class="anuncio">
-            <p>Anuncio que va de derecha a izquierda</p>
-        </div>
-
-        <!-- Panel superior -->
+        <div class="anuncio"><p>Anuncio que va de derecha a izquierda</p></div>
         <div class="panelSuperior">
-            <!-- Navegación de usuario -->
             <div class="navUser">
-                <div class="navIzq">
-                    <button @click="canviarDiv('contacto')">Contactanos</button>
-                </div>
+                <div class="navIzq"><button @click="canviarDiv('contacto')">Contáctanos</button></div>
                 <div class="navCentro">
                     <img src="./img/images.jpeg" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
                 </div>
@@ -31,9 +22,8 @@
                     <button @click="canviarDiv('checkout')">Cesta</button>
                 </div>
             </div>
-            <!-- Navegación de categorías -->
             <div id="navCat">
-                <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id"
+                <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id_categoria"
                     @click="mostrarCategorias(index)" class="categoria-btn">
                     {{ categoria.nombre }}
                 </button>
@@ -49,7 +39,7 @@
 
             <div class="categorias-contenedor">
                 <div class="tarjetas-container">
-                  
+
 
                     <div class="tarjetas-prendas">
                         <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
@@ -93,46 +83,37 @@
             </button>
         </div>
 
-        <!-- Navegación y listado de prendas filtradas -->
-        <div v-if="mostrar">
-            <div id="navPrendas">
-                <button @click="filtrarPrendas('novedades')">Novedades</button>
-                <button @click="filtrarPrendas('hombre')">Hombre</button>
-                <button @click="filtrarPrendas('mujer')">Mujer</button>
-                <button @click="filtrarPrendas('niños')">Niños</button>
-            </div>
-            <div id="prendas">
-                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-                <div v-for="prenda in prendaFiltrados" :key="prenda.id" class="prenda">
-                    <h2>{{ prenda.nombre }}</h2>
-                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
-                    <p>Tallas: {{ prenda.talla.nombre }}</p>
-                    <p>Sexo: {{ prenda.sexo }}</p>
-                    <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
-                </div>
+        <!-- Navegación de categorías y listado de prendas -->
+        <div v-if="mostrarDiv('botiga')" id="botiga">
+            <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+            <div v-for="prenda in prendaFiltrados" :key="prenda.id_prenda" class="prenda">
+                <h2>{{ prenda.nombre }}</h2>
+                <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
+                <p>Precio: {{ prenda.precio }}€</p>
+                <p>Sexo: {{ prenda.sexo }}</p>
+                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
             </div>
         </div>
 
         <!-- Sección de Contacto -->
-<div v-if="mostrarDiv('contacto')" id="contacto">
-    <h1>Contacto</h1>
-    <form>
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" placeholder="Ingresa tu nombre" required>
+        <div v-if="mostrarDiv('contacto')" id="contacto">
+            <h1>Contacto</h1>
+            <form @submit.prevent="enviarFormulario">
+                <div>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" placeholder="Ingresa tu nombre" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Ingresa tu email" required>
+                </div>
+                <div>
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" placeholder="Escribe tu mensaje aquí" required></textarea>
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
         </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Ingresa tu email" required>
-        </div>
-        <div>
-            <label for="mensaje">Mensaje:</label>
-            <textarea id="mensaje" placeholder="Escribe tu mensaje aquí" required></textarea>
-        </div>
-        <button type="submit">Enviar</button>
-    </form>
-</div>
-
 
         <!-- Sección de Checkout -->
         <div v-if="mostrarDiv('checkout')" id="checkout">
@@ -140,11 +121,11 @@
             <div v-for="(item, index) in carrito" :key="index" class="cesta">
                 <h2>{{ item.nombre }}</h2>
                 <img v-if="item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre }}">
-                <p>Tallas: {{ item.talla.nombre }}</p>
-                <p>Sexo: {{ item.sexo }}</p>
+                <p>Precio: {{ item.precio }}€</p>
                 <button @click="quitarCesta(item)">Eliminar</button>
             </div>
         </div>
+
         <footer class="footer">
             <div class="footer-container">
                 <div class="footer-links">
@@ -164,10 +145,10 @@
             </div>
         </footer>
     </div>
-
     <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
     <script type="module" src="./js/comunicationManager.js"></script>
     <script type="module" src="./js/functions.js"></script>
 </body>
-
 </html>
+
+

@@ -7,118 +7,72 @@ createApp({
         const mostrar = ref(false);
         const activeIndex = ref(0);
         const divActual = ref('portada');
-        const dropdownVisible = ref(false);
         const filtroSexo = ref(null);
         const prendaFiltrados = ref([]);
         const carrito = reactive([]);
-        const currentPage = ref(0);
-        const prendaAleatorios = ref([]);  // Nueva propiedad para prenda aleatorios
-
+        const prendaAleatorios = ref([]);
 
         onBeforeMount(async () => {
             const data = await getProductes();
-            console.log(data.producto);
             infoTotal.data.categorias = data.categorias;
-            infoTotal.data.prendas = []; // Inicializar el array de prendas
-            data.categorias.forEach(categoria => {
-                infoTotal.data.prendas.push(...categoria.prendas); // Agregar las prendas de cada categoría
-            });
-
-            console.log(infoTotal.data.prendas);
-            console.log(infoTotal.data.categorias);
             getProductoAleatorios();
         });
 
-        // Función para obtener productos aleatorios
         function getProductoAleatorios() {
-            const allProducts = infoTotal.data.prendas; // Todos los productos
-            if (!allProducts || allProducts.length === 0) {
-                console.error("No hay prendas disponibles.");
-                return;
-            }
-
-            // Barajar las prendas
-            const shuffled = allProducts.sort(() => 0.5 - Math.random());
-            // Seleccionar los primeros 6 prendas aleatorios
-            prendaAleatorios.value = shuffled.slice(0, 6);
-            console.log("Prendas aleatorias seleccionadas:", prendaAleatorios.value); // Verifica lo que se seleccionó
+            const allProducts = infoTotal.data.categorias.flatMap(categoria => categoria.prendas);
+            prendaAleatorios.value = allProducts.sort(() => 0.5 - Math.random()).slice(0, 6);
         }
 
-
-        const categoriaActual = computed(() => {
-            return infoTotal.data.categorias[currentPage.value] || null;
-        });
-
-
-
-
+        const categoriaActual = computed(() => infoTotal.data.categorias[activeIndex.value] || null);
 
         function filtrarPrendas(sexo) {
-            divActual.value = 'prendas';
-            activeIndex.value = 0;
-            mostrar.value = true;
+            divActual.value = 'botiga';
             filtroSexo.value = sexo;
-            prendaFiltrados.value = infoTotal.data.prenda.filter(producto => producto.sexo === sexo);
-            console.log(prendaFiltrados.value);
+            prendaFiltrados.value = infoTotal.data.categorias.flatMap(categoria =>
+                categoria.prendas.filter(prenda => prenda.sexo === sexo));
         }
-
 
         function mostrarCategorias(index) {
-            if (index >= 0 && index < infoTotal.data.categorias.length) {
-                activeIndex.value = index;
-                mostrar.value = true;
-                divActual.value = 'prendas';
-                prendaFiltrados.value = infoTotal.data.categorias[index].prendas;
-                console.log(prendaFiltrados.value);
-            }
+            activeIndex.value = index;
+            divActual.value = 'botiga';
+            prendaFiltrados.value = infoTotal.data.categorias[index].prendas;
         }
 
-        function mostrarDiv(id) {
-            return id === divActual.value;
-        }
+        function mostrarDiv(id) { return id === divActual.value; }
 
         function canviarDiv(nouDiv) {
             divActual.value = nouDiv;
             mostrar.value = false;
         }
 
-        function toggleDropdownAndNavigate() {
-            dropdownVisible.value = !dropdownVisible.value;
-            canviarDiv('botiga');
-        }
-
-        function agregarACesta(prenda) {
-            carrito.push(prenda);
-            console.log(carrito);
-        }
-
+        function agregarACesta(prenda) { carrito.push(prenda); }
+        
         function quitarCesta(prenda) {
-            for (let i = 0; i < carrito.length; i++) {
-                if (carrito[i] === prenda) {
-                    carrito.splice(i, 1);
-                }
-            }
-            console.log(carrito);
+            const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda);
+            if (index > -1) carrito.splice(index, 1);
+        }
+
+        function enviarFormulario() {
+            alert("Gracias por contactarnos. Tu mensaje ha sido enviado con éxito.");
+            canviarDiv('portada');
         }
 
         return {
-            infoTotal,
-            categoriaActual,
-            prendaAleatorios,
-            getProductoAleatorios,
-           
-            mostrarCategorias,
-            canviarDiv,
+            infoTotal, 
+            categoriaActual, 
+            prendaAleatorios, 
+            enviarFormulario,
+            getProductoAleatorios, 
+            mostrarCategorias, 
+            canviarDiv, 
             mostrarDiv,
-            mostrar,
+            mostrar, 
             activeIndex,
-            dropdownVisible,
-            filtroSexo,
-            filtrarPrendas,
-            toggleDropdownAndNavigate,
+            filtroSexo, 
+            filtrarPrendas, 
             prendaFiltrados,
-            agregarACesta,
-            quitarCesta,
+            agregarACesta, 
+            quitarCesta, 
             carrito
         };
     },
