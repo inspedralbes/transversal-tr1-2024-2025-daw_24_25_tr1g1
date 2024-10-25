@@ -1,15 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Tienda</title>
 </head>
+
 <body>
     <div id="appVue">
-        <div class="anuncio"><p>Anuncio que va de derecha a izquierda</p></div>
+        <div class="anuncio">
+            <p>Anuncio que va de derecha a izquierda</p>
+        </div>
         <div class="panelSuperior">
             <div class="navUser">
                 <div class="navIzq"><button @click="canviarDiv('contacto')">Contáctanos</button></div>
@@ -76,24 +79,35 @@
             </div>
         </div>
 
-        <div v-if="mostrarDiv('botiga')" id="botiga">
-            <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id"
-                @click="mostrarCategorias(index)">
-                {{ categoria.nombre }}
-            </button>
-        </div>
 
         <!-- Navegación de categorías y listado de prendas -->
-        <div v-if="mostrarDiv('botiga')" id="botiga">
+        <div v-if="mostrarDiv('botiga')" id="prendas">
             <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+            
+            <!-- Selector de género -->
+            <label for="filtroGenero" class="filtroGenero">Filtrar por género:</label>
+            <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
+                <option value="">Todos</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+            </select>
+        
+            <!-- Lista de prendas filtradas -->
             <div v-for="prenda in prendaFiltrados" :key="prenda.id_prenda" class="prenda">
                 <h2>{{ prenda.nombre }}</h2>
                 <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                 <p>Precio: {{ prenda.precio }}€</p>
                 <p>Sexo: {{ prenda.sexo }}</p>
+                <p>Tallas disponibles:</p>
+                <ul>
+                    <li v-for="talla in prenda.tallas" :key="talla.id_talla">
+                        Talla: {{ talla.nombre }}, Stock: {{ talla.stock }}
+                    </li>
+                </ul>
                 <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
             </div>
         </div>
+        
 
         <!-- Sección de Contacto -->
         <div v-if="mostrarDiv('contacto')" id="contacto">
@@ -149,6 +163,5 @@
     <script type="module" src="./js/comunicationManager.js"></script>
     <script type="module" src="./js/functions.js"></script>
 </body>
+
 </html>
-
-

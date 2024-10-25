@@ -28,15 +28,24 @@ createApp({
         function filtrarPrendas(sexo) {
             divActual.value = 'botiga';
             filtroSexo.value = sexo;
-            prendaFiltrados.value = infoTotal.data.categorias.flatMap(categoria =>
-                categoria.prendas.filter(prenda => prenda.sexo === sexo));
+            prendaFiltrados.value = infoTotal.data.categorias[activeIndex.value].prendas.filter(prenda =>
+                !sexo || prenda.sexo === sexo
+            );
         }
+        
 
         function mostrarCategorias(index) {
-            activeIndex.value = index;
-            divActual.value = 'botiga';
-            prendaFiltrados.value = infoTotal.data.categorias[index].prendas;
+            if (index >= 0 && index < infoTotal.data.categorias.length) {
+                activeIndex.value = index;
+                mostrar.value = true;
+                divActual.value = 'botiga';
+                filtroSexo.value = null;
+                // Llamamos a filtrarPrendas sin filtro para mostrar todas las prendas de la categoría
+                filtrarPrendas('');
+            }
         }
+        
+        
 
         function mostrarDiv(id) { return id === divActual.value; }
 
