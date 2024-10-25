@@ -1,14 +1,15 @@
 /* Estilos Generales */
-#appVue {    
-    margin: 0;
-    padding: 0;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    background-color: white;
-    height: 100vh;     
+#appVue {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
-body {
+body, html {
+    height: 100%;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Anuncio */
@@ -17,7 +18,10 @@ body {
     border: 1px solid black;
     overflow: hidden;
 }
-
+main {
+    flex: 1;
+    padding-bottom: 20px; 
+}
 .anuncio p {
     margin: 0;
     padding: 5px;
@@ -298,7 +302,9 @@ body {
     color: rgb(0, 0, 0);
     padding: 20px 0;
     text-align: center;
-    margin-top: 200px;
+    width: 100%;
+    bottom: 0;
+    margin-top: auto;
 }
 
 .footer-container {
@@ -348,6 +354,8 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px; 
     font-size: 16px; 
+    resize: none;
+
 }
 
 #contacto button {
@@ -371,4 +379,5 @@ body {
     display: block;
     margin: 10px 0 5px; 
     font-weight: bold; 
+
 }
