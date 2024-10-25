@@ -83,31 +83,29 @@
         <!-- Navegación de categorías y listado de prendas -->
         <div v-if="mostrarDiv('botiga')" id="prendas">
             <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-            
-            <!-- Selector de género -->
+
+            <!-- género -->
             <label for="filtroGenero" class="filtroGenero">Filtrar por género:</label>
             <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
                 <option value="">Todos</option>
                 <option value="Hombre">Hombre</option>
                 <option value="Mujer">Mujer</option>
             </select>
-        
-            <!-- Lista de prendas filtradas -->
+
+            <!--prendas filtradas -->
             <div v-for="prenda in prendaFiltrados" :key="prenda.id_prenda" class="prenda">
                 <h2>{{ prenda.nombre }}</h2>
                 <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                 <p>Precio: {{ prenda.precio }}€</p>
                 <p>Sexo: {{ prenda.sexo }}</p>
                 <p>Tallas disponibles:</p>
-                <ul>
-                    <li v-for="talla in prenda.tallas" :key="talla.id_talla">
-                        Talla: {{ talla.nombre }}, Stock: {{ talla.stock }}
-                    </li>
-                </ul>
+                <p v-for="talla in prenda.tallas" :key="talla.id_talla">
+                    Talla: {{ talla.nombre }}
+                </p>
                 <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
             </div>
         </div>
-        
+
 
         <!-- Sección de Contacto -->
         <div v-if="mostrarDiv('contacto')" id="contacto">

@@ -32,7 +32,7 @@ createApp({
                 !sexo || prenda.sexo === sexo
             );
         }
-        
+
 
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
@@ -40,12 +40,10 @@ createApp({
                 mostrar.value = true;
                 divActual.value = 'botiga';
                 filtroSexo.value = null;
-                // Llamamos a filtrarPrendas sin filtro para mostrar todas las prendas de la categoría
                 filtrarPrendas('');
             }
         }
-        
-        
+
 
         function mostrarDiv(id) { return id === divActual.value; }
 
@@ -55,7 +53,7 @@ createApp({
         }
 
         function agregarACesta(prenda) { carrito.push(prenda); }
-        
+
         function quitarCesta(prenda) {
             const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda);
             if (index > -1) carrito.splice(index, 1);
@@ -67,21 +65,21 @@ createApp({
         }
 
         return {
-            infoTotal, 
-            categoriaActual, 
-            prendaAleatorios, 
+            infoTotal,
+            categoriaActual,
+            prendaAleatorios,
             enviarFormulario,
-            getProductoAleatorios, 
-            mostrarCategorias, 
-            canviarDiv, 
+            getProductoAleatorios,
+            mostrarCategorias,
+            canviarDiv,
             mostrarDiv,
-            mostrar, 
+            mostrar,
             activeIndex,
-            filtroSexo, 
-            filtrarPrendas, 
+            filtroSexo,
+            filtrarPrendas,
             prendaFiltrados,
-            agregarACesta, 
-            quitarCesta, 
+            agregarACesta,
+            quitarCesta,
             carrito
         };
     },
