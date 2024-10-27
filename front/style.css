@@ -1,20 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+
 /* Estilos Generales */
 #appVue {
     flex: 1;
     display: flex;
     flex-direction: column;
+    font-family: 'IBM Plex Mono', -apple-system, sans-serif;
+
 }
 body, html {
     height: 100%;
     margin: 0;
     padding: 0;
     display: flex;
+    font-family: 'IBM Plex Mono', -apple-system, sans-serif;
     flex-direction: column;
+    box-sizing: border-box;
+    border: none;
 }
 
 /* Anuncio */
 .anuncio {  
     width: 100%;
+    color: red;
     border: 1px solid black;
     overflow: hidden;
 }
@@ -25,7 +33,7 @@ main {
 .anuncio p {
     margin: 0;
     padding: 5px;
-    animation: moverAnuncio 30s linear infinite;
+    animation: moverAnuncio 120s linear infinite;
 }
 
 @keyframes moverAnuncio {
@@ -37,6 +45,7 @@ main {
 .panelSuperior {
     position: sticky;
     top: 0;
+    font-size: 12px;
     z-index: 1000;
     background-color: white;
 }
@@ -51,15 +60,21 @@ main {
 
 .navUser button, .superior button {
     margin: 0 5px;
+    background-color: transparent;
     padding: 8px 12px;
-    border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 10px;
+    border:none;
+    
+
 }
 
-.navUser button:hover, .superior button:hover, #navPrendas button:hover {
-    background-color:white;
+.navUser button:hover, 
+.navIzq .categoria-btn:hover, 
+.navCentro img:hover {
+    text-decoration: underline; 
 }
+
 .navUser img {
     width: 50px; 
     height: 50px;   
@@ -87,12 +102,12 @@ main {
 }
 
 .navDer input[type="text"] {
-    padding: 10px;
-    border-radius: 5px;
+    padding: 8px;
+    border: 1px solid white;
 }
 
 /* Navegación Categorías */
-#navCat {
+#navCat {    
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -101,9 +116,9 @@ main {
 .categoria-btn {
     padding: 8px 12px;
     border: none;
-    border-radius: 5px;
+    background-color: white;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 10px;
 }
 
 /* Contenido de Botiga */
@@ -173,10 +188,14 @@ main {
 /* Estilo para las categorías */
 .categorias-contenedor {
     display: flex;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
 }
+
 
 /* Estilo para la portada */
 .div-portada {
