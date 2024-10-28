@@ -12,22 +12,20 @@
         <div class="anuncio">
             <p>Anuncio que va de derecha a izquierda</p>
         </div>
-
         <div class="panelSuperior">
             <div class="navUser">
-                <div class="navUser-region">
-                    <button id="btn-cambiar-idioma">Región</button>
-                </div>
                 <div class="navIzq">
-                    <button id="btn-contacto" @click="cambiarDiv('contacto')">Contáctanos</button>
+                    <button id="btn-menu" class="icono" @click="toggleMenuLateral">
+                        <i class="fa fa-bars"></i> <!-- Icono de menú -->
+                    </button>
                 </div>
                 <div class="navCentro">
-                    <img src="./img/logo.png" alt="Inicio" @click="cambiarDiv('portada')" class="img-inicio">
+                    <img src="./img/logo.png" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
                 </div>
                 <div class="navDer">
-                    <i class="icono">🔍</i>
-                    <p id="cantidadTotal">{{ cantidadTotal }}</p>
-                    <button id="btn-carrito" class="icono" @click="cambiarDiv('checkout')"><i class="fa fa-shopping-basket"></i></button>
+                    <button id="btn-carrito" class="icono" @click="canviarDiv('checkout')">
+                        <i class="fa fa-shopping-basket"></i> <!-- Icono de carrito -->
+                    </button>
                 </div>
             </div>
 
@@ -43,6 +41,14 @@
             </div>
         </div>
 
+        <!-- Menú lateral -->
+        <aside v-if="dropdownVisible" class="menu-lateral">
+            <button @click="canviarDiv('portada')" class="menu-item">Inicio</button>
+            <button @click="filtrarPrendas" class="menu-item">Prendas</button>
+            <button @click="canviarDiv('checkout')" class="menu-item">Cesta</button>
+            <button @click="toggleMenuLateral" class="menu-item">Cerrar</button>
+        </aside>
+
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
             <div class="descripcion-portada">
@@ -52,7 +58,7 @@
             <div class="categorias-contenedor">
                 <div class="tarjetas-container">
                     <div class="tarjetas-prendas">
-                        <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+                        <div class="tarjeta-prenda" v-for="prenda in productosFiltrados" :key="prenda.id_prenda">
                             <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
                             <div class="contenido-tarjeta">
                                 <h3>{{ prenda.nombre }}</h3>
@@ -68,7 +74,7 @@
         <!-- Contenido de categorías filtradas -->
         <div v-if="mostrar" id="prendas" class="contenido-prendas">
             <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-            <div v-for="prenda in prendaFiltrados" :key="prenda.id" class="prenda">
+            <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
                 <h2>{{ prenda.nombre }}</h2>
                 <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                 <p>Tallas: {{ prenda.talla.nombre }}</p>
@@ -108,6 +114,7 @@
                 <p>&copy; 2024 Tienda. Todos los derechos reservados.</p>
             </div>
         </footer>
+        
 
         <!-- Scripts -->
         <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>

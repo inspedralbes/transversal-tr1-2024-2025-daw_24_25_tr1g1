@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
 
-#appVue {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    font-family: 'IBM Plex Mono', -apple-system, sans-serif;
-}
-
 body, html {
     height: 100%;
     margin: 0;
@@ -14,7 +7,12 @@ body, html {
     font-family: 'IBM Plex Mono', -apple-system, sans-serif;
     flex-direction: column;
     box-sizing: border-box;
-    border: none;
+}
+
+#appVue {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Anuncio */
@@ -60,7 +58,7 @@ main {
     padding: 20px;
 }
 
-.navUser button, .superior button {
+.navUser button, .navIzq .categoria-btn, .superior button {
     margin: 0 5px;
     background-color: transparent;
     padding: 8px 12px;
@@ -77,14 +75,9 @@ main {
 
 .navUser img {
     width: 50px;
-    align-items: center; 
 }
 
 /* Navegación */
-.navIzq { 
-    flex: 1;
-}
-
 .navCentro {
     flex: 1;
     text-align: center;
@@ -139,7 +132,7 @@ main {
     width: 90%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Una columna por defecto */
+    grid-template-columns: 1fr; /* Una columna por defecto */
     gap: 10px;
     text-align: center;
 }
@@ -185,20 +178,39 @@ main {
     margin: 10px 0;
 }
 
-/* Carrito Lateral */
-#carritoLateral {
-    grid-area: carritoLateral;
+.footer {
     background-color: wheat;
+    text-align: center;
+    padding: 2px; 
+    position: relative; 
+    width: 100%;
+    bottom: 0; /* Asegúrate de que se mantenga en la parte inferior */
 }
 
-/* Footer */
-#footer {
-    text-align: center;
-    position: fixed;
-    background-color: wheat;
-    bottom: 0;
-    width: 100%;
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
+
+.footer-links, .footer-social {
+    margin: 0 15px;
+}
+
+.footer-links a, .footer-social a {
+    color: black; 
+    text-decoration: none; /* Eliminar subrayado */
+}
+
+.footer-links a:hover, .footer-social a:hover {
+    text-decoration: underline; 
+}
+
+.footer-bottom {
+    margin-top: 10px;
+    font-size: 12px; /* Ajusta el tamaño de fuente según necesites */
+}
+
 
 /* Estilo para las categorías */
 .categorias-contenedor {
@@ -240,7 +252,36 @@ main {
     margin: 20px;
 }
 
-/* Media queries para pantallas más grandes */
+/* Estilos para el menú lateral */
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.menu-item {
+    display: block;
+    margin: 15px 0;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+}
+
+.menu-item:hover {
+    background-color: #ddd;
+}
+
+/* Responsivo */
 @media (min-width: 768px) {
     #botiga {
         display: grid;
@@ -249,7 +290,7 @@ main {
     }
 
     #prendas {
-        grid-template-columns: repeat(2, 1fr); /* Dos columnas en tabletas */
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
@@ -261,105 +302,4 @@ main {
     .tarjeta-prenda {
         width: 100%; /* Ancho completo en escritorio */
     }
-}
-
-/* Estilo de las tarjetas */
-.tarjetas-container {
-    display: block;
-    width: 100%;
-    padding: 20px;
-    margin-bottom: 50px;
-}
-
-.tarjetas-prendas {
-    display: block;
-    overflow-x: auto; 
-    white-space: nowrap;
-    text-align: center;
-}
-
-.tarjeta-prenda {
-    display: inline-block;
-    width: 300px; /* Ajustar según sea necesario */
-    height: 400px;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-    position: relative;
-}
-
-.tarjeta-prenda .imagen {
-    width: 100%;
-    height: 150px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 5px;
-}
-
-/* Estilos para nombre, descripción y talla */
-.tarjeta-prenda .nombre-prenda {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.tarjeta-prenda .descripcion-prenda {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.tarjeta-prenda .talla-prenda {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* Botón de compra */
-.tarjeta-prenda .btn-comprar {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.tarjeta-prenda .btn-comprar:hover {
-    background-color: #45a049;
-}
-
-/* Footer */
-.footer {
-    background-color: #fffefe;
-    color: rgb(0, 0, 0);
-    padding: 20px 0;
-    text-align: center;
-    width: 100%;
-    bottom: 0;
-    margin-top: auto;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.footer-links a,
-.footer-social a {
-    color: rgb(0, 0, 0);
-    margin: 0 10px;
-}
-
-.footer-links a:hover,
-.footer-social a:hover {
-    text-decoration: underline;
-}
-
-.footer-bottom {
-    margin-top: 10px;
-    font-size: 14px;
 }

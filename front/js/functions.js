@@ -1,58 +1,41 @@
-import { createApp, ref, reactive, computed, onBeforeMount } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { createApp, ref, reactive, onBeforeMount } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
-        const infoTotal = reactive({ data: { categorias: [], prendas: [] } });
-        const currentPage = ref(0);
+        const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
-        const cantidadTotal = ref(0);
-        const filtroSexo = ref(null);
-        const carrito = reactive([]);
-        const prendaFiltrados = ref([]);
-        const prendaAleatorios = ref([]);
-        const divActual = ref('portada');
+        const divActual = ref('portada');   
         const dropdownVisible = ref(false);
+        const filtroSexo = ref(null);  
+        const productosFiltrados = ref([]); 
+        const carrito = reactive([]); 
 
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
-            data.categorias.forEach(categoria => {
-                infoTotal.data.prendas.push(...categoria.prendas);
-            });
-
-            obtenerPrendasAleatorias();
+            infoTotal.data.productos = data.productos; // Corrección aquí
+            console.log(infoTotal.data.categorias);
+            console.log(infoTotal.data.productos); 
         });
         
-
-        function obtenerPrendasAleatorias() {
-            const todasLasPrendas = infoTotal.data.prendas;
-            if (!todasLasPrendas || todasLasPrendas.length === 0) {
-                console.error("No hay prendas disponibles.");
-                return;
-            }
-            const barajado = todasLasPrendas.sort(() => 0.5 - Math.random());
-            prendaAleatorios.value = barajado.slice(0, 6);
-        }
-
-        const categoriaActual = computed(() => {
-            return infoTotal.data.categorias[currentPage.value] || null;
-        });
-
-        function filtrarPrendas() {
+        function filtrarPrendas(sexo) {
             divActual.value = 'prendas';
-            activeIndex.value = 0;
-            mostrar.value = true;
+            activeIndex.value = 0; 
+            mostrar.value = true;  
+            filtroSexo.value = sexo;  
+            productosFiltrados.value = infoTotal.data.productos.filter(producto => producto.sexo === sexo);
+            console.log(productosFiltrados.value); 
         }
-        
 
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
-                mostrar.value = true;
-                divActual.value = 'prendas';
-                prendaFiltrados.value = infoTotal.data.categorias[index].prendas;
+                mostrar.value = true; 
+                divActual.value = 'prendas'; 
+                productosFiltrados.value = infoTotal.data.categorias[index].prendas; 
+                console.log(productosFiltrados.value);
             }
         }
 
@@ -60,29 +43,51 @@ createApp({
             return id === divActual.value;
         }
 
-        function cambiarDiv(nuevoDiv) {
-            divActual.value = nuevoDiv;
+        function canviarDiv(nouDiv) {
+            divActual.value = nouDiv;
             mostrar.value = false;
-        }
+        }       
+
+        function toggleDropdownAndNavigate() {
+            dropdownVisible.value = !dropdownVisible.value;
+            canviarDiv('botiga');
+        }   
 
         function agregarACesta(prenda) {
-            carrito.push(prenda);
-            cantidadTotal.value++;
+            carrito.push(prenda); 
+            console.log(carrito); 
         }
 
         function quitarCesta(prenda) {
-            const index = carrito.indexOf(prenda);
-            if (index > -1) {
-                carrito.splice(index, 1);
-                cantidadTotal.value--;
+            for (let i = 0; i < carrito.length; i++) {
+                if (carrito[i].id === prenda.id) { // Compara por id
+                    carrito.splice(i, 1); 
+                    break; // Salir del bucle una vez que se elimina
+                }
             }
-        } 
+            console.log(carrito);
+        }        
+
+        function comprovarCarrito() {
+            return carrito.length > 0;
+        }
 
         return {
-            infoTotal,categoriaActual,prendaAleatorios,obtenerPrendasAleatorias,
-            mostrarCategorias,cambiarDiv,mostrarDiv,mostrar,activeIndex,
-            dropdownVisible,filtroSexo,filtrarPrendas,prendaFiltrados,
-            agregarACesta,quitarCesta,carrito,cantidadTotal
+            infoTotal,
+            mostrarCategorias,
+            canviarDiv,
+            mostrarDiv,
+            mostrar,
+            activeIndex,
+            dropdownVisible,
+            filtroSexo,
+            filtrarPrendas,
+            toggleDropdownAndNavigate,
+            productosFiltrados,
+            agregarACesta,
+            quitarCesta,
+            carrito,
+            comprovarCarrito
         };
     },
 }).mount("#appVue");
