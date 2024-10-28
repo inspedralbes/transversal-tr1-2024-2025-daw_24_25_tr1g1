@@ -90,40 +90,40 @@
 
         <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
             <h1>{{ prendaSeleccionada.nombre }}</h1>
+            <button id="prendaVolver" @click="canviarDiv('portada')">
+                <i class="fa fa-long-arrow-left"> Volver</i>
+            </button>
             <div class="info-prenda">
                 <div class="imagenes">
-                    <img v-if="prendaSeleccionada.imagenes[0]" :src="prendaSeleccionada.imagenes[0]" alt="Imagen de {{ prendaSeleccionada.nombre }}">
+                    <div class="imagen-recuadro">
+                        <img v-if="prendaSeleccionada.imagenes[0]" :src="prendaSeleccionada.imagenes[0]" alt="Imagen de {{ prendaSeleccionada.nombre }}">
+                    </div>
                 </div>
                 <div class="detalles">
-                    <p>{{ prendaSeleccionada.descripcion }}</p>
-                    <p>Precio: {{ prendaSeleccionada.precio }}€</p>
-                    <p>Sexo: {{ prendaSeleccionada.sexo }}</p>
-                    <p>Tallas disponibles:</p>
-                    
-                    <div>
-                        <label v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla">
-                            <button 
-                                id="botonTalla" v-model="tallaSeleccionada" 
-                                :value="talla" :class="{ 'sin-stock': talla.stock === 0 }">
-                                {{ talla.nombre }}
-                            </button>
-                        </label>
+                    <div class="descripcion-recuadro">
+                        <p>{{ prendaSeleccionada.descripcion }}</p>
+                        <p>Precio: {{ prendaSeleccionada.precio }}€</p>
+                        <p>Sexo: {{ prendaSeleccionada.sexo }}</p>
                     </div>
-                    
-                
-                    <button id="prendaAñadirCesta" @click="agregarACesta(prendaSeleccionada)">
-                        +<i class="fa fa-shopping-basket"></i>
-                    </button>
-                    <button id="prendaVolver" @click="canviarDiv('portada')">
-                        <i class="fa fa-long-arrow-left"></i>
-                        <i class="fa fa-home"></i>
-                    </button>
+                    <div class="tallas-recuadro">
+                        <p>Tallas disponibles:</p>
+                        <div>
+                            <label v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla">
+                                <button 
+                                    id="botonTalla" v-model="tallaSeleccionada" 
+                                    :value="talla" :class="{ 'sin-stock': talla.stock === 0 }">
+                                    {{ talla.nombre }}
+                                </button>
+                            </label>
+                        </div>
+                        <button id="prendaAñadirCesta" @click="agregarACesta(prendaSeleccionada)">
+                            +<i class="fa fa-shopping-basket"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         
-        
-
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-container">

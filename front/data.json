@@ -6,50 +6,163 @@
             "prendas": [
                 {
                     "id_prenda": 1,
-                    "nombre": "Camisa",
+                    "nombre": "Camisa de algodón",
                     "precio": "29.99",
-                    "descripcion": "Camisa de algodón",
+                    "descripcion": "Camisa de algodón con diseño floral",
                     "descuento": "0.00",
                     "sexo": "Mujer",
                     "tallas": [
-                        {
-                            "id_talla": 1,
-                            "nombre": "S",
-                            "stock": 100
-                        },
-                        {
-                            "id_talla": 2,
-                            "nombre": "M",
-                            "stock": 80
-                        }
+                        { "id_talla": 1, "nombre": "S", "stock": 100 },
+                        { "id_talla": 2, "nombre": "M", "stock": 80 },
+                        { "id_talla": 3, "nombre": "L", "stock": 60 },
+                        { "id_talla": 4, "nombre": "XL", "stock": 40 }
                     ],
                     "imagenes": [
-                        "http://example.com/imagenes/camisa1.jpg",
-                        "http://example.com/imagenes/camisa2.jpg"
+                        "http://example.com/imagenes/camisa1.jpg"
                     ]
                 },
                 {
                     "id_prenda": 2,
-                    "nombre": "Pantalón",
+                    "nombre": "Blusa de seda",
+                    "precio": "34.99",
+                    "descripcion": "Blusa elegante para ocasiones especiales",
+                    "descuento": "5.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 90 },
+                        { "id_talla": 2, "nombre": "M", "stock": 70 },
+                        { "id_talla": 3, "nombre": "L", "stock": 50 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/blusa1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 3,
+                    "nombre": "Vestido de verano",
+                    "precio": "59.99",
+                    "descripcion": "Vestido ligero y fresco",
+                    "descuento": "10.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 60 },
+                        { "id_talla": 2, "nombre": "M", "stock": 80 },
+                        { "id_talla": 3, "nombre": "L", "stock": 50 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/vestido1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 4,
+                    "nombre": "Pantalón de mezclilla",
                     "precio": "39.99",
-                    "descripcion": "Pantalón de mezclilla",
+                    "descripcion": "Pantalón cómodo para el día a día",
+                    "descuento": "5.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 75 },
+                        { "id_talla": 2, "nombre": "M", "stock": 50 },
+                        { "id_talla": 3, "nombre": "L", "stock": 40 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/pantalon1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 5,
+                    "nombre": "Chaqueta de cuero",
+                    "precio": "89.99",
+                    "descripcion": "Chaqueta clásica de cuero",
+                    "descuento": "15.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 30 },
+                        { "id_talla": 2, "nombre": "M", "stock": 25 },
+                        { "id_talla": 3, "nombre": "L", "stock": 20 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/chaqueta1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 6,
+                    "nombre": "Camisa de cuadros",
+                    "precio": "24.99",
+                    "descripcion": "Camisa casual de cuadros",
+                    "descuento": "0.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 5, "nombre": "M", "stock": 100 },
+                        { "id_talla": 6, "nombre": "L", "stock": 80 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/camisa_hombre1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 7,
+                    "nombre": "Pantalón chino",
+                    "precio": "39.99",
+                    "descripcion": "Pantalón chino clásico",
                     "descuento": "5.00",
                     "sexo": "Hombre",
                     "tallas": [
-                        {
-                            "id_talla": 3,
-                            "nombre": "M",
-                            "stock": 150
-                        },
-                        {
-                            "id_talla": 4,
-                            "nombre": "L",
-                            "stock": 60
-                        }
+                        { "id_talla": 5, "nombre": "M", "stock": 150 },
+                        { "id_talla": 6, "nombre": "L", "stock": 60 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 40 }
                     ],
                     "imagenes": [
-                        "http://example.com/imagenes/pantalon1.jpg",
-                        "http://example.com/imagenes/pantalon2.jpg"
+                        "http://example.com/imagenes/pantalon_chino1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 8,
+                    "nombre": "Sudadera con capucha",
+                    "precio": "35.99",
+                    "descripcion": "Sudadera cómoda para el frío",
+                    "descuento": "0.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 5, "nombre": "M", "stock": 70 },
+                        { "id_talla": 6, "nombre": "L", "stock": 50 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 30 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/sudadera_hombre1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 9,
+                    "nombre": "Abrigo de lana",
+                    "precio": "120.99",
+                    "descripcion": "Abrigo elegante de lana",
+                    "descuento": "25.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 5, "nombre": "M", "stock": 40 },
+                        { "id_talla": 6, "nombre": "L", "stock": 30 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 20 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/abrigo_hombre1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 10,
+                    "nombre": "Camiseta básica",
+                    "precio": "19.99",
+                    "descripcion": "Camiseta de algodón básica",
+                    "descuento": "0.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 5, "nombre": "M", "stock": 100 },
+                        { "id_talla": 6, "nombre": "L", "stock": 80 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/camiseta_basica_hombre1.jpg"
                     ]
                 }
             ]
@@ -59,27 +172,560 @@
             "nombre": "Calzado",
             "prendas": [
                 {
-                    "id_prenda": 3,
-                    "nombre": "Zapatillas",
+                    "id_prenda": 11,
+                    "nombre": "Zapatillas deportivas",
                     "precio": "49.99",
-                    "descripcion": "Zapatillas deportivas",
+                    "descripcion": "Zapatillas cómodas para correr",
                     "descuento": "10.00",
                     "sexo": "Mujer",
                     "tallas": [
-                        {
-                            "id_talla": 5,
-                            "nombre": "S",
-                            "stock": 200
-                        },
-                        {
-                            "id_talla": 6,
-                            "nombre": "M",
-                            "stock": 90
-                        }
+                        { "id_talla": 8, "nombre": "S", "stock": 200 },
+                        { "id_talla": 9, "nombre": "M", "stock": 90 },
+                        { "id_talla": 10, "nombre": "L", "stock": 60 }
                     ],
                     "imagenes": [
-                        "http://example.com/imagenes/zapatillas1.jpg",
-                        "http://example.com/imagenes/zapatillas2.jpg"
+                        "http://example.com/imagenes/zapatillas_deportivas1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 12,
+                    "nombre": "Botines",
+                    "precio": "79.99",
+                    "descripcion": "Botines de cuero para mujer",
+                    "descuento": "15.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 8, "nombre": "S", "stock": 50 },
+                        { "id_talla": 9, "nombre": "M", "stock": 40 },
+                        { "id_talla": 10, "nombre": "L", "stock": 30 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/botines_mujer1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 13,
+                    "nombre": "Sandalias de verano",
+                    "precio": "29.99",
+                    "descripcion": "Sandalias ligeras para el calor",
+                    "descuento": "5.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 8, "nombre": "S", "stock": 120 },
+                        { "id_talla": 9, "nombre": "M", "stock": 80 },
+                        { "id_talla": 10, "nombre": "L", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/sandalias_verano1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 14,
+                    "nombre": "Zapatos de tacón",
+                    "precio": "89.99",
+                    "descripcion": "Zapatos elegantes para ocasiones especiales",
+                    "descuento": "20.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 8, "nombre": "S", "stock": 50 },
+                        { "id_talla": 9, "nombre": "M", "stock": 40 },
+                        { "id_talla": 10, "nombre": "L", "stock": 30 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/zapatos_tacon1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 15,
+                    "nombre": "Bailarinas",
+                    "precio": "34.99",
+                    "descripcion": "Bailarinas cómodas para el día a día",
+                    "descuento": "5.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 8, "nombre": "S", "stock": 100 },
+                        { "id_talla": 9, "nombre": "M", "stock": 80 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/bailarinas1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 16,
+                    "nombre": "Zapatillas de entrenamiento",
+                    "precio": "59.99",
+                    "descripcion": "Zapatillas para el gimnasio",
+                    "descuento": "10.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 11, "nombre": "M", "stock": 150 },
+                        { "id_talla": 12, "nombre": "L", "stock": 60 },
+                        { "id_talla": 13, "nombre": "XL", "stock": 40 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/zapatillas_entrenamiento1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 17,
+                    "nombre": "Botas de montaña",
+                    "precio": "119.99",
+                    "descripcion": "Botas resistentes para senderismo",
+                    "descuento": "25.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 11, "nombre": "M", "stock": 80 },
+                        { "id_talla": 12, "nombre": "L", "stock": 50 },
+                        { "id_talla": 13, "nombre": "XL", "stock": 30 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/botas_montana1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 18,
+                    "nombre": "Zapatos oxford",
+                    "precio": "69.99",
+                    "descripcion": "Zapatos formales de cuero",
+                    "descuento": "15.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 11, "nombre": "M", "stock": 60 },
+                        { "id_talla": 12, "nombre": "L", "stock": 40 },
+                        { "id_talla": 13, "nombre": "XL", "stock": 20 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/zapatos_oxford1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 19,
+                    "nombre": "Mocasines",
+                    "precio": "49.99",
+                    "descripcion": "Mocasines cómodos y elegantes",
+                    "descuento": "10.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 11, "nombre": "M", "stock": 100 },
+                        { "id_talla": 12, "nombre": "L", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/mocasines1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 20,
+                    "nombre": "Sandalias de cuero",
+                    "precio": "39.99",
+                    "descripcion": "Sandalias elegantes de cuero",
+                    "descuento": "5.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 11, "nombre": "M", "stock": 80 },
+                        { "id_talla": 12, "nombre": "L", "stock": 50 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/sandalias_cuero1.jpg"
+                    ]
+                }
+            ]
+        },
+        {
+            "id_categoria": 3,
+            "nombre": "Accesorios",
+            "prendas": [
+                {
+                    "id_prenda": 21,
+                    "nombre": "Cinturón de cuero",
+                    "precio": "24.99",
+                    "descripcion": "Cinturón de cuero clásico",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 100 },
+                        { "id_talla": 2, "nombre": "M", "stock": 80 },
+                        { "id_talla": 3, "nombre": "L", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/cinturon1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 22,
+                    "nombre": "Bufanda de lana",
+                    "precio": "19.99",
+                    "descripcion": "Bufanda suave y abrigada",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 150 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/bufanda1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 23,
+                    "nombre": "Gorra de béisbol",
+                    "precio": "15.99",
+                    "descripcion": "Gorra ajustable para el sol",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 200 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/gorra1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 24,
+                    "nombre": "Guantes de lana",
+                    "precio": "12.99",
+                    "descripcion": "Guantes abrigados para el frío",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 80 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/guantes1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 25,
+                    "nombre": "Sombrero de paja",
+                    "precio": "29.99",
+                    "descripcion": "Sombrero ligero para el verano",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 100 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/sombrero1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 26,
+                    "nombre": "Reloj de pulsera",
+                    "precio": "49.99",
+                    "descripcion": "Reloj elegante de acero inoxidable",
+                    "descuento": "10.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 70 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/reloj1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 27,
+                    "nombre": "Pulsera de cuero",
+                    "precio": "14.99",
+                    "descripcion": "Pulsera moderna de cuero",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 150 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/pulsera1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 28,
+                    "nombre": "Diadema",
+                    "precio": "9.99",
+                    "descripcion": "Diadema colorida para el cabello",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 100 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/diadema1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 29,
+                    "nombre": "Gafas de sol",
+                    "precio": "39.99",
+                    "descripcion": "Gafas de sol UV400",
+                    "descuento": "5.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/gafas_sol1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 30,
+                    "nombre": "Cartera de cuero",
+                    "precio": "59.99",
+                    "descripcion": "Cartera elegante y espaciosa",
+                    "descuento": "10.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 30 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/cartera1.jpg"
+                    ]
+                }
+            ]
+        },
+        {
+            "id_categoria": 4,
+            "nombre": "Deportes",
+            "prendas": [
+                {
+                    "id_prenda": 31,
+                    "nombre": "Pantalones de yoga",
+                    "precio": "39.99",
+                    "descripcion": "Pantalones cómodos para hacer yoga",
+                    "descuento": "0.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 100 },
+                        { "id_talla": 2, "nombre": "M", "stock": 80 },
+                        { "id_talla": 3, "nombre": "L", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/pantalones_yoga1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 32,
+                    "nombre": "Top de deporte",
+                    "precio": "24.99",
+                    "descripcion": "Top ligero y transpirable",
+                    "descuento": "0.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 90 },
+                        { "id_talla": 2, "nombre": "M", "stock": 70 },
+                        { "id_talla": 3, "nombre": "L", "stock": 50 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/top_deporte1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 33,
+                    "nombre": "Chaqueta deportiva",
+                    "precio": "49.99",
+                    "descripcion": "Chaqueta para correr",
+                    "descuento": "5.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 60 },
+                        { "id_talla": 2, "nombre": "M", "stock": 50 },
+                        { "id_talla": 3, "nombre": "L", "stock": 40 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/chaqueta_deportiva1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 34,
+                    "nombre": "Zapatillas de running",
+                    "precio": "59.99",
+                    "descripcion": "Zapatillas ligeras para correr",
+                    "descuento": "10.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "S", "stock": 100 },
+                        { "id_talla": 2, "nombre": "M", "stock": 80 },
+                        { "id_talla": 3, "nombre": "L", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/zapatillas_running1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 35,
+                    "nombre": "Gimnasio de equipo",
+                    "precio": "199.99",
+                    "descripcion": "Máquina de ejercicios para casa",
+                    "descuento": "50.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 20 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/gimnasio_equipo1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 36,
+                    "nombre": "Pantalones deportivos",
+                    "precio": "39.99",
+                    "descripcion": "Pantalones cómodos para entrenar",
+                    "descuento": "0.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 5, "nombre": "M", "stock": 100 },
+                        { "id_talla": 6, "nombre": "L", "stock": 80 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/pantalones_deportivos1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 37,
+                    "nombre": "Camiseta de deporte",
+                    "precio": "24.99",
+                    "descripcion": "Camiseta ligera para hacer ejercicio",
+                    "descuento": "0.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 5, "nombre": "M", "stock": 90 },
+                        { "id_talla": 6, "nombre": "L", "stock": 70 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 50 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/camiseta_deporte1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 38,
+                    "nombre": "Chaqueta para ciclismo",
+                    "precio": "49.99",
+                    "descripcion": "Chaqueta resistente al agua",
+                    "descuento": "10.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 5, "nombre": "M", "stock": 60 },
+                        { "id_talla": 6, "nombre": "L", "stock": 50 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 40 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/chaqueta_ciclismo1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 39,
+                    "nombre": "Zapatillas de fútbol",
+                    "precio": "89.99",
+                    "descripcion": "Zapatillas para jugar al fútbol",
+                    "descuento": "15.00",
+                    "sexo": "Hombre",
+                    "tallas": [
+                        { "id_talla": 5, "nombre": "M", "stock": 100 },
+                        { "id_talla": 6, "nombre": "L", "stock": 80 },
+                        { "id_talla": 7, "nombre": "XL", "stock": 60 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/zapatillas_futbol1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 40,
+                    "nombre": "Balón de fútbol",
+                    "precio": "29.99",
+                    "descripcion": "Balón para jugar al aire libre",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 150 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/balon_futbol1.jpg"
+                    ]
+                }
+            ]
+        },
+        {
+            "id_categoria": 5,
+            "nombre": "Bolsos",
+            "prendas": [
+                {
+                    "id_prenda": 41,
+                    "nombre": "Bolso de mano",
+                    "precio": "49.99",
+                    "descripcion": "Bolso de mano elegante",
+                    "descuento": "10.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 70 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/bolso_mano1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 42,
+                    "nombre": "Mochila",
+                    "precio": "39.99",
+                    "descripcion": "Mochila espaciosa para el día a día",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 100 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/mochila1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 43,
+                    "nombre": "Bolso bandolera",
+                    "precio": "34.99",
+                    "descripcion": "Bolso bandolera práctico y moderno",
+                    "descuento": "0.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 80 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/bolso_bandolera1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 44,
+                    "nombre": "Bolso de viaje",
+                    "precio": "89.99",
+                    "descripcion": "Bolso de viaje espacioso",
+                    "descuento": "15.00",
+                    "sexo": "Unisex",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 40 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/bolso_viaje1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 45,
+                    "nombre": "Cartera de mano",
+                    "precio": "19.99",
+                    "descripcion": "Cartera práctica y compacta",
+                    "descuento": "0.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 100 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/cartera_mano1.jpg"
+                    ]
+                },
+                {
+                    "id_prenda": 46,
+                    "nombre": "Bolso tote",
+                    "precio": "59.99",
+                    "descripcion": "Bolso tote elegante y versátil",
+                    "descuento": "5.00",
+                    "sexo": "Mujer",
+                    "tallas": [
+                        { "id_talla": 1, "nombre": "U", "stock": 50 }
+                    ],
+                    "imagenes": [
+                        "http://example.com/imagenes/bolso_tote1.jpg"
                     ]
                 }
             ]
