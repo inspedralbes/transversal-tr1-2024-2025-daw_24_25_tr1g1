@@ -10,7 +10,7 @@
     <body>    
         <div id="appVue">
             <div class="anuncio">
-                <p>Anuncio que va de derecha a izquierda</p>
+                <marquee>Anuncio que va de derecha a izquierda</marquee>
             </div>
 
             <div class="panelSuperior">
@@ -25,7 +25,7 @@
                     </div>
                     <div class="navDer">
                         <input type="text" placeholder="Buscar...">
-                        <button id="login">Login</button>
+                        <button id="login"><i class="fa fa-user"></i></button>
                         <p id="cantidadTotal">{{ cantidadTotal }}</p>
                         <button class="icono" @click="cambiarDiv('checkout')"><i class="fa fa-shopping-basket"></i></button>
                     </div>
@@ -33,9 +33,9 @@
 
                 <div id="navCat">
                     <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                            :key="categoria.id" 
-                            @click="mostrarCategorias(index)" 
-                            class="categoria-btn">
+                        :key="categoria.id" 
+                        @click="mostrarCategorias(index)" 
+                        class="categoria-btn">
                         {{ categoria.nombre }}
                     </button>
                 </div>
