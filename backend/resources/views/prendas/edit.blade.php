@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> 
     <title>Editar Producto</title>
 </head>
 <body>
@@ -10,8 +11,8 @@
 
     <form action="{{ route('prendas.update', $prenda->id_prenda) }}" method="POST">
         @csrf
-        @method('PUT') <!-- Indica que es una solicitud de actualización -->
-        
+        @method('PUT')
+
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $prenda->nombre) }}" required>
         <br>
@@ -24,14 +25,10 @@
         <textarea name="descripcion" id="descripcion" required>{{ old('descripcion', $prenda->descripcion) }}</textarea>
         <br>
 
-        <label for="descuento">Descuento:</label>
-        <input type="number" name="descuento" id="descuento" step="0.01" value="{{ old('descuento', $prenda->descuento) }}">
-        <br>
-
         <label for="categoria_id">Categoría:</label>
         <select name="categoria_id" id="categoria_id" required>
-            @foreach($categorias as $categoria)
-                <option value="{{ $categoria->id_categoria }}" {{ $categoria->id_categoria == $prenda->categoria_id ? 'selected' : '' }}>
+            @foreach ($categorias as $categoria)
+                <option value="{{ $categoria->id_categoria }}" {{ $prenda->categoria_id == $categoria->id_categoria ? 'selected' : '' }}>
                     {{ $categoria->nombre }}
                 </option>
             @endforeach
@@ -46,11 +43,32 @@
         </select>
         <br>
 
-        <button type="submit">Actualizar Producto</button>
+        <label for="imagen">URL de la Imagen:</label>
+        <input type="url" name="imagen" id="imagen" value="{{ old('imagen', $prenda->imagenes->first()->url ?? '') }}">
+        <br>
+
+        <h3>Editar Stock de Tallas</h3>
+        @foreach ($prenda->tallas as $talla)
+            <label for="talla_{{ $talla->id_talla }}">Talla {{ $talla->nombre }}:</label>
+            <input type="number" name="tallas[{{ $talla->id_talla }}][stock]" id="talla_{{ $talla->id_talla }}" 
+                   value="{{ old('tallas.' . $talla->id_talla . '.stock', $talla->stockPorPrenda) }}" min="0">
+            <br>
+        @endforeach
+
+        <h4>Añadir Stock a Otras Tallas</h4>
+        @foreach (['S', 'M', 'L', 'XL'] as $tallaNombre)
+            @if (!$prenda->tallas->where('nombre', $tallaNombre)->first())
+                <label for="nueva_talla_{{ $tallaNombre }}">Talla {{ $tallaNombre }}:</label>
+                <input type="number" name="tallas[{{ $tallaNombre }}][stock]" id="nueva_talla_{{ $tallaNombre }}" value="0" min="0">
+                <br>
+            @endif
+        @endforeach
+
+        <button class="btn" type="submit">Actualizar Producto</button>
     </form>
 
-    <form action="{{ route('prendas.index') }}" method="GET" style="display:inline;">
-    <button type="submit">Volver a la lista</button>
-</form>
+    <form action="{{ route('prendas.index') }}" method="GET">
+        <button class="btn" type="submit">Volver a la lista</button>
+    </form>
 </body>
 </html>

@@ -12,7 +12,7 @@ class Talla extends Model
     protected $primaryKey = 'id_talla';
     protected $fillable = ['stockPorPrenda', 'nombre', 'prenda_id'];
 
-    // Cada talla pertenece a una prenda
+    // cada talla pertenece a una prenda
     public function prenda()
     {
         return $this->belongsTo(Prenda::class, 'prenda_id', 'id_prenda');

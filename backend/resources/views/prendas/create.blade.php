@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> 
     <title>Agregar Producto</title>
 </head>
 <body>
     <h1>Agregar PRENDA</h1>
-    <form action="{{ route('prendas.store') }}" method="POST">
+    <form action="{{ route('prendas.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        
+
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" required>
         <br>
@@ -42,10 +43,25 @@
         </select>
         <br>
 
-        <button type="submit">Guardar Prenda</button>
+        <label for="tallas">Tallas:</label>
+        <div>
+            <label for="talla_s">S:</label>
+            <input type="number" name="tallas[S]" id="talla_s" value="0" min="0">
+            <label for="talla_m">M:</label>
+            <input type="number" name="tallas[M]" id="talla_m" value="0" min="0">
+            <label for="talla_l">L:</label>
+            <input type="number" name="tallas[L]" id="talla_l" value="0" min="0">
+            <label for="talla_xl">XL:</label>
+            <input type="number" name="tallas[XL]" id="talla_xl" value="0" min="0">
+        </div>
+        <br>
+
+        <label for="imagen">URL de la Imagen:</label>
+        <input type="url" name="imagen" id="imagen" placeholder="https://example.com/imagen.jpg">
+        <br>
+
+        <button class="btn" type="submit">Guardar Prenda</button>
     </form>
-    <form action="{{ route('prendas.index') }}" method="GET" style="display: inline;">
-    <button type="submit">Volver a la lista</button>
-    </form>
-    </body>
+    <a class="btn" href="{{ route('prendas.index') }}">Volver a la lista</a>
+</body>
 </html>

@@ -1,0 +1,41 @@
+.btn {
+    padding: 10px; 
+    background-color: #022b3a; 
+    color: white; 
+    border-radius: 5px; 
+}
+
+body {
+    font-family: sans-serif; 
+    padding: 10px;
+    background-color: #1f7a8c;
+}
+
+h1 {
+    text-align: center; 
+    color: #ffffff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #bfdbf7;
+    text-align: center;
+}
+
+th, td {
+    padding: 5px; 
+    border: 2px solid #000000;
+}
+
+th {
+    background-color: #022b3a;
+    color: rgb(255, 255, 255);
+}
+
+img {
+    max-width: 100px; 
+    border-radius: 5px; /* Bordes redondeados para las imágenes */
+    
+}
