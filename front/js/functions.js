@@ -24,6 +24,7 @@ createApp({
 
             obtenerPrendasAleatorias();
         });
+        
 
         function obtenerPrendasAleatorias() {
             const todasLasPrendas = infoTotal.data.prendas;
@@ -44,6 +45,7 @@ createApp({
             activeIndex.value = 0;
             mostrar.value = true;
         }
+        
 
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
