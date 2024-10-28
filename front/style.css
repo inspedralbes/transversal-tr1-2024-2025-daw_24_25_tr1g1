@@ -27,7 +27,7 @@ body, html {
 .anuncio marquee {
     margin: 0;
     padding: 5px;
-    animation: moverAnuncio 120s linear infinite;
+    animation: moverAnuncio 150s linear infinite;
 }
 
 /* ====== Panel Superior ====== */
@@ -35,6 +35,7 @@ body, html {
     top: 0;
     z-index: 1000;
     position: sticky;
+    padding: 10px;
     background-color: white;
     font-size: 12px;
 }
@@ -42,7 +43,7 @@ body, html {
 /* ====== Navegación de Usuario ====== */
 .navUser {
     display: flex;
-    padding: 20px;
+    padding: 5px; /* Ajustado a 5px según tu modificación */
     align-items: center;
     justify-content: space-between;
 }
@@ -62,7 +63,8 @@ body, html {
 }
 
 .navUser img {
-    width: 150px;
+    width: 100px;
+    cursor: pointer;
 }
 
 /* ====== Navegación de Categorías ====== */
@@ -75,9 +77,7 @@ body, html {
 .categoria-btn {
     border: none;
     cursor: pointer;
-    font-size: 10px;
-    padding: 8px 12px;
-    background-color: white;
+    font-size: 12px; /* Ajustado a 12px según tu modificación */
 }
 
 /* ====== Contenido de Botiga ====== */
@@ -115,6 +115,7 @@ body, html {
     height: 200px;
     display: block;
     margin: 0 auto;
+    cursor: pointer;
     border: 1px solid black;
 }
 
@@ -259,8 +260,16 @@ body, html {
     }
 
     #prendas {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    body header #menu ul {
+        max-height: none; 
+        display: flex; 
+    }
+
+    body header #menu ul li {
+        display: inline-block; 
     }
 }
 
@@ -268,8 +277,17 @@ body, html {
     #prendas {
         grid-template-columns: repeat(3, 1fr);
     }
-    
+
+    #marquee {
+        padding: 100px;
+        font-size: 10px;
+    }
+
     .tarjeta-prenda {
         width: 100%;
+    }
+
+    .navUser img {
+        width: 200px;
     }
 }
