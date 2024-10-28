@@ -27,7 +27,7 @@ body, html {
 .anuncio marquee {
     margin: 0;
     padding: 5px;
-    animation: moverAnuncio 120s linear infinite;
+    animation: moverAnuncio 150s linear infinite;
 }
 
 .panelSuperior {
@@ -35,6 +35,7 @@ body, html {
     z-index: 1000;
     font-size: 12px;
     position: sticky;
+    padding: 10px;
     background-color: white;
 }
 
@@ -44,7 +45,7 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 5px;
 }
 
 .navUser button, .navUser .categoria-btn, .navUser button {
@@ -64,7 +65,8 @@ body, html {
 }
 
 .navUser img {
-    width: 150px;
+    width: 100px;
+    cursor: pointer;
 }
 
 /* Navegación Categorías */
@@ -79,12 +81,12 @@ body, html {
     border: none;
     background-color: white;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 /* Contenido de Botiga */
 #botiga {
-    display: block; /* Cambiado a block por defecto para móviles */
+    display: block;
     margin: 20px 0;
 }
 
@@ -116,6 +118,7 @@ body, html {
     height: 200px;
     display: block;
     margin: 0 auto;
+    cursor: pointer;
     border: 1px solid black;
 }
 
@@ -273,12 +276,12 @@ body, html {
     }
 
     body header #menu ul {
-        max-height: none; /* Desplegado completo en pantallas grandes */
-        display: flex; /* Muestra el menú horizontalmente en pantallas grandes */
+        max-height: none; 
+        display: flex; 
     }
 
     body header #menu ul li {
-        display: inline-block; /* Cambia a inline-block para alineación horizontal */
+        display: inline-block; 
     }
 }
 
@@ -286,8 +289,15 @@ body, html {
     #prendas {
         grid-template-columns: repeat(3, 1fr);
     }
+    #marquee {
+        padding: 100px;
+        font-size:10px;
+    }
 
     .tarjeta-prenda {
         width: 100%;
+    }
+    .navUser img {
+        width:200px;
     }
 }
