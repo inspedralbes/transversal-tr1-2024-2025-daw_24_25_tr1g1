@@ -40,13 +40,12 @@
                 <p id="id-descripcion">Descripción de la portada</p>
             </div>
 
-            <div class="tarjetas-prendas">
-                <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+            <div class="tarjetas-prendas" >
+                <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda" @click="verInfoPrenda(prenda)">
                     <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
                     <div class="contenido-tarjeta">
                         <h3>{{ prenda.nombre }}</h3>
                         <p>Precio: {{ prenda.precio }}€</p>
-                        <button @click="verInfoPrenda(prenda)">Ver detalles</button>
                     </div>
                 </div>
             </div>
@@ -57,12 +56,11 @@
             </div>
 
             <div class="tarjetas-prendas">
-                <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+                <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda" @click="verInfoPrenda(prenda)">
                     <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
                     <div class="contenido-tarjeta">
                         <h3>{{ prenda.nombre }}</h3>
                         <p>Precio: {{ prenda.precio }}€</p>
-                        <button @click="verInfoPrenda(prenda)">Ver detalles</button>
                     </div>
                 </div>
             </div>
@@ -80,7 +78,8 @@
                 <option value="Mujer">Mujer</option>
             </select>
             <!--prendas filtradas -->
-            <div v-for="prenda in prendaFiltrados" :key="prenda.id_prenda" class="prenda">
+                                                                                             <!--PONER CLICK PARA ENSEÑAR INFO-->
+            <div v-for="prenda in prendaFiltrados" :key="prenda.id_prenda" class="prenda"  @click="verInfoPrenda(prenda)">
                 <h2>{{ prenda.nombre }}</h2>
                 <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                 <p>Precio: {{ prenda.precio }}€</p>
@@ -89,7 +88,6 @@
                 <p v-for="talla in prenda.tallas" :key="talla.id_talla">
                     Talla: {{ talla.nombre }}
                 </p>
-                <button @click="verInfoPrenda(prenda)">Ver detalles</button>
             </div>
         </div>
 
