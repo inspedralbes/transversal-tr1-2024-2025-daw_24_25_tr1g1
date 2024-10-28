@@ -295,12 +295,15 @@ body {
 .tarjeta-prenda .btn-comprar:hover {
     background-color: #45a049;
 }
+
 /* Contenedor del filtro */
 .filtro-contenedor {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinear a la izquierda */
-    margin: 20px; /* Espaciado alrededor del contenedor */
+    align-items: flex-start;
+    /* Alinear a la izquierda */
+    margin: 20px;
+    /* Espaciado alrededor del contenedor */
 }
 
 /* Estilo mejorado para el filtro de género */
@@ -310,23 +313,23 @@ body {
     border-radius: 5px;
     border: 1px solid #ccc;
     margin-bottom: 20px;
-    background-color: #f9f9f9; /* Fondo claro para destacar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidad */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Transición para hover */
-    width: 100%; /* Ajustar ancho al 100% del contenedor */
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
 }
 
 /* Efecto de hover para el filtro */
 #filtroGenero:hover {
-    border-color: #4CAF50; /* Cambia el color del borde al pasar el mouse */
-    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); /* Aumenta la sombra al hover */
+    border-color: #4CAF50;
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2);
 }
 
-/* Opcional: estilo para las etiquetas del filtro */
+/*etiquetas del filtro */
 .label-filtro {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333; /* Color de la etiqueta */
+    color: #333;
 }
 
 

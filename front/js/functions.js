@@ -11,6 +11,8 @@ createApp({
         const prendaFiltrados = ref([]);
         const carrito = reactive([]);
         const prendaAleatorios = ref([]);
+        const prendaSeleccionada = ref(null);  
+        const tallaSeleccionada = ref(null);  
 
         onBeforeMount(async () => {
             const data = await getProductes();
@@ -33,7 +35,6 @@ createApp({
             );
         }
 
-
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
@@ -44,7 +45,6 @@ createApp({
             }
         }
 
-
         function mostrarDiv(id) { return id === divActual.value; }
 
         function canviarDiv(nouDiv) {
@@ -52,11 +52,25 @@ createApp({
             mostrar.value = false;
         }
 
-        function agregarACesta(prenda) { carrito.push(prenda); }
+        function agregarACesta(prenda) {
+            carrito.push({
+                id_prenda: prenda.id_prenda,
+                nombre: prenda.nombre,
+                precio: prenda.precio,
+                imagenes: prenda.imagenes,
+                tallaSeleccionada: tallaSeleccionada.value 
+            });
+        }
 
         function quitarCesta(prenda) {
-            const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda);
+            const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.tallaSeleccionada === prenda.tallaSeleccionada);
             if (index > -1) carrito.splice(index, 1);
+        }
+
+        function verInfoPrenda(prenda) {
+            prendaSeleccionada.value = prenda;
+            tallaSeleccionada.value = prenda.tallas.length ? prenda.tallas[0].nombre : null;
+            canviarDiv('infoPrenda');
         }
 
         function enviarFormulario() {
@@ -80,7 +94,10 @@ createApp({
             prendaFiltrados,
             agregarACesta,
             quitarCesta,
-            carrito
+            carrito,
+            verInfoPrenda,
+            prendaSeleccionada, 
+            tallaSeleccionada    
         };
     },
 }).mount("#appVue");

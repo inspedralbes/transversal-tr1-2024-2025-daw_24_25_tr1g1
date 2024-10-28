@@ -40,58 +40,45 @@
                 <p id="id-descripcion">Descripción de la portada</p>
             </div>
 
-            <div class="categorias-contenedor">
-                <div class="tarjetas-container">
-
-
-                    <div class="tarjetas-prendas">
-                        <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
-                            <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
-                            <div class="contenido-tarjeta">
-                                <h3>{{ prenda.nombre }}</h3>
-                                <p>Precio: {{ prenda.precio }}€</p>
-                                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
-                            </div>
-                        </div>
+            <div class="tarjetas-prendas">
+                <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+                    <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
+                    <div class="contenido-tarjeta">
+                        <h3>{{ prenda.nombre }}</h3>
+                        <p>Precio: {{ prenda.precio }}€</p>
+                        <button @click="verInfoPrenda(prenda)">Ver detalles</button>
                     </div>
                 </div>
             </div>
+            
             <div class="descripcion-portada">
                 <div class="div-portada"></div>
                 <p id="id-descripcion">Descripción de la portada</p>
             </div>
 
-            <div class="categorias-contenedor">
-                <div class="tarjetas-container">
-
-
-                    <div class="tarjetas-prendas">
-                        <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
-                            <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
-                            <div class="contenido-tarjeta">
-                                <h3>{{ prenda.nombre }}</h3>
-                                <p>Precio: {{ prenda.precio }}€</p>
-                                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
-                            </div>
-                        </div>
+            <div class="tarjetas-prendas">
+                <div class="tarjeta-prenda" v-for="prenda in prendaAleatorios" :key="prenda.id_prenda">
+                    <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
+                    <div class="contenido-tarjeta">
+                        <h3>{{ prenda.nombre }}</h3>
+                        <p>Precio: {{ prenda.precio }}€</p>
+                        <button @click="verInfoPrenda(prenda)">Ver detalles</button>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <!-- Navegación de categorías y listado de prendas -->
+        <!-- Navegación de categorías -->
         <div v-if="mostrarDiv('botiga')" id="prendas">
             <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-
-            <!-- género -->
+            <!-- filtro -->
             <label for="filtroGenero" class="filtroGenero">Filtrar por género:</label>
             <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
                 <option value="">Todos</option>
                 <option value="Hombre">Hombre</option>
                 <option value="Mujer">Mujer</option>
             </select>
-
             <!--prendas filtradas -->
             <div v-for="prenda in prendaFiltrados" :key="prenda.id_prenda" class="prenda">
                 <h2>{{ prenda.nombre }}</h2>
@@ -102,10 +89,30 @@
                 <p v-for="talla in prenda.tallas" :key="talla.id_talla">
                     Talla: {{ talla.nombre }}
                 </p>
-                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
+                <button @click="verInfoPrenda(prenda)">Ver detalles</button>
             </div>
         </div>
 
+        <!-- Pantalla informativa de cada prenda -->
+        <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
+            <h1>{{ prendaSeleccionada.nombre }}</h1>
+            <div class="info-prenda">
+                <div class="imagenes">img </div>
+                <div class="detalles">
+                    <p>{{ prendaSeleccionada.descripcion }}</p>
+                    <p>Precio: {{ prendaSeleccionada.precio }}€</p>
+                    <p>Sexo: {{ prendaSeleccionada.sexo }}</p>
+                    <p>Tallas disponibles:</p>
+                    <select v-model="tallaSeleccionada">
+                        <option v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla" :value="talla.nombre">
+                            {{ talla.nombre }}
+                        </option>
+                    </select>
+                    <button @click="agregarACesta(prendaSeleccionada)">Agregar a la cesta</button>
+                    <button @click="canviarDiv('portada')">Volver</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Sección de Contacto -->
         <div v-if="mostrarDiv('contacto')" id="contacto">
@@ -134,6 +141,7 @@
                 <h2>{{ item.nombre }}</h2>
                 <img v-if="item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre }}">
                 <p>Precio: {{ item.precio }}€</p>
+                <p>Talla seleccionada: {{ item.tallaSeleccionada }}</p>
                 <button @click="quitarCesta(item)">Eliminar</button>
             </div>
         </div>
@@ -156,7 +164,9 @@
                 <p>&copy; 2024 Tienda. Todos los derechos reservados.</p>
             </div>
         </footer>
+
     </div>
+
     <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
     <script type="module" src="./js/comunicationManager.js"></script>
     <script type="module" src="./js/functions.js"></script>
