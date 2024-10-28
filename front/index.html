@@ -16,7 +16,7 @@
             <div class="navUser">
                 <div class="navIzq">
                     <button id="btn-menu" class="icono" @click="toggleMenuLateral">
-                        <i class="fa fa-bars"></i> <!-- Icono de menú -->
+                        <i style="font-size: 30px;" class="fa fa-bars"></i>
                     </button>
                 </div>
                 <div class="navCentro">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="navDer">
                     <button id="btn-carrito" class="icono" @click="canviarDiv('checkout')">
-                        <i class="fa fa-shopping-basket"></i> <!-- Icono de carrito -->
+                        <i style="font-size: 30px;" class="fa fa-shopping-basket"></i>
                     </button>
                 </div>
             </div>
@@ -48,6 +48,7 @@
             <button @click="canviarDiv('checkout')" class="menu-item">Cesta</button>
             <button @click="toggleMenuLateral" class="menu-item">Cerrar</button>
         </aside>
+
 
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
@@ -99,19 +100,19 @@
         <footer class="footer">
             <div class="footer-container">
                 <div class="footer-links">
-                    <a href="#about">Sobre nosotros</a>
-                    <a href="#contact">Contacto</a>
-                    <a href="#privacy">Política de privacidad</a>
-                    <a href="#terms">Términos de servicio</a>
-                </div>
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook">Facebook</a>
-                    <a href="#" aria-label="Twitter">Twitter</a>
-                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="#about">Sobre nosotros</a>             <br>     
+                    <a href="#contact">Contacto</a>                 <br>
+                    <a href="#privacy">Política de privacidad</a>   <br>
+                    <a href="#terms">Términos de servicio</a>       <br>
+                </div>  
+                <div id="rrss" class="footer-social">
+                    <a href="#" aria-label="Facebook"><i style="font-size: 25px;" class="fa fa-facebook-square"> </i></a>
+                    <a href="#" aria-label="Twitter"><i style="font-size: 25px;" class="fa fa-twitter">          </i></a>
+                    <a href="#" aria-label="Instagram"><i style="font-size: 25px;" class="fa fa-instagram">      </i></a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Tienda. Todos los derechos reservados.</p>
+                <p>&copy; 2024 On-White. Todos los derechos reservados.</p>
             </div>
         </footer>
         
@@ -120,6 +121,7 @@
         <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
         <script type="module" src="./js/comunicationManager.js"></script>
         <script type="module" src="./js/functions.js"></script>
+        <script src="./js/menu.js"></script>
     </div>
 </body>
 </html>

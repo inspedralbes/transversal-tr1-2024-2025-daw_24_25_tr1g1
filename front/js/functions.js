@@ -58,6 +58,10 @@ createApp({
             console.log(carrito); 
         }
 
+        function toggleMenuLateral() {
+            dropdownVisible.value = !dropdownVisible.value;
+        }        
+
         function quitarCesta(prenda) {
             for (let i = 0; i < carrito.length; i++) {
                 if (carrito[i].id === prenda.id) { // Compara por id
