@@ -90,10 +90,10 @@ body, html {
 
 /* Sección de Prendas */
 #prendas {
-    width: 90%;
+    width: 98%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr; /* Una columna por defecto */
+    grid-template-columns: 1fr 1fr; /* Una columna por defecto */
     gap: 10px;
     text-align: center;
 }
@@ -104,22 +104,22 @@ body, html {
 }
 
 .prenda {
-    border: 1px solid white;
+    border: 1px solid black;
     padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prenda p{
+    text-align: left;
 }
 
 .prenda img {
-    width: 80%;
+    height: 200px;
     display: block;
     margin: 0 auto;
+    border: 1px solid black;
 }
 
-.contenido-tarjeta button#agregarACesta {
-    color: red;
-    background: none;
-}
+
 
 /* Sección de Checkout */
 #checkout {

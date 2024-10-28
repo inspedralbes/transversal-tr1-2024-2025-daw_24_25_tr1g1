@@ -56,20 +56,6 @@
                 <div class="div-portada"></div>
                 <p id="id-descripcion">Descripción de la portada</p>
             </div>
-            <div class="categorias-contenedor">
-                <div class="tarjetas-container">
-                    <div class="tarjetas-prendas">
-                        <div class="tarjeta-prenda" v-for="prenda in productosFiltrados" :key="prenda.id_prenda">
-                            <div class="imagen" :style="{ backgroundImage: 'url(' + prenda.imagenes[0] + ')' }"></div>
-                            <div class="contenido-tarjeta">
-                                <h3>{{ prenda.nombre }}</h3>
-                                <p>Precio: {{ prenda.precio }}€</p>
-                                <button id="agregarACesta" @click="agregarACesta(prenda)">Agregar a la cesta</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Contenido de categorías filtradas -->
@@ -79,7 +65,6 @@
                 <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                 <p>{{prenda.descripcion}}</p>
                 <p>{{ prenda.precio }}</p>
-                <button id="btn-agregar-cesta" @click="agregarACesta(prenda)">Agregar a la cesta</button>
             </div>
         </div>
 
