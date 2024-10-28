@@ -4,15 +4,16 @@ import { getProductes } from './comunicationManager.js';
 createApp({
     setup() {
         const infoTotal = reactive({ data: { categorias: [], prendas: [] } });
+        const currentPage = ref(0);
         const mostrar = ref(false);
         const activeIndex = ref(0);
+        const cantidadTotal = ref(0);
+        const filtroSexo = ref(null);
+        const carrito = reactive([]);
+        const prendaFiltrados = ref([]);
+        const prendaAleatorios = ref([]);
         const divActual = ref('portada');
         const dropdownVisible = ref(false);
-        const filtroSexo = ref(null);
-        const prendaFiltrados = ref([]);
-        const carrito = reactive([]);
-        const currentPage = ref(0);
-        const prendaAleatorios = ref([]);
 
         onBeforeMount(async () => {
             const data = await getProductes();
@@ -64,30 +65,22 @@ createApp({
 
         function agregarACesta(prenda) {
             carrito.push(prenda);
+            cantidadTotal.value++;
         }
-        
+
         function quitarCesta(prenda) {
             const index = carrito.indexOf(prenda);
-            if (index > -1) carrito.splice(index, 1);
-        }        
+            if (index > -1) {
+                carrito.splice(index, 1);
+                cantidadTotal.value--;
+            }
+        } 
 
         return {
-            infoTotal,
-            categoriaActual,
-            prendaAleatorios,
-            obtenerPrendasAleatorias,
-            mostrarCategorias,
-            cambiarDiv,
-            mostrarDiv,
-            mostrar,
-            activeIndex,
-            dropdownVisible,
-            filtroSexo,
-            filtrarPrendas,
-            prendaFiltrados,
-            agregarACesta,
-            quitarCesta,
-            carrito
+            infoTotal,categoriaActual,prendaAleatorios,obtenerPrendasAleatorias,
+            mostrarCategorias,cambiarDiv,mostrarDiv,mostrar,activeIndex,
+            dropdownVisible,filtroSexo,filtrarPrendas,prendaFiltrados,
+            agregarACesta,quitarCesta,carrito,cantidadTotal
         };
     },
 }).mount("#appVue");
