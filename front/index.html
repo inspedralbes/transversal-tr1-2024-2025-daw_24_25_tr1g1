@@ -97,22 +97,28 @@
         <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
             <h1>{{ prendaSeleccionada.nombre }}</h1>
             <div class="info-prenda">
-                <div class="imagenes">img </div>
+                <div class="imagenes">
+                    <img v-for="(imagen, index) in prendaSeleccionada.imagenes" :src="imagen" :alt="`Imagen ${index + 1}`" />
+                </div>
                 <div class="detalles">
                     <p>{{ prendaSeleccionada.descripcion }}</p>
                     <p>Precio: {{ prendaSeleccionada.precio }}€</p>
                     <p>Sexo: {{ prendaSeleccionada.sexo }}</p>
                     <p>Tallas disponibles:</p>
-                    <select v-model="tallaSeleccionada">
+                    <select v-model="tallaSeleccionada" v-if="prendaSeleccionada.tallas.length > 0">
                         <option v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla" :value="talla.nombre">
                             {{ talla.nombre }}
                         </option>
                     </select>
-                    <button @click="agregarACesta(prendaSeleccionada)">Agregar a la cesta</button>
+                    <p v-else>No hay tallas disponibles.</p> <!-- Mensaje cuando no hay tallas disponibles -->
+                    <button @click="agregarACesta(prendaSeleccionada)" v-if="tallaSeleccionada">Agregar a la cesta</button>
                     <button @click="canviarDiv('portada')">Volver</button>
                 </div>
             </div>
         </div>
+        
+        
+        
 
         <!-- Sección de Contacto -->
         <div v-if="mostrarDiv('contacto')" id="contacto">

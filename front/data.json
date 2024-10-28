@@ -12,16 +12,7 @@
                     "descuento": "0.00",
                     "sexo": "Mujer",
                     "tallas": [
-                        {
-                            "id_talla": 1,
-                            "nombre": "S",
-                            "stock": 100
-                        },
-                        {
-                            "id_talla": 2,
-                            "nombre": "M",
-                            "stock": 80
-                        }
+                        
                     ],
                     "imagenes": [
                         "http:\/\/example.com\/imagenes\/camisa1.jpg",

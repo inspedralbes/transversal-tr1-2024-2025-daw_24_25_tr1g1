@@ -11,8 +11,8 @@ createApp({
         const prendaFiltrados = ref([]);
         const carrito = reactive([]);
         const prendaAleatorios = ref([]);
-        const prendaSeleccionada = ref(null);  
-        const tallaSeleccionada = ref(null);  
+        const prendaSeleccionada = ref(null);
+        const tallaSeleccionada = ref(null);
 
         onBeforeMount(async () => {
             const data = await getProductes();
@@ -58,7 +58,7 @@ createApp({
                 nombre: prenda.nombre,
                 precio: prenda.precio,
                 imagenes: prenda.imagenes,
-                tallaSeleccionada: tallaSeleccionada.value 
+                tallaSeleccionada: tallaSeleccionada.value
             });
         }
 
@@ -68,8 +68,25 @@ createApp({
         }
 
         function verInfoPrenda(prenda) {
-            prendaSeleccionada.value = prenda;
-            tallaSeleccionada.value = prenda.tallas.length ? prenda.tallas[0].nombre : null;
+            // nuevo objeto de prenda sin tallas en stock
+            prendaSeleccionada.value = {
+                id_prenda: prenda.id_prenda,
+                nombre: prenda.nombre,
+                descripcion: prenda.descripcion,
+                precio: prenda.precio,
+                sexo: prenda.sexo,
+                imagenes: prenda.imagenes,
+                // tallas mayor que 0
+                tallas: prenda.tallas.filter(talla => talla.stock > 0)
+            };
+
+            // si hay talla, pues assignarla
+            if (prendaSeleccionada.value.tallas.length > 0) {
+                tallaSeleccionada.value = prendaSeleccionada.value.tallas[0].nombre; 
+            } else {
+                tallaSeleccionada.value = null;
+            }
+
             canviarDiv('infoPrenda');
         }
 
@@ -96,8 +113,8 @@ createApp({
             quitarCesta,
             carrito,
             verInfoPrenda,
-            prendaSeleccionada, 
-            tallaSeleccionada    
+            prendaSeleccionada,
+            tallaSeleccionada
         };
     },
 }).mount("#appVue");
