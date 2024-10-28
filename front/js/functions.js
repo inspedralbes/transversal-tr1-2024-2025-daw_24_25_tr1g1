@@ -1,41 +1,51 @@
-import { createApp, ref, reactive, onBeforeMount } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { createApp, ref, reactive, computed, onBeforeMount } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
+        // Declaración de variables reactivas
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
-        const divActual = ref('portada');   
+        const divActual = ref('portada');
         const dropdownVisible = ref(false);
-        const filtroSexo = ref(null);  
-        const productosFiltrados = ref([]); 
-        const carrito = reactive([]); 
+        const filtroSexo = ref(null);
+        const productosFiltrados = ref([]);
+        const carrito = reactive([]);
+        const prendaAleatorios = ref([]);
+        const prendaSeleccionada = ref(null);
+        const tallaSeleccionada = ref(null);
 
+        // Cargar datos iniciales
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
-            infoTotal.data.productos = data.productos; // Corrección aquí
-            console.log(infoTotal.data.categorias);
-            console.log(infoTotal.data.productos); 
+            infoTotal.data.productos = data.productos;
+            getProductoAleatorios();
         });
-        
-        function filtrarPrendas(sexo) {
-            divActual.value = 'prendas';
-            activeIndex.value = 0; 
-            mostrar.value = true;  
-            filtroSexo.value = sexo;  
-            productosFiltrados.value = infoTotal.data.productos.filter(producto => producto.sexo === sexo);
-            console.log(productosFiltrados.value); 
+
+        // Generar productos aleatorios para la portada
+        function getProductoAleatorios() {
+            const allProducts = infoTotal.data.categorias.flatMap(categoria => categoria.prendas);
+            prendaAleatorios.value = allProducts.sort(() => 0.5 - Math.random()).slice(0, 6);
         }
 
+
+        function filtrarPrendas(sexo) {
+            filtroSexo.value = sexo;
+            if (activeIndex.value !== null) {
+                productosFiltrados.value = infoTotal.data.categorias[activeIndex.value].prendas.filter(producto => !sexo || producto.sexo === sexo);
+            }
+            divActual.value = 'prendas';
+        }        
+
+        // Mostrar categorías y filtrar productos por categoría
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
-                mostrar.value = true; 
-                divActual.value = 'prendas'; 
-                productosFiltrados.value = infoTotal.data.categorias[index].prendas; 
-                console.log(productosFiltrados.value);
+                mostrar.value = true;
+                divActual.value = 'prendas';
+                productosFiltrados.value = infoTotal.data.categorias[index].prendas;
             }
         }
 
@@ -46,52 +56,41 @@ createApp({
         function canviarDiv(nouDiv) {
             divActual.value = nouDiv;
             mostrar.value = false;
-        }       
-
-        function toggleDropdownAndNavigate() {
-            dropdownVisible.value = !dropdownVisible.value;
-            canviarDiv('botiga');
-        }   
-
-        function agregarACesta(prenda) {
-            carrito.push(prenda); 
-            console.log(carrito); 
         }
 
-        function toggleMenuLateral() {
-            dropdownVisible.value = !dropdownVisible.value;
-        }        
+    function agregarACesta(prenda) {
+        carrito.push({
+            id_prenda: prenda.id_prenda,
+            nombre: prenda.nombre,
+            precio: prenda.precio,
+            imagenes: prenda.imagenes,
+            talla: tallaSeleccionada.value,
+        });
+    }
 
+
+        // Quitar prenda del carrito
         function quitarCesta(prenda) {
-            for (let i = 0; i < carrito.length; i++) {
-                if (carrito[i].id === prenda.id) { // Compara por id
-                    carrito.splice(i, 1); 
-                    break; // Salir del bucle una vez que se elimina
-                }
-            }
-            console.log(carrito);
-        }        
-
-        function comprovarCarrito() {
-            return carrito.length > 0;
+            const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.tallaSeleccionada === prenda.tallaSeleccionada);
+            if (index > -1) carrito.splice(index, 1);
         }
+
+        function verInfoPrenda(prenda) {
+            if (prenda) {
+                prendaSeleccionada.value = prenda;
+                tallaSeleccionada.value = prenda.tallas?.length ? prenda.tallas[0].nombre : null;
+                canviarDiv('infoPrenda');
+            } else {
+                console.error("No se ha seleccionado una prenda.");
+            }
+        }
+        
+
 
         return {
-            infoTotal,
-            mostrarCategorias,
-            canviarDiv,
-            mostrarDiv,
-            mostrar,
-            activeIndex,
-            dropdownVisible,
-            filtroSexo,
-            filtrarPrendas,
-            toggleDropdownAndNavigate,
-            productosFiltrados,
-            agregarACesta,
-            quitarCesta,
-            carrito,
-            comprovarCarrito
+            infoTotal,mostrarCategorias,canviarDiv,mostrarDiv,mostrar,activeIndex,dropdownVisible,
+            filtroSexo,filtrarPrendas,productosFiltrados,agregarACesta,quitarCesta,carrito,
+            getProductoAleatorios,prendaAleatorios,verInfoPrenda,prendaSeleccionada,tallaSeleccionada,
         };
     },
 }).mount("#appVue");

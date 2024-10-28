@@ -32,9 +32,9 @@
             <div id="navCat" class="navCat">
                 <div class="categorias">
                     <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                            :key="categoria.id" 
-                            @click="mostrarCategorias(index)" 
-                            class="categoria-btn">
+                        :key="categoria.id" 
+                        @click="mostrarCategorias(index)" 
+                        class="categoria-btn">
                         {{ categoria.nombre }}
                     </button>
                 </div>
@@ -49,7 +49,6 @@
             <button @click="toggleMenuLateral" class="menu-item">Cerrar</button>
         </aside>
 
-
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
             <div class="descripcion-portada">
@@ -60,11 +59,20 @@
 
         <!-- Contenido de categorías filtradas -->
         <div v-if="mostrar" id="prendas" class="contenido-prendas">
-            <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+            <div>
+                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+                <label for="filtroGenero" class="filtroGenero">Género: </label>
+                <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
+                    <option value="">Todos</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                </select>
+            </div>
             <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
                 <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
-                <p>{{prenda.descripcion}}</p>
+                <p>{{ prenda.descripcion }}</p>
                 <p>{{ prenda.precio }}</p>
+                <button @click="verInfoPrenda(prenda)">Ver detalles</button>
             </div>
         </div>
 
@@ -80,26 +88,61 @@
             </div>
         </div>
 
+        <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
+            <h1>{{ prendaSeleccionada.nombre }}</h1>
+            <div class="info-prenda">
+                <div class="imagenes">
+                    <img v-if="prendaSeleccionada.imagenes[0]" :src="prendaSeleccionada.imagenes[0]" alt="Imagen de {{ prendaSeleccionada.nombre }}">
+                </div>
+                <div class="detalles">
+                    <p>{{ prendaSeleccionada.descripcion }}</p>
+                    <p>Precio: {{ prendaSeleccionada.precio }}€</p>
+                    <p>Sexo: {{ prendaSeleccionada.sexo }}</p>
+                    <p>Tallas disponibles:</p>
+                    
+                    <div>
+                        <label v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla">
+                            <button 
+                                id="botonTalla" v-model="tallaSeleccionada" 
+                                :value="talla" :class="{ 'sin-stock': talla.stock === 0 }">
+                                {{ talla.nombre }}
+                            </button>
+                        </label>
+                    </div>
+                    
+                
+                    <button id="prendaAñadirCesta" @click="agregarACesta(prendaSeleccionada)">
+                        +<i class="fa fa-shopping-basket"></i>
+                    </button>
+                    <button id="prendaVolver" @click="canviarDiv('portada')">
+                        <i class="fa fa-long-arrow-left"></i>
+                        <i class="fa fa-home"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        
+
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-container">
                 <div class="footer-links">
-                    <a href="#about">Sobre nosotros</a>             <br>     
-                    <a href="#contact">Contacto</a>                 <br>
-                    <a href="#privacy">Política de privacidad</a>   <br>
-                    <a href="#terms">Términos de servicio</a>       <br>
+                    <a href="#about">Sobre nosotros</a><br>
+                    <a href="#contact">Contacto</a><br>
+                    <a href="#privacy">Política de privacidad</a><br>
+                    <a href="#terms">Términos de servicio</a><br>
                 </div>  
                 <div id="rrss" class="footer-social">
                     <a href="#" aria-label="Facebook"><i style="font-size: 25px;" class="fa fa-facebook-square"> </i></a>
-                    <a href="#" aria-label="Twitter"><i style="font-size: 25px;" class="fa fa-twitter">          </i></a>
-                    <a href="#" aria-label="Instagram"><i style="font-size: 25px;" class="fa fa-instagram">      </i></a>
+                    <a href="#" aria-label="Twitter"><i style="font-size: 25px;" class="fa fa-twitter"> </i></a>
+                    <a href="#" aria-label="Instagram"><i style="font-size: 25px;" class="fa fa-instagram"> </i></a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 On-White. Todos los derechos reservados.</p>
             </div>
         </footer>
-        
 
         <!-- Scripts -->
         <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
