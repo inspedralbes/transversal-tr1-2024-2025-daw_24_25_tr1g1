@@ -4,10 +4,10 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'IBM Plex Mono', -apple-system, sans-serif;
-    display: flex; /* Para que body sea un contenedor flex */
+    display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    font-family: 'IBM Plex Mono', -apple-system, sans-serif;
 }
 
 #appVue {
@@ -24,29 +24,20 @@ body, html {
     border-bottom: 1px solid black;
 }
 
-.anuncio p {
+.anuncio marquee {
     margin: 0;
     padding: 5px;
     animation: moverAnuncio 120s linear infinite;
 }
 
-@keyframes moverAnuncio {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-/* Panel Superior */
 .panelSuperior {
-    position: sticky;
     top: 0;
-    font-size: 12px;
     z-index: 1000;
+    font-size: 12px;
+    position: sticky;
     background-color: white;
 }
 
-.icono {
-    font-size: 20px;
-}
 
 /* Navegación de Usuario */
 .navUser {
@@ -63,7 +54,7 @@ body, html {
     cursor: pointer;
     font-size: 10px;
     border: none;
-    transition: background-color 0.3s; /* Añadir transición */
+    transition:0.3s;
 }
 
 .navUser button:hover, 
@@ -267,21 +258,6 @@ body, html {
     text-decoration: none;
     color: black;
     font-size: 16px;
-}
-
-/* Estilo para el botón del menú móvil */
-.nav-mobile {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-}
-
-.nav-mobile span {
-    display: block;
-    width: 30px;
-    height: 3px;
-    margin: 5px auto;
-    background-color: black; /* Color de las barras del botón */
 }
 
 /* Media queries para diferentes dispositivos */

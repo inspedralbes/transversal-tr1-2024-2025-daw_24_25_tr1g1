@@ -10,7 +10,7 @@
 <body>
     <div id="appVue">
         <div class="anuncio">
-            <p>Anuncio que va de derecha a izquierda</p>
+            <marquee>Anuncio que va de derecha a izquierda</marquee>
         </div>
         <div class="panelSuperior">
             <div class="navUser">
@@ -76,10 +76,9 @@
         <div v-if="mostrar" id="prendas" class="contenido-prendas">
             <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
             <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
-                <h2>{{ prenda.nombre }}</h2>
                 <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
-                <p>Tallas: {{ prenda.talla.nombre }}</p>
-                <p>Sexo: {{ prenda.sexo }}</p>
+                <p>{{prenda.descripcion}}</p>
+                <p>{{ prenda.precio }}</p>
                 <button id="btn-agregar-cesta" @click="agregarACesta(prenda)">Agregar a la cesta</button>
             </div>
         </div>
