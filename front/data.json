@@ -18,7 +18,7 @@
                         { "id_talla": 4, "nombre": "XL", "stock": 40 }
                     ],
                     "imagenes": [
-                        "http://example.com/imagenes/camisa1.jpg"
+                        "https://placehold.co/1400x2500"
                     ]
                 },
                 {

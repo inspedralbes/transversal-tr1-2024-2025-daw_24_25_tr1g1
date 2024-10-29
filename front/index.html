@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>On-White</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>On-White</title>    
 </head>
 <body>
     <div id="appVue">
@@ -23,40 +24,78 @@
                     <img src="./img/logo.png" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
                 </div>
                 <div class="navDer">
-                    <button id="btn-carrito" class="icono" @click="canviarDiv('checkout')">
+                    <button id="btn-carrito" class="icono" @click="toggleCarrito">
                         <i style="font-size: 20px;" class="fa fa-shopping-basket"></i>
                     </button>
                 </div>
-            </div>
-
-            <div id="navCat" class="navCat">
-                <div class="categorias">
-                    <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                        :key="categoria.id" 
-                        id="botonCategoria"
-                        @click="mostrarCategorias(index)" 
-                        class="categoria-btn">
-                        {{ categoria.nombre }}
-                    </button>
-                </div>
-            </div>
+            </div>            
         </div>
 
-        <!-- Menú lateral -->
-        <aside v-if="dropdownVisible" class="menu-lateral">
-            <button @click="canviarDiv('portada')" class="menu-item">Inicio</button>
-            <button @click="filtrarPrendas" class="menu-item">Prendas</button>
-            <button @click="canviarDiv('checkout')" class="menu-item">Cesta</button>
-            <button @click="toggleMenuLateral" class="menu-item">Cerrar</button>
-        </aside>
+        <!-- Menú Lateral -->
+        <div class="menu-lateral" :class="{ visible: categoriasVisibles }">
+            <button class="cerrar-menu" @click="toggleMenuLateral">Cerrar</button>
+            <div class="categorias">
+                <h3>Categorías</h3>
+                <button v-for="(categoria, index) in infoTotal.data.categorias" 
+                    :key="categoria.id" 
+                    @click="mostrarCategorias(index)" 
+                    class="categoria-btn">
+                    {{ categoria.nombre }}
+                </button>
+            </div>
+        </div>
+        
+        <!-- Cesta Desplegable -->
+        <div class="cesta-lateral" :class="{ visible: carritoVisible }">
+            <button class="cerrar-cesta" @click="toggleCarrito">Cerrar</button>
+            <h3>Cesta</h3>
+            <div v-if="carrito.length > 0" class="contenedor-cesta">
+                <div v-for="(item, index) in carrito" :key="index" class="cesta">
+                    <h2>{{ item.nombre || "Producto sin nombre" }}</h2>
+                    <img v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre || 'sin nombre' }}">
+                    <button @click="quitarCesta(item)">X</button>
+                </div>
+            </div>
+            <div v-else>
+                <p>Tu cesta está vacía.</p>
+            </div>
+        </div>
 
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
-            <div class="descripcion-portada">
-                <div class="div-portada"></div>
-                <p id="id-descripcion">Descripción de la portada</p>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="https://placehold.co/400x400.png" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="https://placehold.co/600x400.png" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="https://placehold.co/600x400.png" alt="Third slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-        </div>
+            <div>
+                <p>Aquí podría ir una descripción</p>
+            </div>
+            <div>
+                <p>Aquí podrían ir un carrusel de prendas</p>
+            </div>
+        </div>        
 
         <!-- Contenido de categorías filtradas -->
         <div v-if="mostrar" id="prendas" class="contenido-prendas">
@@ -64,7 +103,6 @@
                 <div class="tituloCategoria">
                     <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
                 </div>
-                
                 <label for="filtroGenero" class="filtroGenero">Género: </label>
                 <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
                     <option value="">Todos</option>
@@ -83,14 +121,22 @@
         <!-- Sección de Checkout -->
         <div v-if="mostrarDiv('checkout')" id="checkout" class="contenido-checkout">
             <h1>Cesta</h1>
-            <div v-for="(item, index) in carrito" :key="index" class="cesta">
-                <h2>{{ item.nombre }}</h2>
-                <img v-if="item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre }}">
-                <p>Tallas: {{ item.talla.nombre }}</p>
-                <p>Sexo: {{ item.sexo }}</p>
-                <button id="btn-eliminar" @click="quitarCesta(item)">Eliminar</button>
+            <div v-if="carrito.length > 0" class="contenedor-cesta">
+                <div v-for="(item, index) in carrito" :key="index" class="cesta">
+                    <h2>{{ item.nombre || "Producto sin nombre" }}</h2>
+                    <img v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre || 'sin nombre' }}">
+                    <p v-if="item.talla && item.talla.nombre">Talla: {{ item.talla.nombre || "No seleccionado" }}</p>
+                    <p>Sexo: {{ item.sexo || "No especificado" }}</p>
+                    <button id="btn-eliminar" @click="quitarCesta(item)">X</button>
+                </div>
             </div>
-        </div>
+            <div v-else>
+                <p>Tu cesta está vacía.</p>
+            </div>
+            <div id="finalitzarCompra" v-if="carrito.length > 0">
+                <button id="botonFinalizarCompra">Finalizar Compra</button>
+            </div>
+        </div>        
 
         <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
             <h1>{{ prendaSeleccionada.nombre }}</h1>
@@ -114,20 +160,21 @@
                         <div>
                             <label v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla">
                                 <button 
-                                    id="botonTalla" v-model="tallaSeleccionada" 
-                                    :value="talla" :class="{ 'sin-stock': talla.stock === 0 }">
+                                    id="botonTalla" 
+                                    :class="{ 'sin-stock': talla.stock === 0 }" 
+                                    @click="seleccionarTalla(talla)">
                                     {{ talla.nombre }}
                                 </button>
                             </label>
                         </div>
-                        <button id="prendaAñadirCesta" @click="agregarACesta(prendaSeleccionada)">
+                        <button id="prendaAñadirCesta" @click="agregarACesta(prendaSeleccionada, tallaSeleccionada)">
                             +<i class="fa fa-shopping-basket"></i>
-                        </button>
-                    </div>
+                        </button>                                             
+                    </div>                    
                 </div>
             </div>
         </div>
-        
+
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-container">
@@ -138,9 +185,9 @@
                     <a href="#terms">Términos de servicio</a><br>
                 </div>  
                 <div id="rrss" class="footer-social">
-                    <a href="#" aria-label="Facebook"><i style="font-size: 25px;" class="fa fa-facebook-square"> </i></a>
-                    <a href="#" aria-label="Twitter"><i style="font-size: 25px;" class="fa fa-twitter"> </i></a>
-                    <a href="#" aria-label="Instagram"><i style="font-size: 25px;" class="fa fa-instagram"> </i></a>
+                    <a href="#" aria-label="Facebook"><i style="font-size: 25px;" class="fa fa-facebook-square"></i></a>
+                    <a href="#" aria-label="Twitter"><i style="font-size: 25px;" class="fa fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i style="font-size: 25px;" class="fa fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -153,6 +200,11 @@
         <script type="module" src="./js/comunicationManager.js"></script>
         <script type="module" src="./js/functions.js"></script>
         <script src="./js/menu.js"></script>
+
+        <!-- jQuery y Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </div>
 </body>
 </html>

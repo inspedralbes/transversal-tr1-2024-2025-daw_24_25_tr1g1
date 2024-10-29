@@ -1,394 +1,418 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap");
 
 /* General Styles */
-body,
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  font-family: "IBM Plex Mono", -apple-system, sans-serif;
-  overflow-x: hidden;
+body {
+    margin: 0 auto;
 }
 
 #appVue {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    font-family: "IBM Plex Mono", -apple-system, sans-serif;
+}
+
+.carousel-item img {
+    height: 400px;
 }
 
 /* ====== Anuncio ====== */
 .anuncio {
-  width: 100%;
-  overflow: hidden;
-  border-bottom: 1px solid black;
+    border-bottom: 1px solid black;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .anuncio marquee {
-  margin: 0;
-  padding: 1px;
-  font-size: 13px;
-  animation: moverAnuncio 150s linear infinite;
+    margin: 0;
+    padding: 1px;
+    font-size: 13px;
+    animation: moverAnuncio 150s linear infinite;
 }
 
 /* ====== Panel Superior ====== */
 .panelSuperior {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 10px;
-  background-color: white;
-  font-size: 12px;
-  width: 100%;
-  box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-#botonCategoria{
-  background: 0;
-  margin: 5px ;
-  
-
+#botonCategoria {
+    background: transparent;
+    margin: 5px;
 }
+
 #botonCategoria:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* ====== Navegación de Usuario ====== */
 .navUser {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  overflow-x: hidden;
-  padding: 5px;
-  box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
 .navUser button,
 .navUser .categoria-btn,
 .navUser img {
-  border: none;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 10px;
-  padding: 8px 12px;
-  background-color: transparent;
-}
-
-.navUser button:hover,
-.navUser .categoria-btn:hover,
-.navUser img:hover {
-  text-decoration: underline;
+    border: none;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 8px 12px;
+    background-color: transparent;
 }
 
 .navUser img {
-  width: 120px;
-  cursor: pointer;
+    width: 120px;
+}
+
+.categorias-menu {
+    padding: 10px 0;
+}
+
+.categoria-menu-item {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+
+.categoria-menu-item:hover {
+    background-color: #f0f0f0;
 }
 
 /* ====== Navegación de Categorías ====== */
 #navCat {
-  display: flex;
-  padding: 10px;
-  justify-content: center;
-  width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
+    display: flex;
+    padding-bottom: 15px;
+    justify-content: center;
+    width: 100%;
 }
 
 .categoria-btn {
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
 }
 
 /* ====== Contenido de Botiga ====== */
 #botiga {
-  display: block;
-  margin: 20px 0;
-  width: 100%;
-  overflow-x: hidden;
+    margin: 20px 0;
+    width: 100%;
 }
 
 /* ====== Sección de Prendas ====== */
 #prendas {
-  gap: 10px;
-  width: 98%;
-  display: grid;
-  margin: 0 auto;
-  text-align: center;
-  grid-template-columns: 1fr;
-  box-sizing: border-box;
+    display: grid;
+    margin: 0 auto;
+    text-align: center;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }
 
 #prendas h1 {
-  text-align: center;
+    text-align: center;
 }
 
 .titulo-y-filtro {
-  display: flex;
-  flex-direction: column; /* Asegúrate de que esté en columna */
-  align-items: center;    /* Centra los elementos horizontalmente */
-  margin-bottom: 20px;    /* Espacio entre el filtro y las prendas */
-}
-
-.tituloCategoria {
-  margin: 0; /* Elimina el margen para evitar separación no deseada */
-}
-
-.filtroGenero {
-  margin-top: 10px; /* Espacio entre el título y el selector */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .prenda {
-  border: 1px solid black;
-  cursor: pointer;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.prenda p {
-  text-align: left;
-}
-
-.prenda button {
-  background-color: white;
-  border: none;
-  cursor: pointer;
-  text-decoration: none; /* Sin subrayado por defecto */
-}
-
-.prenda button:hover {
-  text-decoration: underline; /* Subrayado al pasar el cursor */
+    border: 1px solid black;
+    cursor: pointer;
+    padding: 10px;
 }
 
 .prenda img {
-  height: 200px;
-  display: block;
-  margin: 0 auto;
-  cursor: pointer;
-  border: 1px solid black;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid black;
 }
 
 /* ====== Sección de Checkout ====== */
 #checkout {
-  text-align: center;
-  margin: 20px;
+    text-align: center;
+    margin: 20px;
+}
+
+.contenedor-cesta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 .cesta {
-  border: 1px solid wheat;
-  margin: 10px 0;
-  padding: 10px;
+    width: 48%;
+    padding: 10px;
+    border: 1px solid gray;
+}
+
+#botonFinalizarCompra {
+    cursor: pointer;
+    padding: 2px 15px;
+    border: 1px solid black;
+}
+
+#botonFinalizarCompra:hover {
+    color: white;
+    background: black;
+}
+
+#btn-eliminar {
+    color: white;
+    font-weight: bold;
+    background: red;
+    border-radius: 50%;
 }
 
 /* ====== Footer ====== */
 .footer {
-  width: 100%;
-  padding: 10px;
-  margin: 20px auto 0;
-  text-align: center;
-  border-top: 1px solid black;
-  box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+    padding: 10px;
+    margin-top: auto;
 }
 
 .footer-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
 }
 
 .footer-links,
 .footer-social {
-  text-align: center;
+    text-align: center;
 }
 
 .footer-links a,
 .footer-social a {
-  color: black;
-  text-decoration: none;
-  font-size: 14px;
-  margin: 5px 0;
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 5px 0;
 }
 
 .footer-links a:hover,
 .footer-social a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .footer-bottom {
-  margin-top: 10px;
-  font-size: 12px;
-}
-
-/* ====== Social Media ====== */
-.footer-social a {
-  margin: 50px 20px;
-}
-
-.nav-menu {
-  list-style: none;
-  padding: 0;
-}
-
-.nav-menu li {
-  margin: 15px 0;
-}
-
-.nav-menu a {
-  text-decoration: none;
-  color: black;
-  font-size: 16px;
+    font-size: 12px;
 }
 
 /* ====== Estilos de la Portada ====== */
 .div-portada {
-  height: 300px;
-  width: 100%;
-  background-color: #b8bdc1;
-  margin: 50px 0 20px;
-  box-sizing: border-box;
-  overflow-x: hidden;
+    height: 300px;
+    width: 100%;
+    background-color: #b8bdc1;
+    margin: 50px 0 20px;
+    overflow-x: hidden;
 }
 
 .descripcion-portada {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-bottom: 2px solid #ddd;
-  box-sizing: border-box;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #ddd;
 }
 
 #id-descripcion {
-  text-align: left;
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 100px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 100px;
 }
 
 /* ====== Botones y Detalles ====== */
 #botonTalla {
-  margin: 5px;
-  background: 0;
-  cursor: pointer;
-  font-weight: 100;
-  border: 1px solid black;
-  box-sizing: border-box;
-}
-
-#botonTalla:focus {
-  color: rgb(104, 104, 104);
-  border: 1px solid rgb(104, 104, 104);
+    margin: 5px;
+    border: 1px solid black;
 }
 
 #prendaAñadirCesta,
 #prendaVolver {
-  margin: 5px;
-  background: 0;
-  padding: 2px 8px;
-  border: 1px solid black;
-  box-sizing: border-box;
+    margin: 5px;
+    padding: 2px 8px;
+    border: 1px solid black;
 }
 
 /* ====== Estilos para la sección de información de la prenda ====== */
 #infoPrenda {
-  max-width: 100%;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 4px;
-  background-color: white;
-  box-sizing: border-box;
-  overflow-x: hidden;
+    flex: 1;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 4px;
+    background-color: white;
 }
 
 .info-prenda {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .imagen-recuadro {
-  border: 1px solid black;
-  padding: 100px;
-  margin-right: 20px;
-  width: 100%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    border: 1px solid black;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
 }
 
-/* Imagen alargada */
 .imagen-recuadro img {
-  max-width: 80%;
-  max-height: 100%;
+    width: 100%;
+    height: auto; 
 }
 
 .descripcion-recuadro,
 .tallas-recuadro {
-  border: 1px solid black;
-  padding: 10px;
-  margin-top: 20px;
-  box-sizing: border-box;
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 20px;
 }
 
 /* Estilo para el botón de añadir a cesta */
 #prendaAñadirCesta {
-  padding: 10px 10px;
-  cursor: pointer;
+    padding: 10px 10px;
+    cursor: pointer;
 }
 
 #prendaAñadirCesta:hover {
-  background-color: #e2e2e2;
+    background-color: #e2e2e2;
 }
 
-#prendaVolver {
-  margin-top: 20px;
-  cursor: pointer;
-  border-radius: 1px;
+/* ====== Menú Lateral ====== */
+.menu-lateral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 20%; 
+    background-color: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    padding: 10px;
+    transform: translateX(-100%); 
+    transition: transform 0.6s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
+
+.menu-lateral.visible {
+    transform: translateX(0); 
+}
+
+.menu-lateral .cerrar-menu {
+    margin-top: 20px;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.categorias {
+    margin-top: 20px;
+}
+
+.categoria-btn {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+}
+
+.categoria-btn:hover {
+    background-color: #f0f0f0;
+}
+/* ====== Cesta Desplegable ====== */
+.cesta-lateral {
+  position: fixed;
+  right: 0; /* Cambiado a right */
+  top: 0;
+  height: 100%;
+  width: 20%; 
+  background-color: #ffffff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5); /* Cambiado a -2px */
+  z-index: 1000;
+  padding: 10px;
+  transform: translateX(100%); /* Cambiado a 100% */
+  transition: transform 0.6s cubic-bezier(0.47, 0, 0.745, 0.715);
+}
+
+.cesta-lateral.visible {
+  transform: translateX(0); /* Sin cambios */
+}
+
+.cesta-lateral .cerrar-cesta {
+  margin-top: 20px;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.cesta-lateral h3 {
+  margin-top: 20px; /* Añadir un margen para separar el título del botón */
+}
+
+.contenedor-cesta {
+  margin-top: 10px; /* Espaciado adicional entre el título y los items */
+}
+
+.cesta {
+  margin-bottom: 15px; /* Espaciado entre los items de la cesta */
+}
+
 
 /* ====== Media Queries for larger screens ====== */
 @media (min-width: 768px) {
-  .info-prenda {
-    flex-direction: row;
-  }
+    .info-prenda {
+        flex-direction: row;
+    }
 
-  .imagen-recuadro {
-    width: 200px;
-    height: 400px;
-  }
+    .imagen-recuadro {
+        width: 200px;
+        height: 400px;
+    }
 
-  #prendas {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    #prendas {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-  .footer-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    .footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
 @media (min-width: 1024px) {
-  #botiga {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
+    #botiga {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 
-  #prendas {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .tituloCategoria {
-    justify-content: center;
-  }
-
-  .navUser img {
-    width: 200px;
-  }
+    #prendas {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
