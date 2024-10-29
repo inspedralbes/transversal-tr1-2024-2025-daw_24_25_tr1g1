@@ -1,8 +1,9 @@
 .btn {
-    padding: 10px; 
+    padding: 10px 20px; 
     background-color: #022b3a; 
     color: white; 
     border-radius: 5px; 
+    text-decoration: none;
 }
 
 body {
@@ -12,6 +13,10 @@ body {
 }
 
 h1 {
+    text-align: center; 
+    color: #ffffff;
+}
+h2 {
     text-align: center; 
     color: #ffffff;
 }
@@ -38,4 +43,68 @@ img {
     max-width: 100px; 
     border-radius: 5px; /* Bordes redondeados para las imágenes */
     
+}
+
+.form-container {
+    width: 50%;
+    margin: 0 auto;
+    background-color: #044157c2;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.form-container label {
+    display: block;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container input[type="url"],
+.form-container textarea{
+    width: 97%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #022b3a;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #022b3a;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Botón de guardar */
+.form-container .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #044157;
+}
+
+.volver-btn {
+    display: block;
+    margin-right: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.volver-btn:hover {
+    background-color: #034b64; 
 }
