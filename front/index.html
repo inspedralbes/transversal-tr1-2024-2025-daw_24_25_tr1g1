@@ -33,6 +33,7 @@
                 <div class="categorias">
                     <button v-for="(categoria, index) in infoTotal.data.categorias" 
                         :key="categoria.id" 
+                        id="botonCategoria"
                         @click="mostrarCategorias(index)" 
                         class="categoria-btn">
                         {{ categoria.nombre }}
@@ -59,8 +60,11 @@
 
         <!-- Contenido de categorías filtradas -->
         <div v-if="mostrar" id="prendas" class="contenido-prendas">
-            <div>
-                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+            <div class="titulo-y-filtro">
+                <div class="tituloCategoria">
+                    <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+                </div>
+                
                 <label for="filtroGenero" class="filtroGenero">Género: </label>
                 <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
                     <option value="">Todos</option>
