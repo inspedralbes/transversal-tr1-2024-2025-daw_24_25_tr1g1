@@ -20,13 +20,8 @@ createApp({
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
-            getProductoAleatorios();
         });
-
-        function getProductoAleatorios() {
-            const allProducts = infoTotal.data.categorias.flatMap(categoria => categoria.prendas);
-            prendaAleatorios.value = allProducts.sort(() => 0.5 - Math.random()).slice(0, 6);
-        }
+        
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;

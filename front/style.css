@@ -1,8 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap");
 
+<<<<<<< HEAD
 /* General Styles */
 body {
     margin: 0 auto;
+=======
+* {
+  transition: .2s;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: "IBM Plex Mono", -apple-system, sans-serif;
+  overflow-x: hidden;
+>>>>>>> eec884f7ec4aa6594631d2f7c005f894c84eb2e0
 }
 
 #appVue {
@@ -63,12 +80,21 @@ body {
 .navUser button,
 .navUser .categoria-btn,
 .navUser img {
+<<<<<<< HEAD
     border: none;
     margin: 0 5px;
     cursor: pointer;
     transition: 0.3s;
     padding: 8px 12px;
     background-color: transparent;
+=======
+  border: none;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 8px 12px;
+  background-color: transparent;
+>>>>>>> eec884f7ec4aa6594631d2f7c005f894c84eb2e0
 }
 
 .navUser img {
@@ -94,10 +120,19 @@ body {
 
 /* ====== Navegación de Categorías ====== */
 #navCat {
+<<<<<<< HEAD
     display: flex;
     padding-bottom: 15px;
     justify-content: center;
     width: 100%;
+=======
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  justify-content: center;
+>>>>>>> eec884f7ec4aa6594631d2f7c005f894c84eb2e0
 }
 
 .categoria-btn {
@@ -126,6 +161,7 @@ body {
 }
 
 .titulo-y-filtro {
+<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -149,12 +185,34 @@ body {
 #checkout {
     text-align: center;
     margin: 20px;
+=======
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: column; 
+}
+
+.tituloCategoria {
+  margin: 0; 
+}
+
+.filtroGenero {
+  margin-top: 10px;
+}
+
+.prenda {
+  padding: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid black;
+>>>>>>> eec884f7ec4aa6594631d2f7c005f894c84eb2e0
 }
 .cesta img {
     width: 100px;
     height: 100px;
 }
 
+<<<<<<< HEAD
 .contenedor-cesta {
     display: flex;
     flex-wrap: wrap;
@@ -166,6 +224,17 @@ body {
     width: 48%;
     padding: 10px;
     border: 1px solid gray;
+=======
+.prenda button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: none; 
+}
+
+.prenda button:hover {
+  text-decoration: underline; 
+>>>>>>> eec884f7ec4aa6594631d2f7c005f894c84eb2e0
 }
 
 #botonFinalizarCompra {
@@ -179,11 +248,46 @@ body {
     background: black;
 }
 
+<<<<<<< HEAD
 #btn-eliminar {
     color: white;
     font-weight: bold;
     background: red;
     border-radius: 50%;
+=======
+.contenedor-cesta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.cesta {
+  width: 48%;
+  padding: 10px;
+  margin-bottom: 30px;
+  border: 1px solid gray;
+}
+
+#botonFinalizarCompra {
+  background: 0;
+  cursor: pointer;
+  padding: 2px 15px;
+  border: 1px solid black;
+}
+
+#botonFinalizarCompra:hover {
+  color: white;
+  background: black;
+}
+
+#btn-eliminar{
+  color: white;
+  font-weight: 900;
+  background: red;
+  border-radius: 300px;
+  border: 1px solid red;
+>>>>>>> eec884f7ec4aa6594631d2f7c005f894c84eb2e0
 }
 
 /* ====== Footer ====== */
@@ -412,6 +516,7 @@ body {
 }
 
 @media (min-width: 1024px) {
+<<<<<<< HEAD
     #botiga {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -421,3 +526,22 @@ body {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+=======
+  #botiga {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #prendas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tituloCategoria {
+    justify-content: center;
+  }
+
+  .navUser img {
+    width: 200px;
+  }
+}
+>>>>>>> eec884f7ec4aa6594631d2f7c005f894c84eb2e0
