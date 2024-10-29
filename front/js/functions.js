@@ -92,14 +92,40 @@ createApp({
             }
         }
 
+        function finalizarCompra() {
+            const datosCompra = carrito.map(item => ({
+                id_prenda: item.id_prenda,
+                talla: item.talla.nombre
+            }));
+            console.log(datosCompra);
         
+            fetch('TU_URL_DE_API/aqui', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(datosCompra),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.log('Error en la compra');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Compra realizada con éxito:', data);
+            })
+            .catch(error => {
+                console.error('Error al finalizar la compra:', error);
+            });
+        }        
 
 
         return {
             infoTotal,mostrarCategorias,canviarDiv,mostrarDiv,mostrar,activeIndex,dropdownVisible,
             filtroSexo,filtrarPrendas,productosFiltrados,agregarACesta,quitarCesta,carrito,
             getProductoAleatorios,prendaAleatorios,verInfoPrenda,prendaSeleccionada,tallaSeleccionada,
-            seleccionarTalla
+            seleccionarTalla,finalizarCompra
         };
     },
 }).mount("#appVue");

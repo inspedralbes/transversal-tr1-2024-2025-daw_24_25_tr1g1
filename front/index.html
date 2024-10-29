@@ -88,7 +88,6 @@
                     <h2>{{ item.nombre || "Producto sin nombre" }} <!--(ID: {{ item.id_prenda }})--></h2>
                     <img v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre || 'sin nombre' }}">
                     <p v-if="item.talla && item.talla.nombre">Talla: {{ item.talla.nombre || "No seleccionado" }}</p>
-                    <p>Sexo: {{ item.sexo || "No especificado" }}</p>
                     <button id="btn-eliminar" @click="quitarCesta(item)">X</button>
                 </div>
             </div>
@@ -97,7 +96,7 @@
                 <p>Tu cesta está vacía.</p>
             </div>
             <div id="finalitzarCompra" v-if="carrito.length > 0">
-                <button id="botonFinalizarCompra">Finalizar Compra</button>
+                <button id="botonFinalizarCompra" @click="finalizarCompra">Finalizar Compra</button>
             </div>
         </div>        
 
