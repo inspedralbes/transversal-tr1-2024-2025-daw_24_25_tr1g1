@@ -98,7 +98,7 @@ createApp({
                 talla: item.talla.nombre
             }));
             console.log(datosCompra);
-        
+
             fetch('TU_URL_DE_API/aqui', {
                 method: 'POST',
                 headers: {
