@@ -3,20 +3,19 @@ import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
-        // Declaración de variables reactivas
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
-        const divActual = ref('portada');
-        const dropdownVisible = ref(false);
         const filtroSexo = ref(null);
-        const productosFiltrados = ref([]);
         const carrito = reactive([]);
         const prendaAleatorios = ref([]);
-        const prendaSeleccionada = ref(null);
+        const divActual = ref('portada');
+        const dropdownVisible = ref(false);
+        const productosFiltrados = ref([]);
         const tallaSeleccionada = ref(null);
+        const prendaSeleccionada = ref(null);
 
-        // Cargar datos iniciales
+
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
@@ -56,34 +55,43 @@ createApp({
         function canviarDiv(nouDiv) {
             divActual.value = nouDiv;
             mostrar.value = false;
+            console.log("Div actual cambiado a:", divActual.value); // Agregar para verificar
+        }
+        
+
+
+
+        function seleccionarTalla(talla) {
+            tallaSeleccionada.value = talla;
+            console.log("Talla:", talla.nombre);
         }
 
-    function agregarACesta(prenda) {
-        carrito.push({
-            id_prenda: prenda.id_prenda,
-            nombre: prenda.nombre,
-            precio: prenda.precio,
-            imagenes: prenda.imagenes,
-            talla: tallaSeleccionada.value,
-        });
-    }
+        function agregarACesta(prenda,talla) {
+            carrito.push({
+                id_prenda: prenda.id_prenda,
+                nombre: prenda.nombre,
+                precio: prenda.precio,
+                imagenes: prenda.imagenes,
+                talla: talla,
+            });
+        }
+        
 
 
-        // Quitar prenda del carrito
         function quitarCesta(prenda) {
-            const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.tallaSeleccionada === prenda.tallaSeleccionada);
+            const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
             if (index > -1) carrito.splice(index, 1);
         }
+    
 
         function verInfoPrenda(prenda) {
             if (prenda) {
                 prendaSeleccionada.value = prenda;
                 tallaSeleccionada.value = prenda.tallas?.length ? prenda.tallas[0].nombre : null;
                 canviarDiv('infoPrenda');
-            } else {
-                console.error("No se ha seleccionado una prenda.");
             }
         }
+
         
 
 
@@ -91,6 +99,7 @@ createApp({
             infoTotal,mostrarCategorias,canviarDiv,mostrarDiv,mostrar,activeIndex,dropdownVisible,
             filtroSexo,filtrarPrendas,productosFiltrados,agregarACesta,quitarCesta,carrito,
             getProductoAleatorios,prendaAleatorios,verInfoPrenda,prendaSeleccionada,tallaSeleccionada,
+            seleccionarTalla
         };
     },
 }).mount("#appVue");

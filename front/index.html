@@ -83,14 +83,24 @@
         <!-- Sección de Checkout -->
         <div v-if="mostrarDiv('checkout')" id="checkout" class="contenido-checkout">
             <h1>Cesta</h1>
-            <div v-for="(item, index) in carrito" :key="index" class="cesta">
-                <h2>{{ item.nombre }}</h2>
-                <img v-if="item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre }}">
-                <p>Tallas: {{ item.talla.nombre }}</p>
-                <p>Sexo: {{ item.sexo }}</p>
-                <button id="btn-eliminar" @click="quitarCesta(item)">Eliminar</button>
+            <div v-if="carrito.length > 0" class="contenedor-cesta">
+                <div v-for="(item, index) in carrito" :key="index" class="cesta">
+                    <h2>{{ item.nombre || "Producto sin nombre" }} <!--(ID: {{ item.id_prenda }})--></h2>
+                    <img v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre || 'sin nombre' }}">
+                    <p v-if="item.talla && item.talla.nombre">Talla: {{ item.talla.nombre || "No seleccionado" }}</p>
+                    <p>Sexo: {{ item.sexo || "No especificado" }}</p>
+                    <button id="btn-eliminar" @click="quitarCesta(item)">X</button>
+                </div>
             </div>
-        </div>
+            
+            <div v-else>
+                <p>Tu cesta está vacía.</p>
+            </div>
+            <div id="finalitzarCompra" v-if="carrito.length > 0">
+                <button id="botonFinalizarCompra">Finalizar Compra</button>
+            </div>
+        </div>        
+
 
         <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
             <h1>{{ prendaSeleccionada.nombre }}</h1>
@@ -114,16 +124,18 @@
                         <div>
                             <label v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla">
                                 <button 
-                                    id="botonTalla" v-model="tallaSeleccionada" 
-                                    :value="talla" :class="{ 'sin-stock': talla.stock === 0 }">
+                                    id="botonTalla" 
+                                    :class="{ 'sin-stock': talla.stock === 0 }" 
+                                    @click="seleccionarTalla(talla)"
+                                >
                                     {{ talla.nombre }}
                                 </button>
                             </label>
                         </div>
-                        <button id="prendaAñadirCesta" @click="agregarACesta(prendaSeleccionada)">
+                        <button id="prendaAñadirCesta" @click="agregarACesta(prendaSeleccionada, tallaSeleccionada, id_prenda)">
                             +<i class="fa fa-shopping-basket"></i>
-                        </button>
-                    </div>
+                        </button>                                             
+                    </div>                    
                 </div>
             </div>
         </div>

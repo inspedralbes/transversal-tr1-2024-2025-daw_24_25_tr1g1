@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap");
 
-/* General Styles */
+* {
+  transition: .2s;
+}
+
 body,
 html {
   height: 100%;
@@ -72,7 +75,6 @@ html {
   border: none;
   margin: 0 5px;
   cursor: pointer;
-  transition: 0.3s;
   font-size: 10px;
   padding: 8px 12px;
   background-color: transparent;
@@ -91,12 +93,12 @@ html {
 
 /* ====== Navegación de Categorías ====== */
 #navCat {
+  width: 100%;
   display: flex;
   padding: 10px;
-  justify-content: center;
-  width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
+  justify-content: center;
 }
 
 .categoria-btn {
@@ -130,24 +132,24 @@ html {
 
 .titulo-y-filtro {
   display: flex;
-  flex-direction: column; /* Asegúrate de que esté en columna */
-  align-items: center;    /* Centra los elementos horizontalmente */
-  margin-bottom: 20px;    /* Espacio entre el filtro y las prendas */
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: column; 
 }
 
 .tituloCategoria {
-  margin: 0; /* Elimina el margen para evitar separación no deseada */
+  margin: 0; 
 }
 
 .filtroGenero {
-  margin-top: 10px; /* Espacio entre el título y el selector */
+  margin-top: 10px;
 }
 
 .prenda {
-  border: 1px solid black;
-  cursor: pointer;
   padding: 10px;
+  cursor: pointer;
   box-sizing: border-box;
+  border: 1px solid black;
 }
 
 .prenda p {
@@ -158,11 +160,11 @@ html {
   background-color: white;
   border: none;
   cursor: pointer;
-  text-decoration: none; /* Sin subrayado por defecto */
+  text-decoration: none; 
 }
 
 .prenda button:hover {
-  text-decoration: underline; /* Subrayado al pasar el cursor */
+  text-decoration: underline; 
 }
 
 .prenda img {
@@ -179,10 +181,38 @@ html {
   margin: 20px;
 }
 
+.contenedor-cesta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
 .cesta {
-  border: 1px solid wheat;
-  margin: 10px 0;
+  width: 48%;
   padding: 10px;
+  margin-bottom: 30px;
+  border: 1px solid gray;
+}
+
+#botonFinalizarCompra {
+  background: 0;
+  cursor: pointer;
+  padding: 2px 15px;
+  border: 1px solid black;
+}
+
+#botonFinalizarCompra:hover {
+  color: white;
+  background: black;
+}
+
+#btn-eliminar{
+  color: white;
+  font-weight: 900;
+  background: red;
+  border-radius: 300px;
+  border: 1px solid red;
 }
 
 /* ====== Footer ====== */
