@@ -46,20 +46,22 @@
         </div>
         
         <!-- Cesta Desplegable -->
-        <div class="cesta-lateral" :class="{ visible: carritoVisible }">
-            <button class="cerrar-cesta" @click="toggleCarrito">Cerrar</button>
-            <h3>Cesta</h3>
-            <div v-if="carrito.length > 0" class="contenedor-cesta">
-                <div v-for="(item, index) in carrito" :key="index" class="cesta">
-                    <h2>{{ item.nombre || "Producto sin nombre" }}</h2>
-                    <img v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre || 'sin nombre' }}">
-                    <button @click="quitarCesta(item)">X</button>
-                </div>
-            </div>
-            <div v-else>
-                <p>Tu cesta está vacía.</p>
-            </div>
+<div class="cesta-lateral" :class="{ visible: carritoVisible }">
+    <button class="cerrar-cesta" @click="toggleCarrito">Cerrar</button>
+    <h3>Cesta</h3>
+    <div v-if="carrito.length > 0" class="contenedor-cesta">
+        <div v-for="(item, index) in carrito" :key="index" class="cesta">
+            <p>{{ item.nombre || "Producto sin nombre" }}</p>
+            <button @click="quitarCesta(item)">Eliminar</button>
         </div>
+    </div>
+    <div v-else>
+        <p>Tu cesta está vacía.</p>
+    </div>
+    <!-- Botón para ir al checkout -->
+    <button id="btn-checkout" @click="canviarDiv('checkout')">Ir a Checkout</button>
+</div>
+
 
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">

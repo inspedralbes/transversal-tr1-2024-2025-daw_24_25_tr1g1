@@ -150,6 +150,10 @@ body {
     text-align: center;
     margin: 20px;
 }
+.cesta img {
+    width: 100px;
+    height: 100px;
+}
 
 .contenedor-cesta {
     display: flex;
@@ -312,7 +316,7 @@ body {
     z-index: 1000;
     padding: 10px;
     transform: translateX(-100%); 
-    transition: transform 0.6s cubic-bezier(0.47, 0, 0.745, 0.715);
+    transition: transform 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
 .menu-lateral.visible {
@@ -357,11 +361,11 @@ body {
   z-index: 1000;
   padding: 10px;
   transform: translateX(100%); /* Cambiado a 100% */
-  transition: transform 0.6s cubic-bezier(0.47, 0, 0.745, 0.715);
+  transition: transform 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
 .cesta-lateral.visible {
-  transform: translateX(0); /* Sin cambios */
+  transform: translateX(0); 
 }
 
 .cesta-lateral .cerrar-cesta {
@@ -372,16 +376,17 @@ body {
   cursor: pointer;
 }
 
-.cesta-lateral h3 {
-  margin-top: 20px; /* Añadir un margen para separar el título del botón */
+.cesta-lateral p {
+  margin-top: 20px; 
+  font-size: 1rem;
 }
 
 .contenedor-cesta {
-  margin-top: 10px; /* Espaciado adicional entre el título y los items */
+  margin-top: 10px; 
 }
 
 .cesta {
-  margin-bottom: 15px; /* Espaciado entre los items de la cesta */
+  margin-bottom: 15px; 
 }
 
 

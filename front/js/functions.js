@@ -14,7 +14,7 @@ createApp({
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
         const categoriasVisibles = ref(false);
-        const carritoVisible = ref(false); // Nueva variable para controlar la visibilidad del carrito
+        const carritoVisible = ref(false); 
 
         onBeforeMount(async () => {
             const data = await getProductes();
@@ -42,7 +42,8 @@ createApp({
                 mostrar.value = true;
                 productosFiltrados.value = infoTotal.data.categorias[index].prendas || [];
                 divActual.value = 'prendas';
-                categoriasVisibles.value = false; // Cierra el menú al seleccionar
+                categoriasVisibles.value = false; 
+                carritoVisible.value=false;
             } else {
                 console.error("Índice fuera de rango:", index);
             }
@@ -89,7 +90,7 @@ createApp({
         }
 
         function toggleCarrito() {
-            carritoVisible.value = !carritoVisible.value; // Alterna la visibilidad del carrito
+            carritoVisible.value = !carritoVisible.value; 
         }
 
         return {
@@ -114,7 +115,7 @@ createApp({
             categoriasVisibles,
             toggleMenuLateral,
             carritoVisible,
-            toggleCarrito // Exponemos la función para alternar el carrito
+            toggleCarrito
         };
     },
 }).mount("#appVue");
