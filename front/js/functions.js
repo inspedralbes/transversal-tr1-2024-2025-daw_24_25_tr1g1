@@ -1,4 +1,4 @@
-import { createApp, ref, reactive, computed, onBeforeMount } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { createApp, ref, reactive, onBeforeMount } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 import { getProductes } from './comunicationManager.js';
 
 createApp({
@@ -8,27 +8,21 @@ createApp({
         const activeIndex = ref(0);
         const filtroSexo = ref(null);
         const carrito = reactive([]);
-        const prendaAleatorios = ref([]);
         const divActual = ref('portada');
         const dropdownVisible = ref(false);
         const productosFiltrados = ref([]);
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
-
+        const usuario = ref('');
+        const contrasena = ref('');
+        const errorLogin = ref('');
+        const menuVisible = ref(false); 
 
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
-            getProductoAleatorios();
-        });
-
-        // Generar productos aleatorios para la portada
-        function getProductoAleatorios() {
-            const allProducts = infoTotal.data.categorias.flatMap(categoria => categoria.prendas);
-            prendaAleatorios.value = allProducts.sort(() => 0.5 - Math.random()).slice(0, 6);
-        }
-
+        });      
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
@@ -36,9 +30,8 @@ createApp({
                 productosFiltrados.value = infoTotal.data.categorias[activeIndex.value].prendas.filter(producto => !sexo || producto.sexo === sexo);
             }
             divActual.value = 'prendas';
-        }        
+        }
 
-        // Mostrar categorías y filtrar productos por categoría
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
@@ -55,18 +48,16 @@ createApp({
         function canviarDiv(nouDiv) {
             divActual.value = nouDiv;
             mostrar.value = false;
-            console.log("Div actual cambiado a:", divActual.value); // Agregar para verificar
+            menuVisible.value = false; 
+            console.log("Div actual cambiado a:", divActual.value);
         }
-        
-
-
 
         function seleccionarTalla(talla) {
             tallaSeleccionada.value = talla;
             console.log("Talla:", talla.nombre);
         }
 
-        function agregarACesta(prenda,talla) {
+        function agregarACesta(prenda, talla) {
             carrito.push({
                 id_prenda: prenda.id_prenda,
                 nombre: prenda.nombre,
@@ -75,20 +66,32 @@ createApp({
                 talla: talla,
             });
         }
-        
-
 
         function quitarCesta(prenda) {
             const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
             if (index > -1) carrito.splice(index, 1);
         }
-    
+
+        function toggleMenuLateral() {
+            menuVisible.value = !menuVisible.value; 
+        }
+        
+        
 
         function verInfoPrenda(prenda) {
             if (prenda) {
                 prendaSeleccionada.value = prenda;
                 tallaSeleccionada.value = prenda.tallas?.length ? prenda.tallas[0].nombre : null;
                 canviarDiv('infoPrenda');
+            }
+        }
+
+        function iniciarSesion() {
+            if (usuario.value === '' && contrasena.value === '') {
+                errorLogin.value = '';
+                canviarDiv('portada');
+            } else {
+                errorLogin.value = 'Credenciales incorrectas';
             }
         }
 
@@ -113,19 +116,46 @@ createApp({
                 return response.json();
             })
             .then(data => {
-                console.log('Compra realizada con éxito:', data);
+                console.log('Compra finalizada', data);
             })
-            .catch(error => {
-                console.error('Error al finalizar la compra:', error);
-            });
-        }        
+            .catch(error => console.error('Error:', error));
+        }
 
+        function signOut() {
+            // Lógica para cerrar sesión
+            console.log("Sesión cerrada");
+            usuario.value = '';
+            contrasena.value = '';
+            canviarDiv('portada');
+        }
 
         return {
-            infoTotal,mostrarCategorias,canviarDiv,mostrarDiv,mostrar,activeIndex,dropdownVisible,
-            filtroSexo,filtrarPrendas,productosFiltrados,agregarACesta,quitarCesta,carrito,
-            getProductoAleatorios,prendaAleatorios,verInfoPrenda,prendaSeleccionada,tallaSeleccionada,
-            seleccionarTalla,finalizarCompra
+            infoTotal,
+            mostrar,
+            activeIndex,
+            filtroSexo,
+            carrito,
+            divActual,
+            dropdownVisible,
+            productosFiltrados,
+            tallaSeleccionada,
+            prendaSeleccionada,
+            usuario,
+            contrasena,
+            errorLogin,
+            menuVisible, // Exponer la propiedad del menú
+            filtrarPrendas,
+            mostrarCategorias,
+            mostrarDiv,
+            canviarDiv,
+            seleccionarTalla,
+            agregarACesta,
+            quitarCesta,
+            toggleMenuLateral, // Exponer la función de toggle
+            verInfoPrenda,
+            iniciarSesion,
+            finalizarCompra,
+            signOut // Exponer la función de cerrar sesión
         };
-    },
-}).mount("#appVue");
+    }
+}).mount('#appVue');
