@@ -148,6 +148,8 @@
                         { "id_talla": 7, "nombre": "XL", "stock": 20 }
                     ],
                     "imagenes": [
+                        "http://example.com/imagenes/abrigo_hombre1.jpg",
+                        "http://example.com/imagenes/abrigo_hombre1.jpg",
                         "http://example.com/imagenes/abrigo_hombre1.jpg"
                     ]
                 },
