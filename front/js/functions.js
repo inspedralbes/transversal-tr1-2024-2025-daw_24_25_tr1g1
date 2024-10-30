@@ -3,52 +3,60 @@ import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
+        // Reacción y referencia de variables
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
-        const mostrar = ref(false); // Controla la visibilidad de navCat
+        const mostrar = ref(false);
         const activeIndex = ref(0);
         const filtroSexo = ref(null);
         const carrito = reactive([]);
+        const prendaAleatorios = ref([]);
         const divActual = ref('portada');
         const dropdownVisible = ref(false);
         const productosFiltrados = ref([]);
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
-<<<<<<< HEAD
         const correoElectronico = ref('');
 
-=======
-        const usuario = ref('');
-        const contrasena = ref('');
-        const errorLogin = ref('');
-        const menuVisible = ref(false); 
->>>>>>> da2fe0916ae38beac52f62fd02f7eddbe61b1434
-
-        const menuState = reactive({
-            mostrar: false,
-            mostrarBotonCerrar: false
-        });
-
+        // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
-<<<<<<< HEAD
             getProductoAleatorios();
         });
 
+        // Funciones de manejo de productos
         function getProductoAleatorios() {
-            const allProducts = infoTotal.data.categorias.flatMap(categoria => categoria.prendas);
+            const allProducts = [];
+
+            for (let i = 0; i < infoTotal.data.categorias.length; i++) {
+                const categoria = infoTotal.data.categorias[i];
+
+                for (let j = 0; j < categoria.prendas.length; j++) {
+                    allProducts.push(categoria.prendas[j]);
+                }
+            }
             prendaAleatorios.value = allProducts.sort(() => 0.5 - Math.random()).slice(0, 6);
         }
-=======
-        });      
->>>>>>> da2fe0916ae38beac52f62fd02f7eddbe61b1434
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
+
             if (activeIndex.value !== null) {
-                productosFiltrados.value = infoTotal.data.categorias[activeIndex.value].prendas.filter(producto => !sexo || producto.sexo === sexo);
+                const prendas = infoTotal.data.categorias[activeIndex.value].prendas;
+                const productosFiltradosTemp = [];
+
+                for (let i = 0; i < prendas.length; i++) {
+                    const producto = prendas[i];
+
+                    if (!sexo || producto.sexo === sexo) {
+                        productosFiltradosTemp.push(producto);
+                    }
+                }
+
+                productosFiltrados.value = productosFiltradosTemp;
             }
+
             divActual.value = 'prendas';
         }
 
@@ -67,18 +75,10 @@ createApp({
 
         function canviarDiv(nouDiv) {
             divActual.value = nouDiv;
-<<<<<<< HEAD
-            mostrar.value = false; 
-        }
-
-
-=======
             mostrar.value = false;
-            menuVisible.value = false; 
-            console.log("Div actual cambiado a:", divActual.value);
         }
->>>>>>> da2fe0916ae38beac52f62fd02f7eddbe61b1434
 
+        // Funciones de manejo del carrito
         function seleccionarTalla(talla) {
             tallaSeleccionada.value = talla;
         }
@@ -97,38 +97,33 @@ createApp({
             const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
             if (index > -1) carrito.splice(index, 1);
         }
-<<<<<<< HEAD
-=======
 
-        function toggleMenuLateral() {
-            menuVisible.value = !menuVisible.value; 
-        }
-        
-        
->>>>>>> da2fe0916ae38beac52f62fd02f7eddbe61b1434
-
+        // Funciones de manejo de información de productos
         function verInfoPrenda(prenda) {
             if (prenda) {
                 prendaSeleccionada.value = prenda;
-                tallaSeleccionada.value = prenda.tallas?.length ? prenda.tallas[0].nombre : null;
+                if (prenda.tallas && prenda.tallas.length > 0) {
+                    tallaSeleccionada.value = prenda.tallas[0].nombre;
+                } else {
+                    tallaSeleccionada.value = null;
+                }
                 canviarDiv('infoPrenda');
             }
         }
 
-        function iniciarSesion() {
-            if (usuario.value === '' && contrasena.value === '') {
-                errorLogin.value = '';
-                canviarDiv('portada');
-            } else {
-                errorLogin.value = 'Credenciales incorrectas';
-            }
-        }
-
+        // Funciones de compra
         function finalizarCompra() {
-            const datosCompra = carrito.map(item => ({
-                id_prenda: item.id_prenda,
-                talla: item.talla.nombre
-            }));
+            const total = totalCarrito();
+
+            const datosCompra = {
+                productos: carrito.map(item => ({
+                    id_prenda: item.id_prenda,
+                    talla: item.talla,
+                    precio: item.precio
+                })),
+                total: total,
+                email: correoElectronico.value
+            };
             console.log(datosCompra);
 
             fetch('TU_URL_DE_API/aqui', {
@@ -138,69 +133,55 @@ createApp({
                 },
                 body: JSON.stringify(datosCompra),
             })
-            .then(response => {
-                if (!response.ok) {
-                    console.log('Error en la compra');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Compra finalizada', data);
-            })
-<<<<<<< HEAD
-            .catch(error => {
-                console.error('Error al finalizar la compra:', error);
-            });
-=======
-            .catch(error => console.error('Error:', error));
->>>>>>> da2fe0916ae38beac52f62fd02f7eddbe61b1434
+                .then(response => {
+                    if (!response.ok) {
+                        console.log('Error en la compra');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Compra realizada con éxito:', data);
+                })
+                .catch(error => {
+                    console.error('Error al finalizar la compra:', error);
+                });
         }
 
-        function signOut() {
-            // Lógica para cerrar sesión
-            console.log("Sesión cerrada");
-            usuario.value = '';
-            contrasena.value = '';
-            canviarDiv('portada');
+        // Función para calcular el total del carrito
+        function totalCarrito() {
+            var total = 0;
+
+            for (var i = 0; i < carrito.length; i++) {
+                var item = carrito[i];
+                var precio = parseFloat(item.precio);
+                total += precio;
+            }
+            return total;
         }
-
-
-        
 
         return {
-<<<<<<< HEAD
-            infoTotal, mostrarCategorias, canviarDiv, mostrarDiv, mostrar,
-            activeIndex, dropdownVisible, filtroSexo, filtrarPrendas, productosFiltrados, 
-            agregarACesta, quitarCesta, carrito, getProductoAleatorios, prendaAleatorios, 
-            verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra
-=======
-            infoTotal,
-            mostrar,
-            activeIndex,
-            filtroSexo,
-            carrito,
-            divActual,
-            dropdownVisible,
-            productosFiltrados,
-            tallaSeleccionada,
-            prendaSeleccionada,
-            usuario,
-            contrasena,
-            errorLogin,
-            menuVisible, // Exponer la propiedad del menú
-            filtrarPrendas,
-            mostrarCategorias,
-            mostrarDiv,
+            infoTotal, 
+            mostrarCategorias, 
             canviarDiv,
+            mostrarDiv, 
+            mostrar,
+            activeIndex, 
+            dropdownVisible, 
+            filtroSexo, 
+            filtrarPrendas, 
+            productosFiltrados,
+            agregarACesta, 
+            quitarCesta, 
+            carrito, 
+            getProductoAleatorios, 
+            prendaAleatorios,
+            verInfoPrenda, 
+            prendaSeleccionada, 
+            tallaSeleccionada, 
             seleccionarTalla,
-            agregarACesta,
-            quitarCesta,
-            toggleMenuLateral, // Exponer la función de toggle
-            verInfoPrenda,
-            iniciarSesion,
-            finalizarCompra,
-            signOut // Exponer la función de cerrar sesión
->>>>>>> da2fe0916ae38beac52f62fd02f7eddbe61b1434
+            finalizarCompra, 
+            correoElectronico, 
+            totalCarrito
         };
-    }
-}).mount('#appVue');
+    },
+}).mount("#appVue");
