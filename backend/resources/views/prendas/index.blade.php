@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Prendas</title>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
     <h1>Listado de Prendas</h1>
     @if(session('success'))
-        <div style="color: green;">{{ session('success') }}</div>
+    <div class="success-message">
+        {{ session('success') }}
+    </div>
     @endif
-
+    
     <a href="{{ route('prendas.create') }}" class="btn">Agregar Prenda</a>
 
-    <!-- Tabla de Prendas -->
     <table>
         <thead>
             <tr>
@@ -22,7 +23,7 @@
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Descripción</th>
-                <th>Imagen</th>
+                <th>Imágenes</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -35,7 +36,11 @@
                     <td>{{ $prenda->descripcion }}</td>
                     <td>
                         @if($prenda->imagenes->isNotEmpty())
-                            <img src="{{ $prenda->imagenes->first()->url }}" alt="{{ $prenda->nombre }}" /> <!-- Muestra la primera imagen -->
+                            <div class="imagenes">
+                                @foreach($prenda->imagenes as $imagen)
+                                    <img src="{{ $imagen->url }}" alt="{{ $prenda->nombre }}" style="width: 100px; height: 100px; margin: 2px;">
+                                @endforeach
+                            </div>
                         @else
                             No disponible
                         @endif
@@ -53,7 +58,6 @@
         </tbody>
     </table>
 
-    <!-- Tabla de Tallas -->
     <h1>Listado de Tallas</h1>
     <table>
         <thead>

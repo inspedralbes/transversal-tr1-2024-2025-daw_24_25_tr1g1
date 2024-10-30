@@ -50,12 +50,16 @@
                 <input type="number" name="tallas[XL]" id="talla_xl" value="0" min="0">
             </div>
 
-            <label for="imagen">URL de la Imagen:</label>
-            <input type="url" name="imagen" id="imagen" placeholder="https://example.com/imagen.jpg">
-
+            <label for="imagenes">URLs de Imágenes:</label>
+            <div id="imagenes-container">
+            <input type="url" name="imagenes[]" placeholder="url1" required>
+            <input type="url" name="imagenes[]" placeholder="url2">
+            <input type="url" name="imagenes[]" placeholder="url3">
+            <input type="url" name="imagenes[]" placeholder="url4">
+            </div>
+          
             <button class="btn" type="submit">Guardar Prenda</button>
-            <button type="button" class="btn volver-btn" onclick="window.location.href='{{ route('prendas.index') }}'">Volver a la lista</button>
-
+            <button type="button" class="btn" onclick="window.location.href='{{ route('prendas.index') }}'">Volver a la lista</button>
         </form>
 
         </div>

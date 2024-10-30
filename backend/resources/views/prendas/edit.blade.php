@@ -38,8 +38,22 @@
                 <option value="U" {{ $prenda->sexo == 'U' ? 'selected' : '' }}>Unisex</option>
             </select>
 
-            <label for="imagen">URL de la Imagen:</label>
-            <input type="url" name="imagen" id="imagen" value="{{ old('imagen', $prenda->imagenes->first()->url ?? '') }}">
+            <label>URLs de Imágenes (máximo 4):</label>
+            <div id="imagenes-container">
+                <input type="url" name="imagenes[]" 
+                    value="{{ old('imagenes.0', $prenda->imagenes[0]->url ?? '') }}" 
+                    placeholder="url1" 
+                    required>
+                <input type="url" name="imagenes[]" 
+                    value="{{ old('imagenes.1', $prenda->imagenes[1]->url ?? '') }}" 
+                    placeholder="url2">
+                <input type="url" name="imagenes[]" 
+                    value="{{ old('imagenes.2', $prenda->imagenes[2]->url ?? '') }}" 
+                    placeholder="url3">
+                <input type="url" name="imagenes[]" 
+                    value="{{ old('imagenes.3', $prenda->imagenes[3]->url ?? '') }}" 
+                    placeholder="url4">
+            </div>
 
             <h2>Editar Stock de Tallas</h2>
             @foreach ($prenda->tallas as $talla)
@@ -57,7 +71,7 @@
             @endforeach
 
             <button class="btn" type="submit">Actualizar Producto</button>
-            <button type="button" class="btn volver-btn" onclick="window.location.href='{{ route('prendas.index') }}'">Volver a la lista</button>
+            <button type="button" class="btn" onclick="window.location.href='{{ route('prendas.index') }}'">Volver a la lista</button>
         </form>
 
     </div>

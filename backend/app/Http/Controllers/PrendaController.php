@@ -22,7 +22,6 @@ class PrendaController extends Controller
 
     public function store(Request $request)
 {
-    // Validar datos
     $request->validate([
         'nombre' => 'required',
         'precio' => 'required|numeric',
@@ -31,28 +30,25 @@ class PrendaController extends Controller
         'categoria_id' => 'required|exists:categoria,id_categoria',
         'sexo' => 'required|in:M,F,U',
         'tallas' => 'required|array',
-        'imagen' => 'nullable|url', // Validar como URL
+        'imagenes.*' => 'nullable|url', 
     ]);
 
-    // Crear la prenda
-    $prenda = Prenda::create($request->except('tallas', 'imagen'));
+    $prenda = Prenda::create($request->except('tallas', 'imagenes'));
 
-    // Guardar la URL de la imagen en la tabla `imagenes` si existe
-    if ($request->has('imagen')) {
-        $prenda->imagenes()->create(['url' => $request->imagen]); // Se guarda en la tabla imagenes
+    if ($request->has('imagenes')) {
+        foreach ($request->imagenes as $url) {
+            if ($url) { 
+                $prenda->imagenes()->create(['url' => $url]);
+            }
+        }
     }
-
-    // Guardar tallas y stock
     foreach ($request->tallas as $nombre => $stock) {
         if ($stock > 0) {
             $prenda->tallas()->create(['nombre' => $nombre, 'stockPorPrenda' => $stock]);
         }
     }
-
-    return redirect()->route('prendas.index')->with('success', 'PRENDA CREADA CON ÉXITO');
+    return redirect()->route('prendas.index')->with('success', 'Prenda creada con éxito');
 }
-
-
 
 
     public function show($id)
@@ -74,55 +70,37 @@ class PrendaController extends Controller
         'nombre' => 'required',
         'precio' => 'required|numeric',
         'descripcion' => 'required',
-        'descuento' => 'nullable|numeric',
         'categoria_id' => 'required|exists:categoria,id_categoria',
         'sexo' => 'required|in:M,F,U',
-        'tallas.*.stock' => 'nullable|numeric',
-        'imagen' => 'nullable|url', // Validar como URL
+        'imagenes.*' => 'nullable|url', 
     ]);
 
     $prenda = Prenda::findOrFail($id);
-    $prenda->update($request->except('tallas', 'imagen')); // Actualiza otros campos
 
-    // Actualizar el stock de las tallas
-    foreach ($request->tallas as $id_talla => $data) {
-        $tallaPrenda = $prenda->tallas()->where('id_talla', $id_talla)->first();
-        if ($tallaPrenda) {
-            if ($data['stock'] > 0) {
-                $tallaPrenda->stockPorPrenda = $data['stock'];
-                $tallaPrenda->save();
+    $prenda->update($request->except('imagenes'));
+
+    $imagenesExistentes = $prenda->imagenes;
+
+    foreach ($request->imagenes as $index => $url) {
+        if ($url) {
+            if (isset($imagenesExistentes[$index])) {
+                $imagenesExistentes[$index]->update(['url' => $url]);
             } else {
-                $tallaPrenda->delete();
+                $prenda->imagenes()->create(['url' => $url]);
             }
-        } elseif ($data['stock'] > 0) {
-            $prenda->tallas()->create([
-                'id_talla' => $id_talla,
-                'stockPorPrenda' => $data['stock'],
-                'nombre' => $id_talla, // Asegúrate de agregar el nombre de la talla
-            ]);
+        } elseif (isset($imagenesExistentes[$index])) {
+            $imagenesExistentes[$index]->delete();
         }
     }
 
-    // Actualiza la URL de la imagen si existe
-    if ($request->has('imagen')) {
-        $prenda->imagenes()->updateOrCreate(
-            ['prenda_id' => $prenda->id_prenda], // Busca la imagen de la prenda
-            ['url' => $request->imagen] // Actualiza la URL de la imagen
-        );
-    }
-
-    return redirect()->route('prendas.index')->with('success', 'PRENDA ACTUALIZADA CON ÉXITO');
+    return redirect()->route('prendas.index')->with('success', 'Prenda actualizada con éxito');
 }
 
-
-
-    
-    
 
     public function destroy($id)
     {
         $prenda = Prenda::findOrFail($id);
         $prenda->delete();
-        return redirect()->route('prendas.index')->with('success', 'PRENDA ELIMINADA CON EXITO');
+        return redirect()->route('prendas.index')->with('success', 'Prenda eliminada con éxito');
     }
 }
