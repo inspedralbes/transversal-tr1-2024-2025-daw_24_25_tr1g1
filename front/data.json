@@ -18,7 +18,9 @@
                         { "id_talla": 4, "nombre": "XL", "stock": 40 }
                     ],
                     "imagenes": [
-                        "http://example.com/imagenes/camisa1.jpg"
+                        "https://cdn-images.farfetch-contents.com/off-white-stars-all-over-skate-s-s-tee_24376753_55553252_1000.jpg?c=3",
+                        "https://cdn-images.farfetch-contents.com/off-white-stars-all-over-skate-s-s-tee_24376753_55553252_1000.jpg?c=3",
+                        "https://cdn-images.farfetch-contents.com/off-white-stars-all-over-skate-s-s-tee_24376753_55553252_1000.jpg?c=3"
                     ]
                 },
                 {

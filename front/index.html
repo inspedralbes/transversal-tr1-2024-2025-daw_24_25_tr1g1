@@ -29,26 +29,18 @@
                 </div>
             </div>
 
-            <div id="navCat" class="navCat">
+            <div class="menu-lateral" id="menu-lateral" :class="{ 'visible': mostrar }">
                 <div class="categorias">
                     <button v-for="(categoria, index) in infoTotal.data.categorias" 
-                        :key="categoria.id" 
-                        id="botonCategoria"
-                        @click="mostrarCategorias(index)" 
-                        class="categoria-btn">
+                            :key="categoria.id" 
+                            @click="mostrarCategorias(index)" 
+                            class="categoria-btn">
                         {{ categoria.nombre }}
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Menú lateral -->
-        <aside v-if="dropdownVisible" class="menu-lateral">
-            <button @click="canviarDiv('portada')" class="menu-item">Inicio</button>
-            <button @click="filtrarPrendas" class="menu-item">Prendas</button>
-            <button @click="canviarDiv('checkout')" class="menu-item">Cesta</button>
-            <button @click="toggleMenuLateral" class="menu-item">Cerrar</button>
-        </aside>
 
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
@@ -86,7 +78,7 @@
             <div v-if="carrito.length > 0" class="contenedor-cesta">
                 <div v-for="(item, index) in carrito" :key="index" class="cesta">
                     <h2>{{ item.nombre || "Producto sin nombre" }} <!--(ID: {{ item.id_prenda }})--></h2>
-                    <img v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre || 'sin nombre' }}">
+                    <img height="200px" v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre || 'sin nombre' }}">
                     <p v-if="item.talla && item.talla.nombre">Talla: {{ item.talla.nombre || "No seleccionado" }}</p>
                     <button id="btn-eliminar" @click="quitarCesta(item)">X</button>
                 </div>
@@ -96,7 +88,10 @@
                 <p>Tu cesta está vacía.</p>
             </div>
             <div id="finalitzarCompra" v-if="carrito.length > 0">
-                <button id="botonFinalizarCompra" @click="finalizarCompra()">Finalizar Compra</button>
+                <form action="">
+                    <input type="email" placeholder="Correo Electronico"><br><br>
+                    <button id="botonFinalizarCompra" @click="finalizarCompra()">Finalizar Compra</button>
+                </form>
             </div>
         </div>        
 
@@ -109,7 +104,11 @@
             <div class="info-prenda">
                 <div class="imagenes">
                     <div class="imagen-recuadro">
-                        <img v-if="prendaSeleccionada.imagenes[0]" :src="prendaSeleccionada.imagenes[0]" alt="Imagen de {{ prendaSeleccionada.nombre }}">
+                        
+                        <img v-for="(imagen, index) in prendaSeleccionada.imagenes.slice(0, 3)" 
+                            :key="index" 
+                            :src="imagen" 
+                            alt="Imagen de {{ prendaSeleccionada.nombre }}">
                     </div>
                 </div>
                 <div class="detalles">
@@ -163,7 +162,6 @@
         <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
         <script type="module" src="./js/comunicationManager.js"></script>
         <script type="module" src="./js/functions.js"></script>
-        <script src="./js/menu.js"></script>
     </div>
 </body>
 </html>
