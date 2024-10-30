@@ -23,6 +23,9 @@
                     <img src="./img/logo.png" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
                 </div>
                 <div class="navDer">
+                    <button id="btn-login" class="icono" @click="canviarDiv('login')">
+                        <i style="font-size:24px" class="fa fa-user"></i>
+                    </button>
                     <button id="btn-carrito" class="icono" @click="canviarDiv('checkout')">
                         <i style="font-size: 20px;" class="fa fa-shopping-basket"></i>
                     </button>
@@ -41,14 +44,15 @@
                 </div>
             </div>
         </div>
-
-        <!-- Menú lateral -->
-        <aside v-if="dropdownVisible" class="menu-lateral">
-            <button @click="canviarDiv('portada')" class="menu-item">Inicio</button>
-            <button @click="filtrarPrendas" class="menu-item">Prendas</button>
-            <button @click="canviarDiv('checkout')" class="menu-item">Cesta</button>
-            <button @click="toggleMenuLateral" class="menu-item">Cerrar</button>
-        </aside>
+        <div id="menuLateral" class="menu-lateral" v-if="menuVisible">
+            <button class="menu-item" @click="filtrarPorGenero('Hombre')">Hombre</button>
+            <br>
+            <button class="menu-item" @click="filtrarPorGenero('Mujer')">Mujer</button>
+            <br>
+            <button class="menu-item" @click="canviarDiv('contacto')">Contacto</button>
+            <br>
+            <button class="menu-item" @click="signOut">Sign Out</button>
+        </div>
 
         <!-- Contenido de la tienda -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
@@ -78,6 +82,28 @@
                 <p>{{ prenda.precio }}</p>
                 <button @click="verInfoPrenda(prenda)">Ver detalles</button>
             </div>
+        </div>
+        
+        <!-- Sección de Login -->
+        <div v-if="mostrarDiv('login')" id="login" class="contenido-login">
+            <h1>Iniciar Sesión</h1>
+            <form @submit.prevent="iniciarSesion">
+                <div class="form-group" id="user">
+                    <label for="username">Usuario:</label>
+                    <br>
+                    <input type="text" id="username" v-model="usuario" required>
+                </div>
+                <br>
+                <div class="form-group" id="pass">
+                    <label for="password">Contraseña:</label>
+                    <br>
+                    <input type="password" id="password" v-model="contrasena" required>
+                </div>
+
+                <button type="submit">Iniciar Sesión</button>
+                <p v-if="errorLogin" class="error">{{ errorLogin }}</p>
+            </form>
+            <p>¿No tienes cuenta? <a href="#" @click="registrarse">Regístrate aquí</a></p>
         </div>
 
         <!-- Sección de Checkout -->

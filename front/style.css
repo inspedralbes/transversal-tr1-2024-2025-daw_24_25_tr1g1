@@ -417,6 +417,60 @@ input[type="email"]:focus{
   border-radius: 1px;
 }
 
+
+/* ====== Login ====== */
+
+.contenido-login {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 20%;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.contenido-login h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 1000;
+  transition: transform 0.7s ease;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  padding: 20px; 
+  box-sizing: border-box; 
+}
+
+.menu-item {
+  margin: 15px 0; 
+  padding: 15px; 
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-item:hover {
+  background-color: #d4d2d2;
+}
+
 @media (min-width: 768px) {
   .info-prenda {
     flex-direction: row;
