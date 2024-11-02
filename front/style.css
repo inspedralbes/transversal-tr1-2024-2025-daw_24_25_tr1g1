@@ -1,18 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap");
 
+/* ==================== Estilos Generales ==================== */
 * {
-  transition: .2s;
+  transition: .6s;
 }
 
 body,
 html {
-  height: 100%;
   margin: 0;
   padding: 0;
-  display: flex;
-  overflow-x: hidden;
   flex-direction: column;
-  box-sizing: border-box;
   font-family: "IBM Plex Mono", -apple-system, sans-serif;
 }
 
@@ -22,155 +19,165 @@ html {
   flex-direction: column;
 }
 
-/* ====== Anuncio ====== */
+/* ==================== Anuncio ==================== */
 .anuncio {
   width: 100%;
   overflow: hidden;
   border-bottom: 1px solid black;
 }
 
-.anuncio marquee {
-  margin: 0;
-  padding: 1px;
-  font-size: 13px;
-  animation: moverAnuncio 150s linear infinite;
+.marquee {
+  font-size: 0.8rem;
+  white-space: nowrap; 
+  animation: marquee 120s linear infinite;
+  animation-play-state: running;
 }
 
-/* ====== Panel Superior ====== */
+.anuncio:hover .marquee {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* ==================== Panel Superior ==================== */
 .panelSuperior {
   top: 0;
   width: 100%;
   z-index: 1000;
-  padding: 10px;
-  font-size: 12px;
   position: sticky;
-  box-sizing: border-box;
   background-color: white;
 }
 
-#botonCategoria{
-  background: 0;
-  margin: 5px ;
+#botonCategoria {
+  font-size: 0.8rem;
+  font-family: "IBM Plex Mono", -apple-system, sans-serif;
 }
 
-/* ====== Navegación de Usuario ====== */
+/* ==================== Navegación de Usuario ==================== */
 .navUser {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
   overflow-x: hidden;
   padding: 5px;
-  box-sizing: border-box;
 }
 
 .navUser button,
-.navUser .categoria-btn,
-.navUser img {
+.navUser .categoria-btn {
   border: none;
   margin: 0 5px;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 0.8rem;
   padding: 8px 12px;
   background-color: transparent;
 }
 
-.navUser button:hover,
-.navUser .categoria-btn:hover,
-.navUser img:hover {
-  text-decoration: underline;
+#menuLateral {
+  display: block;
 }
 
 .navUser img {
-  width: 120px;
+  width: 180px;
+  height: auto;
   cursor: pointer;
+  margin: 0 auto;
 }
 
-/* ====== Navegación de Categorías ====== */
+/* ==================== Navegación de Categorías ==================== */
 #navCat {
   width: 100%;
-  display: flex;
   padding: 10px;
+  display: flex;
   overflow-x: hidden;
-  box-sizing: border-box;
   justify-content: center;
 }
 
 .categoria-btn {
   border: none;
+  padding: 6px 10px;
   cursor: pointer;
-  font-size: 12px;
 }
 
-/* ====== Contenido de Botiga ====== */
+/* ==================== Contenido de Botiga ==================== */
 #botiga {
   display: block;
-  margin: 20px 0;
   width: 100%;
   overflow-x: hidden;
 }
 
-/* ====== Sección de Prendas ====== */
-#prendas {
-  gap: 10px;
-  width: 98%;
-  display: grid;
-  margin: 0 auto;
-  text-align: center;
-  grid-template-columns: 1fr;
-  box-sizing: border-box;
-}
-
-#prendas h1 {
-  text-align: center;
-}
-
-.titulo-y-filtro {
+.titulo {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
   flex-direction: column; 
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.tituloCategoria {
-  margin: 0; 
+.tituloCategoria h1 {
+  font-size: 1rem; 
+  margin: 10px 0;
+}
+
+.tituloCategoria p {
+  font-size: 0.7rem;
+  margin: 10px 0;
 }
 
 .filtroGenero {
   margin-top: 10px;
 }
 
-.prenda {
-  padding: 10px;
-  cursor: pointer;
-  box-sizing: border-box;
-  border: 1px solid black;
+#filtroGenero {
+  margin-top: 5px;
+  font-size: 0.7rem;
 }
 
-.prenda p {
-  text-align: left;
-}
-
-.prenda button {
+#prendas {
+  display: grid;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
   background-color: white;
-  border: none;
-  cursor: pointer;
-  text-decoration: none; 
+  grid-template-columns: 1fr;
 }
 
-.prenda button:hover {
-  text-decoration: underline; 
+.prenda {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
 }
 
 .prenda img {
-  height: 200px;
+  width: 50%;
+  height: auto;
   display: block;
-  margin: 0 auto;
+  margin: auto;
   cursor: pointer;
-  border: 1px solid black;
 }
 
-/* ====== Sección de Checkout ====== */
+.prenda img:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.prenda p {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  padding: auto;
+  color: #333;
+}
+
+/* ==================== Sección de Checkout ==================== */
 #checkout {
   text-align: center;
   margin: 20px;
@@ -183,7 +190,7 @@ html {
   gap: 20px;
 }
 
-.contenedor-cesta img{
+.contenedor-cesta img {
   height: 200px;
 }
 
@@ -206,7 +213,7 @@ html {
   background: black;
 }
 
-#btn-eliminar{
+#btn-eliminar {
   color: white;
   font-weight: 900;
   background: red;
@@ -214,7 +221,8 @@ html {
   border: 1px solid red;
 }
 
-input[type="email"]{
+/* ==================== Estilos de Input ==================== */
+input[type="email"] {
   border: 2px solid gray;
   color: black;
   background: gray;
@@ -224,23 +232,22 @@ input[type="email"]{
   transition: .2s;
 }
 
-input[type="email"]::placeholder{
+input[type="email"]::placeholder {
   color: black;
 }
 
-input[type="email"]:focus{
-  background: gainsboro;
-  border-color: gainsboro;
+input[type="email"]:focus {
+  background: #dcdcdc;
+  border-color: #dcdcdc;
 }
 
-/* ====== Footer ====== */
+/* ==================== Footer ==================== */
 .footer {
   width: 100%;
   padding: 10px;
   margin: 20px auto 0;
   text-align: center;
   border-top: 1px solid black;
-  box-sizing: border-box;
 }
 
 .footer-container {
@@ -276,49 +283,30 @@ input[type="email"]:focus{
   font-size: 12px;
 }
 
-/* ====== Social Media ====== */
 .footer-social a {
   margin: 50px 20px;
 }
 
-.nav-menu {
-  list-style: none;
-  padding: 0;
-}
-
-.nav-menu li {
-  margin: 15px 0;
-}
-
-.nav-menu a {
-  text-decoration: none;
-  color: black;
-  font-size: 16px;
-}
-
-.categorias{
+.categorias {
   text-align: center;
 }
 
-.categorias button{
-  transition: .2s;
-  padding: 5px;
-  background: 0;
+.categorias button {
+  transition: .5s;
+  background-color: white;
   margin: 0 5px;
 }
 
-.categorias button:hover{
+.categorias button:hover {
   border-bottom: 1px solid black;
 }
 
-
-/* ====== Estilos de la Portada ====== */
+/* ==================== Estilos de la Portada ==================== */
 .div-portada {
   height: 300px;
   width: 100%;
   background-color: #b8bdc1;
   margin: 50px 0 20px;
-  box-sizing: border-box;
   overflow-x: hidden;
 }
 
@@ -326,24 +314,20 @@ input[type="email"]:focus{
   padding: 20px;
   background-color: #f9f9f9;
   border-bottom: 2px solid #ddd;
-  box-sizing: border-box;
 }
 
 #id-descripcion {
   text-align: left;
   font-size: 16px;
-  line-height: 1.5;
   margin-bottom: 100px;
 }
 
-/* ====== Botones y Detalles ====== */
+/* ==================== Botones y Detalles ==================== */
 #botonTalla {
   margin: 5px;
   background: 0;
   cursor: pointer;
-  font-weight: 100;
   border: 1px solid black;
-  box-sizing: border-box;
 }
 
 #botonTalla:focus {
@@ -360,14 +344,12 @@ input[type="email"]:focus{
   box-sizing: border-box;
 }
 
-/* ====== Estilos para la sección de información de la prenda ====== */
+/* ==================== Estilos para la sección de información de la prenda ==================== */
 #infoPrenda {
-  max-width: 100%;
   margin: 20px auto;
   padding: 20px;
   border-radius: 4px;
   background-color: white;
-  box-sizing: border-box;
   overflow-x: hidden;
 }
 
@@ -390,7 +372,6 @@ input[type="email"]:focus{
 .imagen-recuadro img {
   height: 100%;
   margin: 0 auto;
-  
 }
 
 .descripcion-recuadro,
@@ -398,7 +379,6 @@ input[type="email"]:focus{
   border: 1px solid black;
   padding: 10px;
   margin-top: 20px;
-  box-sizing: border-box;
 }
 
 /* Estilo para el botón de añadir a cesta */
@@ -417,9 +397,14 @@ input[type="email"]:focus{
   border-radius: 1px;
 }
 
+/* ==================== Media Queries ==================== */
 @media (min-width: 768px) {
   .info-prenda {
     flex-direction: row;
+  }
+
+  #menuLateral {
+    display: none;
   }
 
   .imagen-recuadro {
@@ -427,31 +412,62 @@ input[type="email"]:focus{
     height: 400px;
   }
 
-  #prendas {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
   }
-}
 
-@media (min-width: 1024px) {
+  .navUser img {
+    width: 250px;
+    justify-content: center;
+  }
+
   #botiga {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
+  #categoria-btn {
+    font-size: 1.2rem;
+  }
+
   #prendas {
-    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: white;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .tituloCategoria {
     justify-content: center;
   }
+  
+.titulo {
+  display: flex;
+  flex-direction: column; 
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #e0e0e0;
+}
 
-  .navUser img {
-    width: 200px;
-  }
+.tituloCategoria h1 {
+  font-size: 1.5rem; 
+  margin: 10px 0;
+}
+
+.tituloCategoria p {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.filtroGenero {
+  margin-top: 10px;
+}
+
+#filtroGenero {
+  margin-top: 5px;
+  font-size: 1rem;
+}
 }

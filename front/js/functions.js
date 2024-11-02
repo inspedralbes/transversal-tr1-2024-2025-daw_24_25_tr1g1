@@ -9,9 +9,7 @@ createApp({
         const activeIndex = ref(0);
         const filtroSexo = ref(null);
         const carrito = reactive([]);
-        const prendaAleatorios = ref([]);
         const divActual = ref('portada');
-        const dropdownVisible = ref(false);
         const productosFiltrados = ref([]);
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
@@ -22,22 +20,7 @@ createApp({
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
-            getProductoAleatorios();
         });
-
-        // Funciones de manejo de productos
-        function getProductoAleatorios() {
-            const allProducts = [];
-
-            for (let i = 0; i < infoTotal.data.categorias.length; i++) {
-                const categoria = infoTotal.data.categorias[i];
-
-                for (let j = 0; j < categoria.prendas.length; j++) {
-                    allProducts.push(categoria.prendas[j]);
-                }
-            }
-            prendaAleatorios.value = allProducts.sort(() => 0.5 - Math.random()).slice(0, 6);
-        }
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
@@ -53,10 +36,8 @@ createApp({
                         productosFiltradosTemp.push(producto);
                     }
                 }
-
                 productosFiltrados.value = productosFiltradosTemp;
             }
-
             divActual.value = 'prendas';
         }
 
@@ -147,6 +128,10 @@ createApp({
                 });
         }
 
+       function toggleMenuLateral() {
+            this.mostrarCategorias = !this.mostrarCategorias; 
+        }
+
         // Función para calcular el total del carrito
         function totalCarrito() {
             var total = 0;
@@ -166,21 +151,19 @@ createApp({
             mostrarDiv, 
             mostrar,
             activeIndex, 
-            dropdownVisible, 
             filtroSexo, 
             filtrarPrendas, 
             productosFiltrados,
             agregarACesta, 
             quitarCesta, 
             carrito, 
-            getProductoAleatorios, 
-            prendaAleatorios,
             verInfoPrenda, 
             prendaSeleccionada, 
             tallaSeleccionada, 
             seleccionarTalla,
             finalizarCompra, 
             correoElectronico, 
+            toggleMenuLateral,
             totalCarrito
         };
     },

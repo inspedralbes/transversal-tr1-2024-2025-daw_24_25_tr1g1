@@ -10,14 +10,15 @@
 <body>
     <div id="appVue">
         <div class="anuncio">
-            <marquee>Anuncio que va de derecha a izquierda</marquee>
+            <div class="marquee">¡No te pierdas nuestras ofertas especiales en ropa de invierno, con descuentos de hasta el 50%! Visita nuestra tienda y descubre más.</div>
         </div>
+        
         <div class="panelSuperior">
             <div class="navUser">
-                <div class="navIzq">
-                    <button id="btn-menu" class="icono" @click="toggleMenuLateral">
+                <div class="navIzq">    
+                    <button id="menuLateral" class="icono" @click="toggleMenuLateral">
                         <i style="font-size: 20px;" class="fa fa-bars"></i>
-                    </button>
+                    </button>              
                 </div>
                 <div class="navCentro">
                     <img src="./img/logo.png" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
@@ -42,15 +43,7 @@
             </div>
         </div>
 
-        <!-- Menú lateral -->
-        <aside v-if="dropdownVisible" class="menu-lateral">
-            <button @click="canviarDiv('portada')" class="menu-item">Inicio</button>
-            <button @click="filtrarPrendas" class="menu-item">Prendas</button>
-            <button @click="canviarDiv('checkout')" class="menu-item">Cesta</button>
-            <button @click="toggleMenuLateral" class="menu-item">Cerrar</button>
-        </aside>
-
-        <!-- Contenido de la tienda -->
+        <!-- Contenido de la portada -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
             <div class="descripcion-portada">
                 <div class="div-portada"></div>
@@ -59,33 +52,39 @@
         </div>
 
         <!-- Contenido de categorías filtradas -->
-        <div v-if="mostrar" id="prendas" class="contenido-prendas">
-            <div class="titulo-y-filtro">
-                <div class="tituloCategoria">
-                    <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-                </div>
-                
-                <label for="filtroGenero" class="filtroGenero">Género: </label>
-                <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
-                    <option value="">Todos</option>
-                    <option value="Hombre">Hombre</option>
-                    <option value="Mujer">Mujer</option>
-                </select>
+        <div v-if="mostrar" class="contenido-prendas">
+            <div class="titulo">
+              <div class="tituloCategoria">
+                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+                <p>Explora nuestra colección de {{ infoTotal.data.categorias[activeIndex].nombre }}, donde encontrarás una amplia variedad de prendas para cualquier ocasión.</p>
+              </div>       
+                  
+              <label for="filtroGenero" class="filtroGenero">Género: </label>
+              <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
+                <option value="">Todos</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+              </select>
             </div>
-            <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda">
+          
+            <!-- Contenedor de prendas -->
+            <div id="prendas">
+              <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda" @click="verInfoPrenda(prenda)">
                 <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                 <p>{{ prenda.descripcion }}</p>
                 <p>{{ prenda.precio }}</p>
-                <button @click="verInfoPrenda(prenda)">Ver detalles</button>
+              </div>
             </div>
-        </div>
+          </div>
+          
+          
 
         <!-- Sección de Checkout -->
         <div v-if="mostrarDiv('checkout')" id="checkout" class="contenido-checkout">
             <h1>Cesta</h1>
             <div v-if="carrito.length > 0" class="contenedor-cesta">
                 <div v-for="(item, index) in carrito" :key="index" class="cesta">
-                    <h2>{{ item.nombre || "Producto sin nombre" }} <!--(ID: {{ item.id_prenda }})--></h2>
+                    <h2>{{ item.nombre || "Producto sin nombre" }}</h2>
                     <img v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]" alt="Imagen de {{ item.nombre || 'sin nombre' }}">
                     <p v-if="item.talla && item.talla.nombre">Talla: {{ item.talla.nombre || "No seleccionado" }}</p>
                     <button id="btn-eliminar" @click="quitarCesta(item)">X</button>
@@ -101,7 +100,6 @@
                 <button id="botonFinalizarCompra" @click="finalizarCompra">Finalizar Compra</button>
             </div>                        
         </div>        
-
 
         <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
             <h1>{{ prendaSeleccionada.nombre }}</h1>
