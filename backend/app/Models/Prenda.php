@@ -16,9 +16,8 @@ class Prenda extends Model
         'categoria_id', 'sexo', 'imagen_url'
     ];
 
-    // el method boot me permite eliminar relaciones al borrar una prenda
-    protected static function boot()
-    {
+    // boot = eliminar relaciones
+    protected static function boot() {
         parent::boot();
 
         static::deleting(function ($prenda) {
