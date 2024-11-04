@@ -1,72 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Tienda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>On-White</title>
 </head>
-<body>    
+
+<body>
     <div id="appVue">
-        <div class="anuncio"> 
-            <p>Anuncio que va de derecha a izquierda</p>
+        <div class="anuncio">
+            <div class="marquee">¡No te pierdas nuestras ofertas especiales en ropa de invierno, con descuentos de hasta
+                el 50%! Visita nuestra tienda y descubre más.</div>
         </div>
-        <div class="superior">
-            <div id="navIzq">
-                <button @click="canviarDiv('portada')">Inicio</button>
-                <button @click="toggleDropdownAndNavigate">Categorías</button>
-                <div v-if="dropdownVisible" class="dropdown">
-                    <ul>
-                        <li v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id">
-                            <button @click="mostrarCategorias(index)">
-                                {{ categoria.nombre }} 
-                            </button>
-                        </li>
-                    </ul>
+
+        <div class="panelSuperior">
+            <div class="navUser">
+                <div class="navIzq">
+                    <button id="btn-login" class="icono" @click="canviarDiv('login')">
+                        <i style="font-size: 20px;" class="fa fa-user"></i>
+                    </button>
+                </div>
+                <div class="navCentro">
+                    <img src="./img/logo.png" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
+                </div>
+                <div class="navDer">
+                    <button id="btn-carrito" class="icono" @click="toggleCarritoLateral">
+                        <i style="font-size: 20px;" class="fa fa-shopping-basket"></i>
+                    </button>
                 </div>
             </div>
-            <div id="navDer">
-                <input type="text" placeholder="Buscar...">
-                <button id="signup">Sign up</button>
-                <button id="login">Login</button>
-                <button @click="canviarDiv('checkout')">Cesta</button>
-            </div>
-        </div>
-        <br><br>
-        <div v-if="mostrarDiv('portada')" id="portada">
-            <h1>portada</h1>
-        </div>
-        <div v-if="mostrarDiv('botiga')" id="botiga">            
-            <ul>
-                <button id="cate" v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id" @click="mostrarCategorias(index)">
-                    {{ categoria.nombre }} 
-                </button>
-            </ul>   
-        </div>
-        
-        <div v-if="mostrar" id="prendas">
-            <div id="navPrendas">
-                <button id="butHomes">Novetats</button>
-                <button id="butHomes">Homes</button>
-                <button id="butDones">Dones</button>
-            </div>
-            <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
-            <div v-for="prenda in infoTotal.data.categorias[activeIndex].prendas" :key="prenda.id" class="prenda">
-                <h2>{{ prenda.nombre }}</h2>
-                <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="aqui van las imagenes" />
-                <p>Tallas: {{ prenda.tallas.join(', ') }}</p>
-                <p>Sexo: {{ prenda.sexo }}</p>
-                <button @click="agregarACesta(prenda)">Agregar a la cesta</button>
-            </div>
-        </div>
-        <div v-if="mostrarDiv('checkout')" id="checkout">
-            <h1>Cesta</h1>
-        </div>
-    </div>
-    
 
-    <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
-    <script type="module" src="./js/comunicationManager.js"></script>
-    <script type="module" src="./js/functions.js"></script>
+            <div id="navCat" class="navCat">
+                <div class="categorias">
+                    <button v-for="(categoria, index) in infoTotal.data.categorias" :key="categoria.id"
+                        id="botonCategoria" @click="mostrarCategorias(index)" class="categoria-btn">
+                        {{ categoria.nombre }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario de Login -->
+        <div v-if="mostrarDiv('login')" id="login" class="login-form">
+            <h2>Iniciar Sesión</h2>
+            <form @submit.prevent="iniciarSesion">
+                <div class="form-group">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" v-model="correo" required placeholder="Introduce tu correo">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" v-model="contrasena" required
+                        placeholder="Introduce tu contraseña">
+                </div>
+                <button type="submit">Iniciar Sesión</button>
+                <p class="error-message" v-if="error">{{ error }}</p>
+                <p>¿No tienes una cuenta? <a href="#" @click="mostrarRegistro">Regístrate aquí</a></p>
+            </form>
+        </div>
+
+        <!-- Carrito Lateral -->
+        <div id="menuCarrito" class="menu-carrito" :class="{ 'visible': carritoVisible }">
+            <button class="cerrar" @click="toggleCarritoLateral">Cerrar</button>
+            <h3>Cesta</h3>
+            <div v-if="carrito.length > 0">
+                <div v-for="(item, index) in carrito" :key="index" class="cesta-item">
+                    <h3>{{ item.nombre || "Producto sin nombre" }}</h3>
+                    <p>Talla: {{ item.talla.nombre || item.talla || "No especificada" }}</p>
+                    <p>Precio: {{ item.precio }}€</p>
+                    <button @click="quitarCesta(item)">Eliminar</button>
+                </div>
+            </div>
+            <div v-else>
+                <p>Tu cesta está vacía.</p>
+            </div>
+            <p>Total: {{ totalCarrito() }}€</p>
+            <button id="botonFinalizarCompra" @click="irAlCheckout">Ir al carrito</button>
+        </div>
+
+
+        <!-- Contenido de la portada -->
+        <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
+            <div class="descripcion-portada">
+                <div class="div-portada">
+                    <img src="./img/ade9d580-d18c-4bad-a4b4-11f7e7f8f25d_skate-caps-web.webp"
+                        @click="canviarDiv('portada')" class="img-inicio">
+                </div>
+                <p id="id-descripcion">No se que poner</p>
+            </div>
+        </div>
+
+        <!-- Contenido de categorías filtradas -->
+        <div v-if="mostrar" class="contenido-prendas">
+            <div class="titulo">
+                <div class="tituloCategoria">
+                    <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+                    <p>Explora nuestra colección de {{ infoTotal.data.categorias[activeIndex].nombre }}, donde
+                        encontrarás una amplia variedad de prendas para cualquier ocasión.</p>
+                </div>
+
+                <label for="filtroGenero" class="filtroGenero">Género: </label>
+                <select id="filtroGenero" @change="filtrarPrendas($event.target.value)">
+                    <option value="">Todos</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                </select>
+            </div>
+
+            <!-- Contenedor de prendas -->
+            <div id="prendas">
+                <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda"
+                    @click="verInfoPrenda(prenda)">
+                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
+                    <p>{{ prenda.descripcion }}</p>
+                    <p>{{ prenda.precio }}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Sección de Checkout -->
+        <div v-if="mostrarDiv('checkout')" id="checkout" class="contenido-checkout">
+            <h1>Cesta</h1>
+            <div v-if="carrito.length > 0" class="contenedor-cesta">
+                <ul class="lista-cesta">
+                    <li v-for="(item, index) in carrito" :key="index" class="cesta-item">
+                        <div class="cesta-info">
+                            <h2>{{ item.nombre || "Producto sin nombre" }}</h2>
+                            <img v-if="item.imagenes && item.imagenes[0]" :src="item.imagenes[0]"
+                                alt="Imagen de {{ item.nombre || 'sin nombre' }}">
+                            <p>Talla: {{ item.talla.nombre || "No especificada" }}</p>
+                            <p>Precio: {{ item.precio }}€</p>
+                            <button class="btn-eliminar" @click="quitarCesta(item)">X</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div v-else>
+                <p>Tu cesta está vacía.</p>
+            </div>
+            <div id="finalizarCompra" v-if="carrito.length > 0">
+                <p>Precio total: {{ totalCarrito() }}€</p>
+                <input type="email" placeholder="Correo Electrónico" required v-model="correoElectronico"><br><br>
+                <button @click="canviarDiv('checkout')">Finalizar Compra</button>
+            </div>
+        </div>
+
+        <!--Informacion de las prendas-->
+        <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
+            <h1>{{ prendaSeleccionada.nombre }}</h1>
+            <button id="prendaVolver" @click="canviarDiv('portada')">
+                <i class="fa fa-long-arrow-left"> Volver</i>
+            </button>
+            <div class="info-prenda">
+                <div class="imagenes">
+                    <div class="imagen-recuadro">
+                        <img v-if="prendaSeleccionada.imagenes[0]" :src="prendaSeleccionada.imagenes[0]"
+                            alt="Imagen de {{ prendaSeleccionada.nombre }}">
+                    </div>
+                </div>
+                <div class="detalles">
+                    <div class="descripcion-recuadro">
+                        <p>{{ prendaSeleccionada.descripcion }}</p>
+                        <p>Precio: {{ prendaSeleccionada.precio }}€</p>
+                        <p>Sexo: {{ prendaSeleccionada.sexo }}</p>
+                    </div>
+                    <div class="tallas-recuadro">
+                        <p>Tallas disponibles:</p>
+                        <div>
+                            <label v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla">
+                                <button id="botonTalla" :class="{ 'sin-stock': talla.stock === 0 }"
+                                    @click="seleccionarTalla(talla)">
+                                    {{ talla.nombre }}
+                                </button>
+                            </label>
+                        </div>
+                        <button id="prendaAñadirCesta"
+                            @click="agregarACesta(prendaSeleccionada, tallaSeleccionada, id_prenda)">
+                            +<i class="fa fa-shopping-basket"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <a href="#about">Sobre nosotros</a><br>
+                    <a href="#contact">Contacto</a><br>
+                    <a href="#privacy">Política de privacidad</a><br>
+                    <a href="#terms">Términos de servicio</a><br>
+                </div>
+                <div id="rrss" class="footer-social">
+                    <a href="#" aria-label="Facebook"><i style="font-size: 25px;" class="fa fa-facebook-square">
+                        </i></a>
+                    <a href="#" aria-label="Twitter"><i style="font-size: 25px;" class="fa fa-twitter"> </i></a>
+                    <a href="#" aria-label="Instagram"><i style="font-size: 25px;" class="fa fa-instagram"> </i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 On-White. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
+        <script type="module" src="./js/comunicationManager.js"></script>
+        <script type="module" src="./js/functions.js"></script>
+        <script src="./js/menu.js"></script>
+    </div>
 </body>
+
 </html>

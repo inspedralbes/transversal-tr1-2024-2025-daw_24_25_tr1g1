@@ -1,83 +1,545 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap");
+
+/* ==================== Estilos Generales ==================== */
+* {
+  transition: .6s;
 }
 
+body{
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  font-family: "IBM Plex Mono", -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+#appVue {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== Anuncio ==================== */
 .anuncio {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    background-color: rgba(255, 255, 255, 0.8);    
-    overflow: hidden; 
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid black;
 }
 
-.anuncio p {
-    white-space: nowrap; 
-    animation: moverAnuncio 15s linear infinite; 
-    margin: 0; 
-    padding: 5px; 
+.marquee {
+  font-size: 0.8rem;
+  white-space: nowrap;
+  animation: marquee 100s linear infinite;
+  animation-play-state: running;
 }
 
-@keyframes moverAnuncio {
-    0% {
-        transform: translateX(100%); 
-    }
-    100% {
-        transform: translateX(-100%); 
-    }
+.anuncio:hover .marquee {
+  animation-play-state: paused;
+  cursor: pointer;
 }
 
-.superior {
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+
+/* ==================== Panel Superior ==================== */
+.panelSuperior {
+  position: sticky;
+  top: 0;
+  z-index: 1000; 
+  background-color: white;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+
+#botonCategoria {
+  font-size: 0.8rem;
+  font-family: "IBM Plex Mono", -apple-system, sans-serif;
+}
+
+/* ==================== Login ==================== */
+
+.login-form {
+  max-width: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+button {
+  padding: 10px;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* ==================== Navegación de Usuario ==================== */
+.navUser {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.navUser button,
+.navUser .categoria-btn {
+  border: none;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  background-color: transparent;
+}
+
+.navUser img {
+  width: 180px;
+  height: auto;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.menu-carrito {
+  position: fixed;
+  top: 0;
+  right: -200px;
+  width: 200px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease;
+  z-index: 1000;
+  font-size: 0.8rem;
+}
+
+.cerrar {
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+}
+
+.menu-carrito.visible {
+  right: 0;
+}
+
+.menu-carrito h2 {
+  padding: 20px;
+  background-color: #f5f5f5;
+  margin: 0;
+}
+
+.menu-carrito .cesta-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.menu-carrito button {
+  color: black;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* ==================== Navegación de Categorías ==================== */
+#navCat {
+  width: 100%;
+  display: flex;
+  overflow-x: hidden;
+  padding: 10px 0px 0px 10px;
+  justify-content: center;
+}
+
+.categoria-btn {
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+/* ==================== Contenido de Botiga ==================== */
+#botiga {
+  display: block;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.titulo {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tituloCategoria h1 {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.tituloCategoria p {
+  font-size: 0.7rem;
+  margin: 10px 0;
+}
+
+.filtroGenero {
+  margin-top: 10px;  
+}
+
+#filtroGenero {
+  width: 150px; 
+  font-size: 0.8rem;
+  padding: 5px; 
+  border: 1px solid gray; 
+  border-radius: 4px; 
+  background-color: white; 
+  margin-top: 10px; 
+}
+
+
+#prendas {
+  display: grid;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: white;
+  grid-template-columns: 1fr;
+}
+
+.prenda {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.prenda img {
+  width: 50%;
+  height: auto;
+  display: block;
+  margin: auto;
+  cursor: pointer;
+}
+
+.prenda img:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.prenda p {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  padding: auto;
+  color: #333;
+}
+
+/* ==================== Sección de Checkout ==================== */
+#checkout {
+  text-align: center;
+  margin: 20px;
+}
+
+.contenedor-cesta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.contenedor-cesta img {
+  height: 200px;
+}
+
+.cesta {
+  width: 48%;
+  padding: 10px;
+  margin-bottom: 30px;
+  border: 1px solid gray;
+}
+
+#botonFinalizarCompra {
+  background: 0;
+  cursor: pointer;
+  padding: 2px 15px;
+  border: 1px solid black;
+}
+
+#botonFinalizarCompra:hover {
+  color: white;
+  background: black;
+}
+
+#btn-eliminar {
+  color: white;
+  font-weight: 900;
+  background: red;
+  border-radius: 300px;
+  border: 1px solid red;
+}
+
+/* ==================== Estilos de Input ==================== */
+input[type="email"] {
+  border: 2px solid gray;
+  color: black;
+  background: gray;
+  padding: 5px 10px;
+  letter-spacing: 1px;
+  outline: 0;
+  transition: .2s;
+}
+
+input[type="email"]::placeholder {
+  color: black;
+}
+
+input[type="email"]:focus {
+  background: #dcdcdc;
+  border-color: #dcdcdc;
+}
+
+/* ==================== Footer ==================== */
+.footer {
+  width: 100%;
+  margin: 20px auto 0;
+  text-align: center;
+  border-top: 1px solid black;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer-links,
+.footer-social {
+  text-align: center;
+}
+
+.footer-links a,
+.footer-social a {
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.footer-links a:hover,
+.footer-social a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.footer-social a {
+  margin: 50px 20px;
+}
+
+.categorias {
+  text-align: center;
+}
+
+.categorias button {
+  transition: .5s;
+  background-color: white;
+  margin: 0 5px;
+}
+
+.categorias button:hover {
+  border-bottom: 1px solid black;
+}
+
+/* ==================== Estilos de la Portada ==================== */
+.div-portada {
+  width: 100%;
+  background-color: #b8bdc1;
+  margin-top: 50px;
+}
+
+.div-portada img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+
+}
+
+#id-descripcion {
+  text-align: left;
+  font-size: 16px;
+  margin-bottom: 100px;
+}
+
+
+
+/* ==================== Botones y Detalles ==================== */
+#botonTalla {
+  margin: 5px;
+  background: 0;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+#botonTalla:focus {
+  color: rgb(104, 104, 104);
+  border: 1px solid rgb(104, 104, 104);
+}
+
+#prendaAñadirCesta,
+#prendaVolver {
+  margin: 5px;
+  background: 0;
+  padding: 2px 8px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+/* ==================== Estilos para la sección de información de la prenda ==================== */
+#infoPrenda {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: white;
+  overflow-x: hidden;
+}
+
+.info-prenda {
+  display: flex;
+  flex-direction: column;
+}
+
+.imagen-recuadro {
+  border: 1px solid black;
+  height: 300px;
+  margin-right: 20px;
+  display: flex;
+  overflow-x: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Imagen alargada */
+.imagen-recuadro img {
+  height: 100%;
+  margin: 0 auto;
+}
+
+.descripcion-recuadro,
+.tallas-recuadro {
+  border: 1px solid black;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+#prendaAñadirCesta {
+  padding: 10px 10px;
+  cursor: pointer;
+}
+
+#prendaAñadirCesta:hover {
+  background-color: #e2e2e2;
+}
+
+#prendaVolver {
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 1px;
+}
+
+/* ==================== Media Queries ==================== */
+@media (min-width: 768px) {
+  .info-prenda {
+    flex-direction: row;
+  }
+
+  .imagen-recuadro {
+    width: 200px;
+    height: 400px;
+  }
+
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .navUser img {
+    width: 250px;
+    justify-content: center;
+  }
+
+  #botiga {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #categoria-btn {
+    font-size: 1.2rem;
+  }
+
+  #prendas {
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: white;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .tituloCategoria {
+    justify-content: center;
+  }
+
+  .titulo {
     display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #a1a1a1;
-    border: 1px black solid;
-    margin-top: 30px; 
-}
+    flex-direction: column;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #e0e0e0;
+  }
 
-#navIzq {
-    display: flex;
-    align-items: center;
-}
+  .tituloCategoria h1 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
 
-#cate {
-    position: absolute;
-    top: auto;
-}
+  .tituloCategoria p {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
 
-#navDer {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-}
+  .filtroGenero {
+    margin-top: 10px;
+  }
 
-.superior button {
-    margin: 0 10px;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.superior button:hover {
-    background-color: #ffffff;    
-}
-
-.superior input[type="text"] {
-    margin-left: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.dropdown {
-    position: absolute; /* Cambiado a absolute para que se posicione correctamente */
-    background-color: white; 
-    border: 1px solid #ccc;
-    padding: 20px 20px 10px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Añadido z-index para asegurar que el dropdown esté encima de otros elementos */
+  #filtroGenero {
+    margin-top: 5px;
+    font-size: 1rem;
+  }
 }
