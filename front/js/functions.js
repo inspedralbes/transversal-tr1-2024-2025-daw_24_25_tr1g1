@@ -14,8 +14,9 @@ createApp({
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
         const correoElectronico = ref('');
+        const carritoVisible = ref(false);
+        const menuVisible = ref(false);
 
-        // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
@@ -59,7 +60,6 @@ createApp({
             mostrar.value = false;
         }
 
-        // Funciones de manejo del carrito
         function seleccionarTalla(talla) {
             tallaSeleccionada.value = talla;
         }
@@ -128,8 +128,13 @@ createApp({
                 });
         }
 
-       function toggleMenuLateral() {
-            this.mostrarCategorias = !this.mostrarCategorias; 
+        function toggleCarritoLateral() {
+            carritoVisible.value = !carritoVisible.value;
+        }
+
+        function irAlCheckout() {
+            carritoVisible.value = false;
+            canviarDiv('checkout');
         }
 
         // Función para calcular el total del carrito
@@ -143,27 +148,50 @@ createApp({
             }
             return total;
         }
+        function finalitzarCompra(){
+            this.carritoVisible=false;
+            canviarDiv('checkout');
+        }
+
+        function iniciarSesion() {
+            if (correo.value === '' || contrasena.value === '') {
+                error.value = 'Por favor, completa todos los campos.';
+                return;
+            }
+            error.value = '';
+
+            if (correo.value === 'usuario@example.com' && contrasena.value === 'contraseña') {
+                alert('Inicio de sesión exitoso');
+                canviarDiv('portada'); 
+            } else {
+                error.value = 'Credenciales incorrectas.';
+            }
+        }
+        
 
         return {
-            infoTotal, 
-            mostrarCategorias, 
+            infoTotal,
+            carritoVisible, 
+            irAlCheckout,
+            iniciarSesion,           
+            mostrarCategorias,
+            toggleCarritoLateral,
             canviarDiv,
-            mostrarDiv, 
+            mostrarDiv,
             mostrar,
-            activeIndex, 
-            filtroSexo, 
-            filtrarPrendas, 
+            activeIndex,
+            filtroSexo,
+            filtrarPrendas,
             productosFiltrados,
-            agregarACesta, 
-            quitarCesta, 
-            carrito, 
-            verInfoPrenda, 
-            prendaSeleccionada, 
-            tallaSeleccionada, 
+            agregarACesta,
+            quitarCesta,
+            carrito,
+            verInfoPrenda,
+            prendaSeleccionada,
+            tallaSeleccionada,
             seleccionarTalla,
-            finalizarCompra, 
-            correoElectronico, 
-            toggleMenuLateral,
+            finalizarCompra,
+            correoElectronico,            
             totalCarrito
         };
     },

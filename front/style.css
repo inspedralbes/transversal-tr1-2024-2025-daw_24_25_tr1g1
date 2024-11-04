@@ -5,12 +5,12 @@
   transition: .6s;
 }
 
-body,
-html {
+body{
   margin: 0;
   padding: 0;
   flex-direction: column;
   font-family: "IBM Plex Mono", -apple-system, sans-serif;
+  box-sizing: border-box;
 }
 
 #appVue {
@@ -28,8 +28,8 @@ html {
 
 .marquee {
   font-size: 0.8rem;
-  white-space: nowrap; 
-  animation: marquee 120s linear infinite;
+  white-space: nowrap;
+  animation: marquee 100s linear infinite;
   animation-play-state: running;
 }
 
@@ -42,23 +42,55 @@ html {
   0% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(-100%);
   }
 }
 
+
+
 /* ==================== Panel Superior ==================== */
 .panelSuperior {
-  top: 0;
-  width: 100%;
-  z-index: 1000;
   position: sticky;
+  top: 0;
+  z-index: 1000; 
   background-color: white;
+  font-size: 0.9rem;
+  width: 100%;
 }
+
 
 #botonCategoria {
   font-size: 0.8rem;
   font-family: "IBM Plex Mono", -apple-system, sans-serif;
+}
+
+/* ==================== Login ==================== */
+
+.login-form {
+  max-width: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+button {
+  padding: 10px;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 /* ==================== Navegación de Usuario ==================== */
@@ -67,7 +99,6 @@ html {
   justify-content: space-between;
   width: 100%;
   overflow-x: hidden;
-  padding: 5px;
 }
 
 .navUser button,
@@ -80,10 +111,6 @@ html {
   background-color: transparent;
 }
 
-#menuLateral {
-  display: block;
-}
-
 .navUser img {
   width: 180px;
   height: auto;
@@ -91,12 +118,56 @@ html {
   margin: 0 auto;
 }
 
+.menu-carrito {
+  position: fixed;
+  top: 0;
+  right: -200px;
+  width: 200px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease;
+  z-index: 1000;
+  font-size: 0.8rem;
+}
+
+.cerrar {
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+}
+
+.menu-carrito.visible {
+  right: 0;
+}
+
+.menu-carrito h2 {
+  padding: 20px;
+  background-color: #f5f5f5;
+  margin: 0;
+}
+
+.menu-carrito .cesta-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.menu-carrito button {
+  color: black;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
 /* ==================== Navegación de Categorías ==================== */
 #navCat {
   width: 100%;
-  padding: 10px;
   display: flex;
   overflow-x: hidden;
+  padding: 10px 0px 0px 10px;
   justify-content: center;
 }
 
@@ -115,14 +186,14 @@ html {
 
 .titulo {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   padding: 10px 20px;
   background-color: #f1f1f1;
   border-bottom: 1px solid #e0e0e0;
 }
 
 .tituloCategoria h1 {
-  font-size: 1rem; 
+  font-size: 1rem;
   margin: 10px 0;
 }
 
@@ -132,13 +203,19 @@ html {
 }
 
 .filtroGenero {
-  margin-top: 10px;
+  margin-top: 10px;  
 }
 
 #filtroGenero {
-  margin-top: 5px;
-  font-size: 0.7rem;
+  width: 150px; 
+  font-size: 0.8rem;
+  padding: 5px; 
+  border: 1px solid gray; 
+  border-radius: 4px; 
+  background-color: white; 
+  margin-top: 10px; 
 }
+
 
 #prendas {
   display: grid;
@@ -244,7 +321,6 @@ input[type="email"]:focus {
 /* ==================== Footer ==================== */
 .footer {
   width: 100%;
-  padding: 10px;
   margin: 20px auto 0;
   text-align: center;
   border-top: 1px solid black;
@@ -303,17 +379,16 @@ input[type="email"]:focus {
 
 /* ==================== Estilos de la Portada ==================== */
 .div-portada {
-  height: 300px;
   width: 100%;
   background-color: #b8bdc1;
-  margin: 50px 0 20px;
-  overflow-x: hidden;
+  margin-top: 50px;
 }
 
-.descripcion-portada {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-bottom: 2px solid #ddd;
+.div-portada img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+
 }
 
 #id-descripcion {
@@ -321,6 +396,8 @@ input[type="email"]:focus {
   font-size: 16px;
   margin-bottom: 100px;
 }
+
+
 
 /* ==================== Botones y Detalles ==================== */
 #botonTalla {
@@ -381,7 +458,6 @@ input[type="email"]:focus {
   margin-top: 20px;
 }
 
-/* Estilo para el botón de añadir a cesta */
 #prendaAñadirCesta {
   padding: 10px 10px;
   cursor: pointer;
@@ -401,10 +477,6 @@ input[type="email"]:focus {
 @media (min-width: 768px) {
   .info-prenda {
     flex-direction: row;
-  }
-
-  #menuLateral {
-    display: none;
   }
 
   .imagen-recuadro {
@@ -443,31 +515,31 @@ input[type="email"]:focus {
   .tituloCategoria {
     justify-content: center;
   }
-  
-.titulo {
-  display: flex;
-  flex-direction: column; 
-  padding: 10px 20px;
-  background-color: #f1f1f1;
-  border-bottom: 1px solid #e0e0e0;
-}
 
-.tituloCategoria h1 {
-  font-size: 1.5rem; 
-  margin: 10px 0;
-}
+  .titulo {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #e0e0e0;
+  }
 
-.tituloCategoria p {
-  font-size: 1rem;
-  margin: 10px 0;
-}
+  .tituloCategoria h1 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
 
-.filtroGenero {
-  margin-top: 10px;
-}
+  .tituloCategoria p {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
 
-#filtroGenero {
-  margin-top: 5px;
-  font-size: 1rem;
-}
+  .filtroGenero {
+    margin-top: 10px;
+  }
+
+  #filtroGenero {
+    margin-top: 5px;
+    font-size: 1rem;
+  }
 }
