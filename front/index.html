@@ -64,7 +64,7 @@
 
         <!-- Carrito Lateral -->
         <div id="menuCarrito" class="menu-carrito" :class="{ 'visible': carritoVisible }">
-            <button class="cerrar" @click="toggleCarritoLateral">Cerrar</button>
+            <button class="cerrar" @click="toggleCarritoLateral">X</button>
             <h3>Cesta</h3>
             <div v-if="carrito.length > 0">
                 <div v-for="(item, index) in carrito" :key="index" class="cesta-item">
