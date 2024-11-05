@@ -12,7 +12,7 @@
                     "descuento": "0.00",
                     "sexo": "Mujer",
                     "tallas": [
-                        { "id_talla": 1, "nombre": "S", "stock": 100 },
+                        { "id_talla": 1, "nombre": "S", "stock": 0 },
                         { "id_talla": 2, "nombre": "M", "stock": 80 },
                         { "id_talla": 3, "nombre": "L", "stock": 60 },
                         { "id_talla": 4, "nombre": "XL", "stock": 40 }

@@ -14,25 +14,28 @@ createApp({
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
         const correoElectronico = ref('');
-        const carritoVisible = ref(false);
-        const menuVisible = ref(false);
+        const errorEmail = ref(''); 
+        const compraExitosa = reactive({
+            productos: [],
+            email: '',
+            total: 0
+        });
 
+        // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
         });
+        
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
-
             if (activeIndex.value !== null) {
                 const prendas = infoTotal.data.categorias[activeIndex.value].prendas;
                 const productosFiltradosTemp = [];
-
                 for (let i = 0; i < prendas.length; i++) {
                     const producto = prendas[i];
-
                     if (!sexo || producto.sexo === sexo) {
                         productosFiltradosTemp.push(producto);
                     }
@@ -60,6 +63,7 @@ createApp({
             mostrar.value = false;
         }
 
+        // Funciones de manejo del carrito
         function seleccionarTalla(talla) {
             tallaSeleccionada.value = talla;
         }
@@ -92,55 +96,63 @@ createApp({
             }
         }
 
-        // Funciones de compra
         function finalizarCompra() {
             const total = totalCarrito();
+            
 
+
+            if (!correoElectronico.value) {
+                errorEmail.value = "Escribe tu gmail";
+                return;
+            }
+            
+        
             const datosCompra = {
                 productos: carrito.map(item => ({
                     id_prenda: item.id_prenda,
-                    talla: item.talla,
+                    talla: typeof item.talla === 'object' ? item.talla.nombre : item.talla,
                     precio: item.precio
                 })),
-                total: total,
+                total: parseFloat(total.toFixed(2)),
                 email: correoElectronico.value
             };
-            console.log(datosCompra);
-
-            fetch('TU_URL_DE_API/aqui', {
+        
+            console.log("Datos a enviar:", JSON.stringify(datosCompra));
+        
+            fetch('http://tr1g1.daw.inspedralbes.cat/public/api/compras', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(datosCompra),
             })
-                .then(response => {
-                    if (!response.ok) {
-                        console.log('Error en la compra');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Compra realizada con éxito:', data);
-                })
-                .catch(error => {
-                    console.error('Error al finalizar la compra:', error);
-                });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la compra');
+                }
+                return response.json();
+            })
+            .then(data => {
+                compraExitosa.productos = [];
+                for (const item of carrito) {
+                    compraExitosa.productos.push(item);
+                }
+
+                compraExitosa.email = correoElectronico.value;
+                compraExitosa.total = total;
+                canviarDiv('divFinal');
+            })
+            .catch(error => {
+                console.error('Error al finalizar la compra:', error);
+            });
+
+            watch(correoElectronico, (val) => {
+                if (val) errorEmail.value = '';
+            });
         }
 
-        function toggleCarritoLateral() {
-            carritoVisible.value = !carritoVisible.value;
-        }
-
-        function irAlCheckout() {
-            carritoVisible.value = false;
-            canviarDiv('checkout');
-        }
-
-        // Función para calcular el total del carrito
         function totalCarrito() {
             var total = 0;
-
             for (var i = 0; i < carrito.length; i++) {
                 var item = carrito[i];
                 var precio = parseFloat(item.precio);
@@ -148,51 +160,9 @@ createApp({
             }
             return total;
         }
-        function finalitzarCompra(){
-            this.carritoVisible=false;
-            canviarDiv('checkout');
-        }
-
-        function iniciarSesion() {
-            if (correo.value === '' || contrasena.value === '') {
-                error.value = 'Por favor, completa todos los campos.';
-                return;
-            }
-            error.value = '';
-
-            if (correo.value === 'usuario@example.com' && contrasena.value === 'contraseña') {
-                alert('Inicio de sesión exitoso');
-                canviarDiv('portada'); 
-            } else {
-                error.value = 'Credenciales incorrectas.';
-            }
-        }
-        
 
         return {
-            infoTotal,
-            carritoVisible, 
-            irAlCheckout,
-            iniciarSesion,           
-            mostrarCategorias,
-            toggleCarritoLateral,
-            canviarDiv,
-            mostrarDiv,
-            mostrar,
-            activeIndex,
-            filtroSexo,
-            filtrarPrendas,
-            productosFiltrados,
-            agregarACesta,
-            quitarCesta,
-            carrito,
-            verInfoPrenda,
-            prendaSeleccionada,
-            tallaSeleccionada,
-            seleccionarTalla,
-            finalizarCompra,
-            correoElectronico,            
-            totalCarrito
+            infoTotal, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex,filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta,carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada,seleccionarTalla, finalizarCompra, correoElectronico,totalCarrito, compraExitosa
         };
     },
 }).mount("#appVue");
