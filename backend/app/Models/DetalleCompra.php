@@ -9,7 +9,7 @@ class DetalleCompra extends Model
 {
     use HasFactory;
 
-    protected $table = 'detalle_compras'; // Nombre de la tabla
-    protected $primaryKey = 'id_detalle'; // Clave primaria
-    protected $fillable = ['id_compra', 'id_prenda', 'talla']; // Campos que se pueden llenar
+    protected $table = 'detalle_compras';
+    protected $primaryKey = 'id_detalle';
+    protected $fillable = ['id_compra', 'id_prenda', 'talla'];
 }

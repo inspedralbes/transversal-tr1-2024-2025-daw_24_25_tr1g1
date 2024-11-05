@@ -5,10 +5,8 @@
     use App\Models\Compra;
     use App\Models\DetalleCompra;
 
-    class CompraController extends Controller
-    {
-        public function listaCompra(Request $request)
-        {
+    class CompraController extends Controller {
+        public function listaCompra(Request $request) {
             // Validación de la entrada
             $request->validate([
                 'email' => 'required|email',
