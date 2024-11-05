@@ -3,12 +3,11 @@ import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
-        // Reacción y referencia de variables
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
         const filtroSexo = ref(null);
-        const carrito = reactive([]);
+        const carrito = ref([]);
         const divActual = ref('portada');
         const productosFiltrados = ref([]);
         const tallaSeleccionada = ref(null);
@@ -65,7 +64,7 @@ createApp({
         }
 
         function agregarACesta(prenda, talla) {
-            carrito.push({
+            carrito.value.push({
                 id_prenda: prenda.id_prenda,
                 nombre: prenda.nombre,
                 precio: prenda.precio,
@@ -75,11 +74,10 @@ createApp({
         }
 
         function quitarCesta(prenda) {
-            const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
-            if (index > -1) carrito.splice(index, 1);
+            const index = carrito.value.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
+            if (index > -1) carrito.value.splice(index, 1);  
         }
 
-        // Funciones de manejo de información de productos
         function verInfoPrenda(prenda) {
             if (prenda) {
                 prendaSeleccionada.value = prenda;
@@ -92,12 +90,11 @@ createApp({
             }
         }
 
-        // Funciones de compra
         function finalizarCompra() {
             const total = totalCarrito();
-
+            
             const datosCompra = {
-                productos: carrito.map(item => ({
+                productos: carrito.value.map(item => ({
                     id_prenda: item.id_prenda,
                     talla: item.talla,
                     precio: item.precio
@@ -105,8 +102,9 @@ createApp({
                 total: total,
                 email: correoElectronico.value
             };
+        
             console.log(datosCompra);
-
+        
             fetch('TU_URL_DE_API/aqui', {
                 method: 'POST',
                 headers: {
@@ -122,12 +120,15 @@ createApp({
                 })
                 .then(data => {
                     console.log('Compra realizada con éxito:', data);
+                    carrito.value = [];  
+                    canviarDiv('compraRealizada');
                 })
                 .catch(error => {
                     console.error('Error al finalizar la compra:', error);
                 });
         }
-
+        
+        
         function toggleCarritoLateral() {
             carritoVisible.value = !carritoVisible.value;
         }
@@ -137,43 +138,26 @@ createApp({
             canviarDiv('checkout');
         }
 
-        // Función para calcular el total del carrito
         function totalCarrito() {
-            var total = 0;
+            let total = 0;
 
-            for (var i = 0; i < carrito.length; i++) {
-                var item = carrito[i];
-                var precio = parseFloat(item.precio);
+            for (let i = 0; i < carrito.value.length; i++) {
+                const item = carrito.value[i];
+                const precio = parseFloat(item.precio);
                 total += precio;
             }
             return total;
         }
-        function finalitzarCompra(){
-            this.carritoVisible=false;
+
+        function finalitzarCompra() {
+            carritoVisible.value = false;
             canviarDiv('checkout');
         }
-
-        function iniciarSesion() {
-            if (correo.value === '' || contrasena.value === '') {
-                error.value = 'Por favor, completa todos los campos.';
-                return;
-            }
-            error.value = '';
-
-            if (correo.value === 'usuario@example.com' && contrasena.value === 'contraseña') {
-                alert('Inicio de sesión exitoso');
-                canviarDiv('portada'); 
-            } else {
-                error.value = 'Credenciales incorrectas.';
-            }
-        }
-        
 
         return {
             infoTotal,
             carritoVisible, 
             irAlCheckout,
-            iniciarSesion,           
             mostrarCategorias,
             toggleCarritoLateral,
             canviarDiv,

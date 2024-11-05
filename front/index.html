@@ -142,9 +142,16 @@
             </div>
             <div id="finalizarCompra" v-if="carrito.length > 0">
                 <p>Precio total: {{ totalCarrito() }}€</p>
-                <input type="email" placeholder="Correo Electrónico" required v-model="correoElectronico"><br><br>
-                <button @click="canviarDiv('checkout')">Finalizar Compra</button>
+                <input type="email" v-model="correoElectronico" placeholder="Correo Electrónico" required><br><br>
+                <button @click="finalizarCompra">Finalizar Compra</button>
             </div>
+        </div>
+
+        <!-- Página de confirmación de compra -->
+        <div v-if="mostrarDiv('compraRealizada')" id="compraRealizada" class="contenido-compra-realizada">
+            <h1>¡Compra Realizada Exitosamente!</h1>
+            <p>Gracias por tu compra. Te hemos enviado un correo de confirmación con los detalles de tu pedido.</p>
+            <button @click="canviarDiv('portada')">Volver a la página principal</button>
         </div>
 
         <!--Informacion de las prendas-->
@@ -210,7 +217,6 @@
         <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
         <script type="module" src="./js/comunicationManager.js"></script>
         <script type="module" src="./js/functions.js"></script>
-        <script src="./js/menu.js"></script>
     </div>
 </body>
 
