@@ -3,6 +3,7 @@ import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
+        // Reacción y referencia de variables
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
@@ -69,7 +70,7 @@ createApp({
         }
 
         function agregarACesta(prenda, talla) {
-            carrito.value.push({
+            carrito.push({
                 id_prenda: prenda.id_prenda,
                 nombre: prenda.nombre,
                 precio: prenda.precio,
@@ -79,10 +80,11 @@ createApp({
         }
 
         function quitarCesta(prenda) {
-            const index = carrito.value.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
-            if (index > -1) carrito.value.splice(index, 1);  
+            const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
+            if (index > -1) carrito.splice(index, 1);
         }
 
+        // Funciones de manejo de información de productos
         function verInfoPrenda(prenda) {
             if (prenda) {
                 prendaSeleccionada.value = prenda;
@@ -111,7 +113,7 @@ createApp({
             
         
             const datosCompra = {
-                productos: carrito.value.map(item => ({
+                productos: carrito.map(item => ({
                     id_prenda: item.id_prenda,
                     talla: typeof item.talla === 'object' ? item.talla.nombre : item.talla,
                     precio: item.precio
