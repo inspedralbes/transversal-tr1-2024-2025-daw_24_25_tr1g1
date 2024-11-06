@@ -97,9 +97,11 @@ createApp({
             }
         }
 
-        function toggleCarritoLateral (){
-            carritoVisible.value=!carritoVisible.value;
-        }
+        function toggleCarritoLateral() {
+            carritoVisible.value = !carritoVisible.value;
+            console.log('Carrito visible:', carritoVisible.value); // Esto imprimirá en la consola
+          }
+          
 
         function finalizarCompra() {
             const total = totalCarrito();
@@ -151,10 +153,6 @@ createApp({
             .catch(error => {
                 console.error('Error al finalizar la compra:', error);
             });
-
-            watch(correoElectronico, (val) => {
-                if (val) errorEmail.value = '';
-            });
         }
 
         function totalCarrito() {
@@ -168,7 +166,7 @@ createApp({
         }
 
         return {
-            infoTotal,toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex,filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta,carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada,seleccionarTalla, finalizarCompra, correoElectronico,totalCarrito, compraExitosa
+            infoTotal,carritoVisible,toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex,filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta,carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada,seleccionarTalla, finalizarCompra, correoElectronico,totalCarrito, compraExitosa
         };
     },
 }).mount("#appVue");
