@@ -31,7 +31,8 @@
                     'talla' => $producto['talla'],
                 ]);
             }
-
+            $productosDetalles = $request->productos;
+            Mail::to($compra->email)->send(new PedidoRealizado($compra, $productosDetalles));
             return response()->json(['message' => 'Compra realizada con éxito', 'compra' => $compra], 201);
         }
     }

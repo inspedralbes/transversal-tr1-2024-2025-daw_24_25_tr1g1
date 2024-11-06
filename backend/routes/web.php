@@ -3,6 +3,7 @@
     use App\Http\Controllers\PrendaController;
     use App\Http\Controllers\CompraController;
     use App\Http\Controllers\PedidoController;
+    use App\Mail\PedidoRealizado;
 
     Route::prefix('crood')->group(function () {
         Route::resource('prendas', PrendaController::class);
@@ -13,3 +14,5 @@
     Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
     Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedidos.update');
     Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');
+
+    Route::post('/compras', [CompraController::class, 'listaCompra'])->name('compras.store');
