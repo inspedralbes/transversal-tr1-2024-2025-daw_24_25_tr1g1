@@ -104,14 +104,7 @@ body{
   z-index: 1000;
   font-size: 0.8rem;
   overflow-y: scroll;
-  scrollbar-width: none
 }
-
-.menu-carrito div{
-  width: 90%;
-  margin: 0 auto;
-}
-
 
 .cerrar {
   color: red;
@@ -135,7 +128,6 @@ body{
   padding: 10px;
   border-bottom: 1px solid #eee;
 }
-
 
 
 /* ==================== Navegación de Categorías ==================== */

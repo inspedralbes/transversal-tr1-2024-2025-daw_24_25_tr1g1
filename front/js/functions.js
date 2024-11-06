@@ -8,6 +8,7 @@ createApp({
         const mostrar = ref(false);
         const activeIndex = ref(0);
         const filtroSexo = ref(null);
+        const carritoVisible=ref(false);
         const carrito = reactive([]);
         const divActual = ref('portada');
         const productosFiltrados = ref([]);
@@ -96,6 +97,10 @@ createApp({
             }
         }
 
+        function toggleCarritoLateral (){
+            carritoVisible.value=!carritoVisible.value;
+        }
+
         function finalizarCompra() {
             const total = totalCarrito();
             
@@ -141,6 +146,7 @@ createApp({
                 compraExitosa.email = correoElectronico.value;
                 compraExitosa.total = total;
                 canviarDiv('divFinal');
+                carrito.splice(0, carrito.length);  
             })
             .catch(error => {
                 console.error('Error al finalizar la compra:', error);
@@ -162,7 +168,7 @@ createApp({
         }
 
         return {
-            infoTotal, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex,filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta,carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada,seleccionarTalla, finalizarCompra, correoElectronico,totalCarrito, compraExitosa
+            infoTotal,toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex,filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta,carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada,seleccionarTalla, finalizarCompra, correoElectronico,totalCarrito, compraExitosa
         };
     },
 }).mount("#appVue");
