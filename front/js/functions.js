@@ -22,6 +22,18 @@ createApp({
             total: 0
         });
 
+        onBeforeMount(async () => {
+            const data = await getProductes();
+            infoTotal.data.categorias = data.categorias;
+            infoTotal.data.productos = data.productos;
+        });
+
+        function getValoracionRandom() {
+            return Math.floor(Math.random() * 5) + 1;
+        }
+
+
+        /* PAGINACIÓN */
         const productoXpagina = ref(4);
         const paginaActual = ref(1);
 
@@ -50,14 +62,7 @@ createApp({
                 paginacion();
             }
         }
-
-        onBeforeMount(async () => {
-            const data = await getProductes();
-            infoTotal.data.categorias = data.categorias;
-            infoTotal.data.productos = data.productos;
-            productosFiltrados.value = data.productos;  
-            paginacion();
-        });
+        /* FIN PAGINACION */
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
@@ -72,8 +77,7 @@ createApp({
                 }
                 productosFiltrados.value = productosFiltradosTemp;
             }
-            paginacion();
-            divActual.value = 'prendas';
+
         }
 
         function mostrarCategorias(index) {
@@ -205,7 +209,7 @@ createApp({
         }
 
         return {
-            infoTotal, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
+            infoTotal, getValoracionRandom, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
             , paginaAnterior, paginaSiguiente, totalPaginas,
             paginaActual, productoXpagina
         };

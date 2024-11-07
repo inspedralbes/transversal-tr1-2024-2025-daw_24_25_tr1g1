@@ -23,7 +23,7 @@
         <div class="panelSuperior">
             <div class="navUser">
                 <div class="navIzq">
-                    <a href="http://tr1g1.daw.inspedralbes.cat/public/crood/prendas">
+                    <a href="http://tr1g1.daw.inspedralbes.cat/public/crood/prendas" target="_blank">
                         <button id="btn-carrito" class="icono">
                             <i class="fa fa-database" aria-hidden="true"></i>
                         </button>
@@ -96,18 +96,20 @@
             <div id="prendas">
                 <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda"
                     @click="verInfoPrenda(prenda)">
+                    <p id="valoracion">{{ getValoracionRandom() }}/5 <i class="fa fa-star"></i></p>
+                    
                     <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                     <p>{{ prenda.descripcion }}</p>
                     <p>{{ prenda.precio }}</p>
-                    
                 </div>
             </div>
+
             <!-- Paginación -->
-    <div class="paginacion">
-        <button @click="paginaAnterior" :disabled="paginaActual === 1">Anterior</button>
-        <span>Página {{ paginaActual }} de {{ totalPaginas() }}</span>
-        <button @click="paginaSiguiente" :disabled="paginaActual === totalPaginas()">Siguiente</button>
-    </div>
+            <div class="paginacion">
+                <button @click="paginaAnterior" :disabled="paginaActual === 1">Anterior</button>
+                <span>Página {{ paginaActual }} de {{ totalPaginas() }}</span>
+                <button @click="paginaSiguiente" :disabled="paginaActual === totalPaginas()">Siguiente</button>
+            </div>
         </div>
 
         <!-- Sección de Checkout -->

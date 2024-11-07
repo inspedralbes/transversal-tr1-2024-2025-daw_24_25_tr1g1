@@ -423,6 +423,10 @@ body {
   text-decoration: underline;
 }
 
+#valoracion{
+  margin-bottom: 20px;
+}
+
 /* ==================== Estilos de la Portada ==================== */
 .div-portada {
   width: 100%;
