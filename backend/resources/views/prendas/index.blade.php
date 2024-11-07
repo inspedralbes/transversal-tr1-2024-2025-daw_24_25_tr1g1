@@ -5,6 +5,7 @@
 </div>
 @endif
 
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}"> 
 <a href="{{ route('prendas.create') }}" class="btn">Agregar Prenda</a>
 <a href="{{ route('pedidos.index') }}" class="btn">Ver Compras</a>
 

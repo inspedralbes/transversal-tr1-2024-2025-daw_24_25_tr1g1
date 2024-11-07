@@ -5,6 +5,7 @@
     {{ session('success') }}
 </div>
 @endif
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}"> 
 
 <table>
     <thead>
