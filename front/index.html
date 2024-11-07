@@ -23,9 +23,11 @@
         <div class="panelSuperior">
             <div class="navUser">
                 <div class="navIzq">
-                    <button id="btn-carrito" class="icono" @click="mostrarLikes()">
-                        <i class="fa fa-heart-o" style="font-size: 20px;"></i>
-                    </button>
+                    <a href="http://tr1g1.daw.inspedralbes.cat/public/crood/prendas">
+                        <button id="btn-carrito" class="icono">
+                            <i class="fa fa-database" aria-hidden="true"></i>
+                        </button>
+                    </a>
                 </div>
                 <div class="navCentro">
                     <img src="./img/logo.png" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
@@ -65,28 +67,6 @@
             <button id="botonFinalizarCompra" @click="canviarDiv('checkout'); toggleCarritoLateral()">Ir al
                 carrito</button>
         </div>
-
-        <!-- Div específico para los likes -->
-        <div v-if="mostrarDiv('likes')" class="contenido-likes">
-            <h2>Tus guardados</h2>
-            <div id="likes">
-                <div v-if="productosFiltrados.length === 0">
-                    <p>No hay prendas guardadas.</p>
-                </div>
-                <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda"
-                    @click="verInfoPrenda(prenda)">
-                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
-                    <p>{{ prenda.descripcion }}</p>
-                    <p>{{ prenda.precio }} €</p>
-
-                    <!-- Botón de "like" -->
-                    <button id="btn-like" class="icono" @click.stop="toggleLike(prenda)">
-                        <i class="fa" :class="isLiked(prenda) ? 'fa-heart' : 'fa-heart-o'" style="font-size: 20px;"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
         <!-- Contenido de la Portada -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
             <div class="descripcion-portada">

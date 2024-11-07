@@ -23,6 +23,32 @@ createApp({
             total: 0
         });
 
+        function totalPaginas() {
+            const totalProductos = productosFiltrados.value.length;
+            const paginas = totalProductos / productoXpagina.value;
+            return paginas === parseInt(paginas) ? paginas : parseInt(paginas) + 1;
+        }
+
+        const paginacion = () => {
+            const start = (paginaActual.value - 1) * productoXpagina.value;
+            const end = start + productoXpagina.value;
+            productosFiltrados.value = productosFiltrados.value.slice(start, end);
+        };
+
+        function paginaAnterior() {
+            if (paginaActual.value > 1) {
+                paginaActual.value--;
+                paginacion();
+            }
+        }
+
+        function paginaSiguiente() {
+            if (paginaActual.value < totalPaginas()) {
+                paginaActual.value++;
+                paginacion();
+            }
+        }
+
         // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
