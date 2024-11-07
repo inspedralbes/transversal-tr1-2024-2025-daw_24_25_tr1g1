@@ -6,15 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log; // Para registrar logs
+use Illuminate\Support\Facades\Log;
 use App\Mail\PedidoRealizado;
-use Illuminate\Mail\Envelope;
 
 class CompraController extends Controller
 {
     public function listaCompra(Request $request)
     {
-        // Agregar log para ver los datos recibidos en la solicitud
+        // Log de los datos recibidos
         Log::info('Datos recibidos para la compra:', $request->all());
 
         // Validación de la entrada
@@ -29,6 +28,7 @@ class CompraController extends Controller
 
         Log::info('Datos validados correctamente:', $validated);
 
+        // Crear la compra
         $compra = Compra::create([
             'email' => $request->email,
             'precio_total' => $request->total,
@@ -37,6 +37,7 @@ class CompraController extends Controller
 
         Log::info('Compra creada con éxito:', ['compra_id' => $compra->id_compra]);
 
+        // Crear los detalles de la compra
         foreach ($request->productos as $producto) {
             DetalleCompra::create([
                 'id_compra' => $compra->id_compra,
@@ -48,10 +49,12 @@ class CompraController extends Controller
 
         Log::info('Detalles de la compra guardados correctamente.');
 
+        // Enviar el correo con la confirmación de compra
         Mail::to($compra->email)->send(new PedidoRealizado($compra, $request->productos));
 
         Log::info('Correo enviado a: ' . $compra->email);
 
+        // Respuesta final
         return response()->json([
             'message' => 'Compra realizada con éxito',
             'compra' => $compra,
