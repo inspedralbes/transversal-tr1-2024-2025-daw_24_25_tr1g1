@@ -1,0 +1,76 @@
+/* ==================== Mensaje de Compra Exitosa ==================== */
+#divFinal {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "IBM Plex Mono", -apple-system, sans-serif;
+    color: #333;
+    transition: 0.6s;
+}
+
+#divFinal h2 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #333;
+}
+
+#divFinal h3 {
+    font-size: 1rem;
+    margin: 15px 0 10px;
+    color: #666;
+}
+
+#divFinal p {
+    font-size: 0.9rem;
+    margin: 8px 0;
+    color: #444;
+}
+
+#divFinal i {
+    color: rgb(4, 220, 0);
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+#divFinal ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+#divFinal li {
+    font-size: 0.9rem;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+}
+
+/* Adaptación a pantallas más grandes */
+@media (min-width: 768px) {
+    #divFinal {
+        max-width: 600px;
+        padding: 30px;
+    }
+
+    #divFinal h2 {
+        font-size: 1.5rem;
+    }
+
+    #divFinal h3 {
+        font-size: 1.2rem;
+    }
+
+    #divFinal p,
+    #divFinal li {
+        font-size: 1rem;
+    }
+
+    #divFinal i {
+        font-size: 45px;
+    }
+}

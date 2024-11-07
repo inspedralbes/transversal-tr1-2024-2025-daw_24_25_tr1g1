@@ -175,7 +175,8 @@ createApp({
 
             console.log("Datos a enviar:", JSON.stringify(datosCompra));
 
-            fetch('http://tr1g1.daw.inspedralbes.cat/public/api/compras', {
+        //localhost:8000/api/compras
+            fetch('tr1g1.daw.inspedralbes.cat/public/api/compras', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
