@@ -3,7 +3,6 @@ import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
-        // Reacción y referencia de variables
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
@@ -22,6 +21,9 @@ createApp({
             email: '',
             total: 0
         });
+
+        const productoXpagina = ref(4);
+        const paginaActual = ref(1);
 
         function totalPaginas() {
             const totalProductos = productosFiltrados.value.length;
@@ -49,52 +51,13 @@ createApp({
             }
         }
 
-        // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
+            productosFiltrados.value = data.productos;  
+            paginacion();
         });
-
-        function toggleLike(prenda) {
-            let encontrado = false;
-            for (let i = 0; i < likes.length; i++) {
-                if (likes[i].id_prenda === prenda.id_prenda) {
-                    likes.splice(i, 1);
-                    encontrado = true;
-                }
-            }
-            if (!encontrado) {
-                likes.push(prenda);
-            }
-        }
-
-
-        //esta funcion comprueba si la prenda ya ha sido guardada
-        function isLiked(prenda) {
-            for (let i = 0; i < likes.length; i++) {
-                if (likes[i].id_prenda === prenda.id_prenda) {
-                    return true; 
-                }
-            }
-            return false; 
-        }
-
-        function mostrarLikes() {
-            if (likes.length === 0) {
-                Swal.fire({
-                    text: `No tienes productos guardados`,
-                    timer: 4000,
-                    showConfirmButton: false,
-                    position:'top-start',
-                    toast: true,
-                    background: '#fff',
-                });
-            }
-            productosFiltrados.value = likes;
-            divActual.value = 'likes';
-        }
-
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
@@ -109,6 +72,7 @@ createApp({
                 }
                 productosFiltrados.value = productosFiltradosTemp;
             }
+            paginacion();
             divActual.value = 'prendas';
         }
 
@@ -241,7 +205,9 @@ createApp({
         }
 
         return {
-            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
+            infoTotal, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
+            , paginaAnterior, paginaSiguiente, totalPaginas,
+            paginaActual, productoXpagina
         };
     },
 }).mount("#appVue");
