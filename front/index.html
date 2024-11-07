@@ -22,6 +22,11 @@
                     <button id="btn-login" class="icono" @click="canviarDiv('login')">
                         <i style="font-size: 20px;" class="fa fa-user"></i>
                     </button>
+                    <a href="http://tr1g1.daw.inspedralbes.cat/public/crood/prendas" target="_blank">
+                        <button>
+                            <i style="font-size:24px" class="fa">&#xf1c0;</i>
+                        </button>
+                    </a>
                 </div>
                 <div class="navCentro">
                     <img src="./img/logo.png" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
@@ -95,6 +100,7 @@
 
         <!-- Contenido de categorías filtradas -->
         <div v-if="mostrar" class="contenido-prendas">
+
             <div class="titulo">
                 <div class="tituloCategoria">
                     <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
@@ -108,6 +114,8 @@
                     <option value="Hombre">Hombre</option>
                     <option value="Mujer">Mujer</option>
                 </select>
+                <h1>{{ infoTotal.data.categorias[activeIndex].nombre }}</h1>
+                <p>Explora nuestra colección de {{ infoTotal.data.categorias[activeIndex].nombre }}</p>
             </div>
 
             <!-- Contenedor de prendas -->
@@ -117,9 +125,24 @@
                     <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                     <p>{{ prenda.descripcion }}</p>
                     <p>{{ prenda.precio }}</p>
+                    <p>{{ prenda.precio }}€</p>
+                    <button class="like-button" @click.stop="meGusta(prenda)">
+                        ❤️ Me gusta
+                    </button>
+                    <span> Likes: {{ prenda.likes }}</span>
                 </div>
             </div>
+            <!-- Botones de paginación -->
+            <div class="paginacion">
+                <button :disabled="paginaActual === 1" @click="paginaAnterior()">Anterior</button>
+                <span>Página {{ paginaActual }} de {{ totalPaginas() }}</span>
+                <button :disabled="paginaActual === totalPaginas()"
+                    @click="paginaSiguiente()">Siguiente</button>
+            </div>
+            
         </div>
+
+
         <!-- Sección de Checkout -->
         <div v-if="mostrarDiv('checkout')" id="checkout" class="contenido-checkout">
             <h1>Cesta</h1>

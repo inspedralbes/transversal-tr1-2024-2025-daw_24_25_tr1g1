@@ -14,14 +14,47 @@ createApp({
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
         const correoElectronico = ref('');
-        const carritoVisible = ref(false);
-        const menuVisible = ref(false);
+        const errorEmail = ref('');
+
+        const compraExitosa = reactive({
+            productos: [],
+            email: '',
+            total: 0
+        });
+        const productoXpagina = ref(4);
+        const paginaActual = ref(1);
 
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
         });
+
+        function totalPaginas() {
+            const totalProductos = productosFiltrados.value.length;
+            const paginas = totalProductos / productoXpagina.value;
+            return paginas === parseInt(paginas) ? paginas : parseInt(paginas) + 1;
+        }
+
+        const paginacion = () => {
+            const start = (paginaActual.value - 1) * productoXpagina.value;
+            const end = start + productoXpagina.value;
+            productosFiltrados.value = productosFiltrados.value.slice(start, end);
+        };
+
+        function paginaAnterior() {
+            if (paginaActual.value > 1) {
+                paginaActual.value--;
+                paginacion();
+            }
+        }
+
+        function paginaSiguiente() {
+            if (paginaActual.value < totalPaginas()) {
+                paginaActual.value++;
+                paginacion();
+            }
+        }
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
@@ -41,20 +74,22 @@ createApp({
             }
             divActual.value = 'prendas';
         }
-
         function mostrarCategorias(index) {
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
                 mostrar.value = true;
                 divActual.value = 'prendas';
                 productosFiltrados.value = infoTotal.data.categorias[index].prendas;
+
             }
         }
 
+        // Función para mostrar el div correspondiente
         function mostrarDiv(id) {
             return id === divActual.value;
         }
 
+        // Función para cambiar el div actual
         function canviarDiv(nouDiv) {
             divActual.value = nouDiv;
             mostrar.value = false;
@@ -92,9 +127,17 @@ createApp({
             }
         }
 
-        // Funciones de compra
+        function toggleCarritoLateral() {
+            carritoVisible.value = !carritoVisible.value;
+        }
+
         function finalizarCompra() {
             const total = totalCarrito();
+
+            if (!correoElectronico.value) {
+                errorEmail.value = "Escribe tu gmail";
+                return;
+            }
 
             const datosCompra = {
                 productos: carrito.map(item => ({
@@ -170,29 +213,7 @@ createApp({
         
 
         return {
-            infoTotal,
-            carritoVisible, 
-            irAlCheckout,
-            iniciarSesion,           
-            mostrarCategorias,
-            toggleCarritoLateral,
-            canviarDiv,
-            mostrarDiv,
-            mostrar,
-            activeIndex,
-            filtroSexo,
-            filtrarPrendas,
-            productosFiltrados,
-            agregarACesta,
-            quitarCesta,
-            carrito,
-            verInfoPrenda,
-            prendaSeleccionada,
-            tallaSeleccionada,
-            seleccionarTalla,
-            finalizarCompra,
-            correoElectronico,            
-            totalCarrito
+            infoTotal, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa, paginaAnterior, paginaSiguiente, totalPaginas, paginacion
         };
     },
 }).mount("#appVue");

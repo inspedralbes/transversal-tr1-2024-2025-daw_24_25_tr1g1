@@ -153,6 +153,12 @@ button {
 .menu-carrito .cesta-item {
   padding: 10px;
   border-bottom: 1px solid #eee;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.6rem; 
+  gap:2px;
 }
 
 .menu-carrito button {
@@ -471,7 +477,42 @@ input[type="email"]:focus {
   margin-top: 20px;
   cursor: pointer;
   border-radius: 1px;
+  border: 1px grey solid;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  width: auto;
+  text-align: center;
 }
+
+#prendaVolver:hover {
+  background-color: #e2e2e2;
+}
+
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.paginacion button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.paginacion button:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.paginacion span {
+  font-size: 16px;
+}
+
 
 /* ==================== Media Queries ==================== */
 @media (min-width: 768px) {
@@ -509,7 +550,7 @@ input[type="email"]:focus {
     margin: 0 auto;
     text-align: center;
     background-color: white;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .tituloCategoria {
