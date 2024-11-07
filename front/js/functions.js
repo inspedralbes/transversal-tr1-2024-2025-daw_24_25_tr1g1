@@ -99,7 +99,6 @@ createApp({
 
         function toggleCarritoLateral() {
             carritoVisible.value = !carritoVisible.value;
-            console.log('Carrito visible:', carritoVisible.value); // Esto imprimirá en la consola
           }
           
 
@@ -118,9 +117,9 @@ createApp({
                 productos: carrito.map(item => ({
                     id_prenda: item.id_prenda,
                     talla: typeof item.talla === 'object' ? item.talla.nombre : item.talla,
-                    precio: item.precio
+                    precio: item.precio.toString()
                 })),
-                total: parseFloat(total.toFixed(2)),
+                total: total.toFixed(2),
                 email: correoElectronico.value
             };
         
