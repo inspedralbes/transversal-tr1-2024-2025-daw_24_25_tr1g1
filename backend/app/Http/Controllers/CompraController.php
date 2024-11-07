@@ -16,7 +16,7 @@
                 'productos' => 'required|array',
                 'productos.*.id_prenda' => 'required|integer',
                 'productos.*.talla' => 'required|string',
-                'productos.*.precio' => 'required|numeric'  // Cambiado a 'numeric'
+                'productos.*.precio' => 'required|string'
             ]);
     
             // Crear la entrada principal en la tabla 'compras'
