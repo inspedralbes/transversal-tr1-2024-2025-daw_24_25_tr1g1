@@ -8,14 +8,15 @@ createApp({
         const mostrar = ref(false);
         const activeIndex = ref(0);
         const filtroSexo = ref(null);
-        const carritoVisible=ref(false);
+        const carritoVisible = ref(false);
         const carrito = reactive([]);
         const divActual = ref('portada');
         const productosFiltrados = ref([]);
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
         const correoElectronico = ref('');
-        const errorEmail = ref(''); 
+        const errorEmail = ref('');
+        const likes = reactive([]);
         const compraExitosa = reactive({
             productos: [],
             email: '',
@@ -28,7 +29,46 @@ createApp({
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
         });
-        
+
+        function toggleLike(prenda) {
+            let encontrado = false;
+            for (let i = 0; i < likes.length; i++) {
+                if (likes[i].id_prenda === prenda.id_prenda) {
+                    likes.splice(i, 1);
+                    encontrado = true;
+                }
+            }
+            if (!encontrado) {
+                likes.push(prenda);
+            }
+        }
+
+
+        //esta funcion comprueba si la prenda ya ha sido guardada
+        function isLiked(prenda) {
+            for (let i = 0; i < likes.length; i++) {
+                if (likes[i].id_prenda === prenda.id_prenda) {
+                    return true; 
+                }
+            }
+            return false; 
+        }
+
+        function mostrarLikes() {
+            if (likes.length === 0) {
+                Swal.fire({
+                    text: `No tienes productos guardados`,
+                    timer: 4000,
+                    showConfirmButton: false,
+                    position:'top-start',
+                    toast: true,
+                    background: '#fff',
+                });
+            }
+            productosFiltrados.value = likes;
+            divActual.value = 'likes';
+        }
+
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
@@ -77,7 +117,19 @@ createApp({
                 imagenes: prenda.imagenes,
                 talla: talla,
             });
+            Swal.fire({
+                title: 'Producto añadido',
+                text: `Has añadido "${prenda.nombre}" a la cesta`,
+                icon: 'success',
+                timer: 4000,
+                showConfirmButton: false,
+                position: 'bottom-end',
+                toast: true,
+                background: '#fff',
+                timerProgressBar: true
+            });
         }
+
 
         function quitarCesta(prenda) {
             const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
@@ -99,20 +151,18 @@ createApp({
 
         function toggleCarritoLateral() {
             carritoVisible.value = !carritoVisible.value;
-          }
-          
+        }
+
 
         function finalizarCompra() {
             const total = totalCarrito();
-            
-
 
             if (!correoElectronico.value) {
                 errorEmail.value = "Escribe tu gmail";
                 return;
             }
-            
-        
+
+
             const datosCompra = {
                 productos: carrito.map(item => ({
                     id_prenda: item.id_prenda,
@@ -122,9 +172,9 @@ createApp({
                 total: total.toFixed(2),
                 email: correoElectronico.value
             };
-        
+
             console.log("Datos a enviar:", JSON.stringify(datosCompra));
-        
+
             fetch('http://tr1g1.daw.inspedralbes.cat/public/api/compras', {
                 method: 'POST',
                 headers: {
@@ -132,26 +182,26 @@ createApp({
                 },
                 body: JSON.stringify(datosCompra),
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la compra');
-                }
-                return response.json();
-            })
-            .then(data => {
-                compraExitosa.productos = [];
-                for (const item of carrito) {
-                    compraExitosa.productos.push(item);
-                }
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la compra');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    compraExitosa.productos = [];
+                    for (const item of carrito) {
+                        compraExitosa.productos.push(item);
+                    }
 
-                compraExitosa.email = correoElectronico.value;
-                compraExitosa.total = total;
-                canviarDiv('divFinal');
-                carrito.splice(0, carrito.length);  
-            })
-            .catch(error => {
-                console.error('Error al finalizar la compra:', error);
-            });
+                    compraExitosa.email = correoElectronico.value;
+                    compraExitosa.total = total;
+                    canviarDiv('divFinal');
+                    carrito.splice(0, carrito.length);
+                })
+                .catch(error => {
+                    console.error('Error al finalizar la compra:', error);
+                });
         }
 
         function totalCarrito() {
@@ -165,7 +215,7 @@ createApp({
         }
 
         return {
-            infoTotal,carritoVisible,toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex,filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta,carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada,seleccionarTalla, finalizarCompra, correoElectronico,totalCarrito, compraExitosa
+            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
         };
     },
 }).mount("#appVue");

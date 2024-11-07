@@ -19,11 +19,14 @@
                 nuestra tienda y descubre más.
             </div>
         </div>
-
         <!-- Panel Superior -->
         <div class="panelSuperior">
             <div class="navUser">
-                <div class="navIzq"></div>
+                <div class="navIzq">
+                    <button id="btn-carrito" class="icono" @click="mostrarLikes()">
+                        <i class="fa fa-heart-o" style="font-size: 20px;"></i>
+                    </button>
+                </div>
                 <div class="navCentro">
                     <img src="./img/logo.png" alt="Inicio" @click="canviarDiv('portada')" class="img-inicio">
                 </div>
@@ -31,7 +34,6 @@
                     <button id="btn-carrito" class="icono" @click="toggleCarritoLateral">
                         <i class="fa fa-shopping-basket" style="font-size: 20px;"></i>
                     </button>
-
                 </div>
             </div>
             <div id="navCat" class="navCat">
@@ -64,6 +66,26 @@
                 carrito</button>
         </div>
 
+        <!-- Div específico para los likes -->
+        <div v-if="mostrarDiv('likes')" class="contenido-likes">
+            <h2>Tus guardados</h2>
+            <div id="likes">
+                <div v-if="productosFiltrados.length === 0">
+                    <p>No hay prendas guardadas.</p>
+                </div>
+                <div v-for="prenda in productosFiltrados" :key="prenda.id" class="prenda"
+                    @click="verInfoPrenda(prenda)">
+                    <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
+                    <p>{{ prenda.descripcion }}</p>
+                    <p>{{ prenda.precio }} €</p>
+
+                    <!-- Botón de "like" -->
+                    <button id="btn-like" class="icono" @click.stop="toggleLike(prenda)">
+                        <i class="fa" :class="isLiked(prenda) ? 'fa-heart' : 'fa-heart-o'" style="font-size: 20px;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Contenido de la Portada -->
         <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
@@ -97,6 +119,10 @@
                     <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                     <p>{{ prenda.descripcion }}</p>
                     <p>{{ prenda.precio }}</p>
+                    <p><button id="btn-carrito" class="icono" @click.stop="toggleLike(prenda)">
+                            <i class="fa" :class="isLiked(prenda) ? 'fa-heart' : 'fa-heart-o'"
+                                style="font-size: 20px;"></i>
+                        </button></p>
                 </div>
             </div>
         </div>
@@ -123,9 +149,6 @@
                 <button id="botonFinalizarCompra" @click="finalizarCompra">Finalizar Compra</button>
             </div>
         </div>
-
-
-
         <!-- Información de la Prenda Seleccionada -->
         <div v-if="mostrarDiv('infoPrenda')" id="infoPrenda">
             <h1>{{ prendaSeleccionada.nombre }}</h1>
@@ -206,6 +229,7 @@
     <script type="module" src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
     <script type="module" src="./js/comunicationManager.js"></script>
     <script type="module" src="./js/functions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
