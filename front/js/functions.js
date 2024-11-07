@@ -121,7 +121,7 @@ createApp({
                 title: 'Producto añadido',
                 text: `Has añadido "${prenda.nombre}" a la cesta`,
                 icon: 'success',
-                timer: 4000,
+                timer: 1000,
                 showConfirmButton: false,
                 position: 'bottom-end',
                 toast: true,
@@ -175,8 +175,7 @@ createApp({
 
             console.log("Datos a enviar:", JSON.stringify(datosCompra));
 
-        //localhost:8000/api/compras
-            fetch('tr1g1.daw.inspedralbes.cat/public/api/compras', {
+            fetch('http://tr1g1.daw.inspedralbes.cat/public/api/compras', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

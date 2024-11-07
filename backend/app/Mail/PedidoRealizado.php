@@ -3,10 +3,9 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\content;
 use Illuminate\Queue\SerializesModels;
 
 class PedidoRealizado extends Mailable
@@ -16,19 +15,20 @@ class PedidoRealizado extends Mailable
     public $compra;
     public $productosDetalles;
 
-    /**
-     * Crea una nueva instancia de mensaje.
-     */
-    public function __construct($compra, $productosDetalles)
+    public function __construct($compra, $productos)
     {
         $this->compra = $compra;
-        $this->productosDetalles = $productosDetalles;
+
+        // Convertir cada producto a un objeto para evitar errores de acceso
+        $this->productosDetalles = array_map(function($producto) {
+            return (object) $producto;
+        }, $productos);
     }
 
     public function build()
     {
-        return $this->view('emails.compra_recibida')
-                    ->subject('Confirmación de tu compra')
+        return $this->subject('Confirmación de Compra')
+                    ->view('emails.compra_realizada')
                     ->with([
                         'compra' => $this->compra,
                         'productosDetalles' => $this->productosDetalles
