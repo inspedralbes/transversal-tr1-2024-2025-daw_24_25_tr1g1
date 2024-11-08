@@ -17,18 +17,36 @@ createApp({
         const correoElectronico = ref('');
         const errorEmail = ref('');
         const likes = reactive([]);
+        const currentIndex = ref(0);
+
         const compraExitosa = reactive({
             productos: [],
             email: '',
             total: 0
         });
 
+        // Nueva propiedad para el índice actual de la imagen en el slider
+     
         // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
         });
+
+        // Función para mover el slider a la izquierda
+        function slideIzq() {
+            if (prendaSeleccionada.value && currentIndex.value > 0) {
+                currentIndex.value--;
+            }
+        }
+
+        // Función para mover el slider a la derecha
+        function slideDer() {
+            if (prendaSeleccionada.value && currentIndex.value < prendaSeleccionada.value.imagenes.length - 1) {
+                currentIndex.value++;
+            }
+        }
 
         function toggleLike(prenda) {
             let encontrado = false;
@@ -43,15 +61,13 @@ createApp({
             }
         }
 
-
-        //esta funcion comprueba si la prenda ya ha sido guardada
         function isLiked(prenda) {
             for (let i = 0; i < likes.length; i++) {
                 if (likes[i].id_prenda === prenda.id_prenda) {
-                    return true; 
+                    return true;
                 }
             }
-            return false; 
+            return false;
         }
 
         function mostrarLikes() {
@@ -60,7 +76,7 @@ createApp({
                     text: `No tienes productos guardados`,
                     timer: 4000,
                     showConfirmButton: false,
-                    position:'top-start',
+                    position: 'top-start',
                     toast: true,
                     background: '#fff',
                 });
@@ -68,7 +84,6 @@ createApp({
             productosFiltrados.value = likes;
             divActual.value = 'likes';
         }
-
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
@@ -104,32 +119,53 @@ createApp({
             mostrar.value = false;
         }
 
-        // Funciones de manejo del carrito
-        function seleccionarTalla(talla) {
-            tallaSeleccionada.value = talla;
-        }
+      function seleccionarTalla(talla) {
+    // Si la talla seleccionada actualmente es la misma que la clickeada, deseleccionamos
+    tallaSeleccionada.value = tallaSeleccionada.value === talla ? null : talla;
+}
 
-        function agregarACesta(prenda, talla) {
-            carrito.push({
-                id_prenda: prenda.id_prenda,
-                nombre: prenda.nombre,
-                precio: prenda.precio,
-                imagenes: prenda.imagenes,
-                talla: talla,
-            });
-            Swal.fire({
-                title: 'Producto añadido',
-                text: `Has añadido "${prenda.nombre}" a la cesta`,
-                icon: 'success',
-                timer: 4000,
-                showConfirmButton: false,
-                position: 'bottom-end',
-                toast: true,
-                background: '#fff',
-                timerProgressBar: true
-            });
-        }
+function agregarACesta(prenda, talla) {
+    // Verifica si la talla está seleccionada
+    if (!talla) {
+        // Mostrar alerta si no hay una talla seleccionada
+        Swal.fire({
+            title: 'Selecciona una talla',
+            text: `Por favor, selecciona una talla antes de añadir "${prenda.nombre}" a la cesta.`,
+            icon: 'warning',
+            timer: 3000,
+            showConfirmButton: false,
+            position: 'bottom-end',
+            toast: true,
+            background: '#fff',
+            timerProgressBar: true
+        });
+        return; // Salir de la función si no hay talla seleccionada
+    }
 
+    // Agregar producto con la talla seleccionada al carrito
+    carrito.push({
+        id_prenda: prenda.id_prenda,
+        nombre: prenda.nombre,
+        precio: prenda.precio,
+        imagenes: prenda.imagenes,
+        talla: talla.nombre, // Solo guardamos el nombre de la talla
+    });
+
+    // Confirmación de que el producto se ha añadido al carrito
+    Swal.fire({
+        title: 'Producto añadido',
+        text: `Has añadido "${prenda.nombre}" en talla "${talla.nombre}" a la cesta.`,
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+        position: 'bottom-end',
+        toast: true,
+        background: '#fff',
+        timerProgressBar: true
+    });
+
+    // No restablecer la talla seleccionada para que no se pierda
+}
 
         function quitarCesta(prenda) {
             const index = carrito.findIndex(item => item.id_prenda === prenda.id_prenda && item.talla === prenda.talla);
@@ -153,7 +189,6 @@ createApp({
             carritoVisible.value = !carritoVisible.value;
         }
 
-
         function finalizarCompra() {
             const total = totalCarrito();
 
@@ -161,7 +196,6 @@ createApp({
                 errorEmail.value = "Escribe tu gmail";
                 return;
             }
-
 
             const datosCompra = {
                 productos: carrito.map(item => ({
@@ -215,7 +249,7 @@ createApp({
         }
 
         return {
-            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
+            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa, slideIzq, slideDer, currentIndex
         };
     },
 }).mount("#appVue");

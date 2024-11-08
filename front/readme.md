@@ -495,32 +495,12 @@ body {
   background: 0;
   cursor: pointer;
   border: 1px solid black;
-  transition: background-color 0.3s ease; /* Añadir transición suave */
-}
-
-#botonTalla.selected {
-  background-color: #bdbdbd; /* Cambia el color cuando está seleccionado */
-  color: white;
 }
 
 #botonTalla:focus {
   color: rgb(104, 104, 104);
   border: 1px solid rgb(104, 104, 104);
-  background-color: #bdbdbd;
 }
-
-#botonTalla.sin-stock {
-  background-color: #f1f1f1; /* Fondo gris claro para sin stock */
-  color: #999; /* Texto gris claro */
-  border: 1px solid #ddd; /* Borde gris claro */
-  cursor: not-allowed; /* Cursor deshabilitado */
-}
-
-#botonTalla:not(.selected) {
-  background-color: white; /* Aseguramos que el fondo sea blanco cuando no esté seleccionado */
-  color: black; /* Mantener el color negro cuando no esté seleccionado */
-}
-
 
 @media (min-width: 768px) {
   .info-prenda {
