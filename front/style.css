@@ -660,3 +660,20 @@ body {
         max-width: 300px;
     }
 }
+.paginacion {
+    text-align: center; 
+    margin-top: 20px; 
+}
+
+.paginacion button {
+    margin: 0 10px;
+    padding: 10px 15px; 
+    background-color: #ffffff;
+    color: rgb(0, 0, 0); 
+    border-color:#000; 
+    cursor: pointer; 
+}
+
+.paginacion button:hover {
+    background-color: #6d6d6d; /* Color de fondo al pasar el mouse */
+}
