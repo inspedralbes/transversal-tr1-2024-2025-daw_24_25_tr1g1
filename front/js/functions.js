@@ -1,5 +1,5 @@
 import { createApp, ref, reactive, onBeforeMount } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
-import { getProductes } from './comunicationManager.js';
+import { getProductes, realizarCompra } from './comunicationManager.js';
 
 createApp({
     setup() {
@@ -147,15 +147,13 @@ createApp({
             carritoVisible.value = !carritoVisible.value;
         }
 
-
-        function finalizarCompra() {
+        async function finalizarCompra() {
             const total = totalCarrito();
 
             if (!correoElectronico.value) {
                 errorEmail.value = "Escribe tu gmail";
                 return;
             }
-
 
             const datosCompra = {
                 productos: carrito.map(item => ({
@@ -167,35 +165,18 @@ createApp({
                 email: correoElectronico.value
             };
 
-            console.log("Datos a enviar:", JSON.stringify(datosCompra));
+            try {
+                console.log("Datos a enviar:", JSON.stringify(datosCompra));
+                const data = await realizarCompra(datosCompra);
 
-            fetch('http://tr1g1.daw.inspedralbes.cat/public/api/compras', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(datosCompra),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la compra');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    compraExitosa.productos = [];
-                    for (const item of carrito) {
-                        compraExitosa.productos.push(item);
-                    }
-
-                    compraExitosa.email = correoElectronico.value;
-                    compraExitosa.total = total;
-                    canviarDiv('divFinal');
-                    carrito.splice(0, carrito.length);
-                })
-                .catch(error => {
-                    console.error('Error al finalizar la compra:', error);
-                });
+                compraExitosa.productos = carrito.slice();
+                compraExitosa.email = correoElectronico.value;
+                compraExitosa.total = total;
+                canviarDiv('divFinal');
+                carrito.splice(0, carrito.length);
+            } catch (error) {
+                console.error('Error al finalizar la compra:', error);
+            }
         }
 
         function totalCarrito() {
@@ -209,7 +190,7 @@ createApp({
         }
 
         return {
-            infoTotal, getValoracionRandom, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
+            infoTotal, finalizarCompra, getValoracionRandom, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
             , paginaAnterior, paginaSiguiente, totalPaginas,
             paginaActual, productoXpagina
         };
