@@ -22,13 +22,33 @@ createApp({
             email: '',
             total: 0
         });
+        const paginaActual = ref(1);
+        const productosPorPagina = 3;
 
         // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
             infoTotal.data.productos = data.productos;
-        });
+        })
+
+        function productosPaginados() {
+            const inicio = (paginaActual.value - 1) * productosPorPagina;
+            const fin = inicio + productosPorPagina;
+            return productosFiltrados.value.slice(inicio, fin);
+        }
+        function siguientePagina() {
+            if ((paginaActual.value * productosPorPagina) < productosFiltrados.value.length) {
+                paginaActual.value++;
+            }
+        }
+        
+        function paginaAnterior() {
+            if (paginaActual.value > 1) {
+                paginaActual.value--;
+            }
+        }
+        ;
 
         function toggleLike(prenda) {
             let encontrado = false;
@@ -48,10 +68,10 @@ createApp({
         function isLiked(prenda) {
             for (let i = 0; i < likes.length; i++) {
                 if (likes[i].id_prenda === prenda.id_prenda) {
-                    return true; 
+                    return true;
                 }
             }
-            return false; 
+            return false;
         }
 
         function mostrarLikes() {
@@ -60,7 +80,7 @@ createApp({
                     text: `No tienes productos guardados`,
                     timer: 4000,
                     showConfirmButton: false,
-                    position:'top-start',
+                    position: 'top-start',
                     toast: true,
                     background: '#fff',
                 });
@@ -90,10 +110,12 @@ createApp({
             if (index >= 0 && index < infoTotal.data.categorias.length) {
                 activeIndex.value = index;
                 mostrar.value = true;
-                divActual.value = 'prendas';
                 productosFiltrados.value = infoTotal.data.categorias[index].prendas;
+                paginaActual.value = 1;
+                divActual.value = 'prendas';
             }
         }
+        
 
         function mostrarDiv(id) {
             return id === divActual.value;
@@ -121,7 +143,7 @@ createApp({
                 title: 'Producto añadido',
                 text: `Has añadido "${prenda.nombre}" a la cesta`,
                 icon: 'success',
-                timer: 4000,
+                timer: 1000,
                 showConfirmButton: false,
                 position: 'bottom-end',
                 toast: true,
@@ -167,14 +189,15 @@ createApp({
                 productos: carrito.map(item => ({
                     id_prenda: item.id_prenda,
                     talla: typeof item.talla === 'object' ? item.talla.nombre : item.talla,
-                    precio: item.precio
+                    precio: item.precio.toString()
                 })),
-                total: parseFloat(total.toFixed(2)),
+                total: total.toFixed(2),
                 email: correoElectronico.value
             };
 
             console.log("Datos a enviar:", JSON.stringify(datosCompra));
 
+            //            http://tr1g1.daw.inspedralbes.cat/public/api/compras
             fetch('http://tr1g1.daw.inspedralbes.cat/public/api/compras', {
                 method: 'POST',
                 headers: {
@@ -215,7 +238,7 @@ createApp({
         }
 
         return {
-            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
+            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas,productosPaginados,siguientePagina,paginaAnterior,paginaActual,productosPorPagina, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
         };
     },
 }).mount("#appVue");
