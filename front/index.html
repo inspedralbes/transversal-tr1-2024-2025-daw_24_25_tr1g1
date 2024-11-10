@@ -114,6 +114,7 @@
                 </div>
                 <div id="prendas">
                     <div v-for="prenda in productosPaginados()" :key="prenda.id" class="prenda" @click="verInfoPrenda(prenda)">
+                    <p id="valoracion">{{ getValoracionRandom() }}/5 <i class="fa fa-star"></i></p>
                         <img v-if="prenda.imagenes[0]" :src="prenda.imagenes[0]" alt="Imagen de {{ prenda.nombre }}">
                         <p>{{ prenda.descripcion }}</p>
                         <p>{{ prenda.precio }}</p>

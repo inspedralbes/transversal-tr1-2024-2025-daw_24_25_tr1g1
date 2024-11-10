@@ -32,6 +32,10 @@ createApp({
             infoTotal.data.productos = data.productos;
         })
 
+        function getValoracionRandom() {
+            return Math.floor(Math.random() * 5) + 1;
+        }
+
         function productosPaginados() {
             const inicio = (paginaActual.value - 1) * productosPorPagina;
             const fin = inicio + productosPorPagina;
@@ -239,7 +243,7 @@ createApp({
         }
 
         return {
-            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosPaginados, siguientePagina, paginaAnterior, paginaActual, productosPorPagina, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
+            infoTotal,getValoracionRandom, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosPaginados, siguientePagina, paginaAnterior, paginaActual, productosPorPagina, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
         };
     },
 }).mount("#appVue");
