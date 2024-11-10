@@ -90,7 +90,7 @@
             <div v-if="mostrarDiv('portada')" id="portada" class="contenido-portada">
                 <div class="descripcion-portada">
                     <div class="div-portada">
-                        <img src="./img/ade9d580-d18c-4bad-a4b4-11f7e7f8f25d_skate-caps-web.webp"
+                        <img src="https://www.off---white.com/BWStaticContent/53000/cc4aec09-a36c-4b21-ad12-fc945f4afe6f_modulo-1-web.jpg"
                             @click="canviarDiv('portada')" class="img-inicio">
                     </div>
                     <p id="id-descripcion">"CUTE FEELINGS"</p>
@@ -176,15 +176,20 @@
                         <div class="tallas-recuadro">
                             <p>Tallas disponibles:</p>
                             <div>
-                                <label v-for="talla in prendaSeleccionada.tallas" :key="talla.id_talla">
-                                    <button v-if="talla.stock > 0" id="botonTalla"
-                                        :class="{ 'sin-stock': talla.stock === 0 }" @click="seleccionarTalla(talla)">
-                                        {{ talla.nombre }}
-                                    </button>
-                                </label>
+                                <div>
+                                    <label v-for="talla in prendaSeleccionada?.tallas || []" :key="talla.id_talla">
+                                        <button v-if="talla.stock > 0"
+                                                id="botonTalla"
+                                                :class="{ 'sin-stock': talla.stock === 0 }"
+                                                @click="seleccionarTalla(talla)">
+                                            {{ talla.nombre }}
+                                        </button>
+                                    </label>
+                                </div>                
                             </div>
-                            <button id="prendaAñadirCesta"
-                                @click="agregarACesta(prendaSeleccionada, tallaSeleccionada, id_prenda)">
+                            
+                            <button :disabled="!tallaSeleccionada" id="prendaAñadirCesta"
+                                    @click="agregarACesta(prendaSeleccionada, tallaSeleccionada)">
                                 +<i class="fa fa-shopping-basket"></i>
                             </button>
                         </div>

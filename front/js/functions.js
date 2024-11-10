@@ -1,15 +1,16 @@
 import { createApp, ref, reactive, onBeforeMount } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
-import { getProductes, realizarCompra } from './comunicationManager.js';
+import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
+        // Reacción y referencia de variables
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
         const filtroSexo = ref(null);
         const carritoVisible = ref(false);
         const carrito = reactive([]);
-        const divActual = ref('portada');
+        const divActual = ref('portada');  // Estado inicial en 'portada'
         const productosFiltrados = ref([]);
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
@@ -24,6 +25,7 @@ createApp({
         const paginaActual = ref(1);
         const productosPorPagina = 3;
 
+        // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
@@ -46,15 +48,21 @@ createApp({
                 paginaActual.value--;
             }
         }
-        ;
 
-        function getValoracionRandom() {
-            return Math.floor(Math.random() * 5) + 1;
+        function toggleLike(prenda) {
+            let encontrado = false;
+            for (let i = 0; i < likes.length; i++) {
+                if (likes[i].id_prenda === prenda.id_prenda) {
+                    likes.splice(i, 1);
+                    encontrado = true;
+                }
+            }
+            if (!encontrado) {
+                likes.push(prenda);
+            }
         }
 
-
-<<<<<<< HEAD
-        //esta funcion comprueba si la prenda ya ha sido guardada
+        // Esta función comprueba si la prenda ya ha sido guardada
         function isLiked(prenda) {
             for (let i = 0; i < likes.length; i++) {
                 if (likes[i].id_prenda === prenda.id_prenda) {
@@ -74,38 +82,10 @@ createApp({
                     toast: true,
                     background: '#fff',
                 });
-=======
-        /* PAGINACIÓN */
-        const productoXpagina = ref(4);
-        const paginaActual = ref(1);
-
-        function totalPaginas() {
-            const totalProductos = productosFiltrados.value.length;
-            const paginas = totalProductos / productoXpagina.value;
-            return paginas === parseInt(paginas) ? paginas : parseInt(paginas) + 1;
-        }
-
-        const paginacion = () => {
-            const start = (paginaActual.value - 1) * productoXpagina.value;
-            const end = start + productoXpagina.value;
-            productosFiltrados.value = productosFiltrados.value.slice(start, end);
-        };
-
-        function paginaAnterior() {
-            if (paginaActual.value > 1) {
-                paginaActual.value--;
-                paginacion();
->>>>>>> af6b21d1e6212fecbe3818b3044fa2432ddc2146
             }
+            productosFiltrados.value = likes;
+            divActual.value = 'likes';
         }
-
-        function paginaSiguiente() {
-            if (paginaActual.value < totalPaginas()) {
-                paginaActual.value++;
-                paginacion();
-            }
-        }
-        /* FIN PAGINACION */
 
         function filtrarPrendas(sexo) {
             filtroSexo.value = sexo;
@@ -120,7 +100,7 @@ createApp({
                 }
                 productosFiltrados.value = productosFiltradosTemp;
             }
-
+            divActual.value = 'prendas';
         }
 
         function mostrarCategorias(index) {
@@ -129,10 +109,9 @@ createApp({
                 mostrar.value = true;
                 productosFiltrados.value = infoTotal.data.categorias[index].prendas;
                 paginaActual.value = 1;
-                divActual.value = 'prendas';
+                divActual.value = 'prendas';  // Cambia de 'portada' a 'prendas'
             }
         }
-        
 
         function mostrarDiv(id) {
             return id === divActual.value;
@@ -143,12 +122,22 @@ createApp({
             mostrar.value = false;
         }
 
-        // Funciones de manejo del carrito
         function seleccionarTalla(talla) {
             tallaSeleccionada.value = talla;
         }
-
+        
         function agregarACesta(prenda, talla) {
+            if (!talla) {
+                Swal.fire({
+                    text: "Selecciona una talla antes de añadir a la cesta.",
+                    icon: 'warning',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                return;
+            }
+            
+            // Resto de la lógica para agregar a la cesta
             carrito.push({
                 id_prenda: prenda.id_prenda,
                 nombre: prenda.nombre,
@@ -156,6 +145,8 @@ createApp({
                 imagenes: prenda.imagenes,
                 talla: talla,
             });
+            
+            // Mensaje de éxito para agregar a la cesta
             Swal.fire({
                 title: 'Producto añadido',
                 text: `Has añadido "${prenda.nombre}" a la cesta`,
@@ -175,24 +166,20 @@ createApp({
             if (index > -1) carrito.splice(index, 1);
         }
 
-        // Funciones de manejo de información de productos
         function verInfoPrenda(prenda) {
             if (prenda) {
                 prendaSeleccionada.value = prenda;
-                if (prenda.tallas && prenda.tallas.length > 0) {
-                    tallaSeleccionada.value = prenda.tallas[0].nombre;
-                } else {
-                    tallaSeleccionada.value = null;
-                }
+                tallaSeleccionada.value = null; 
                 canviarDiv('infoPrenda');
             }
         }
+        
 
         function toggleCarritoLateral() {
             carritoVisible.value = !carritoVisible.value;
         }
 
-        async function finalizarCompra() {
+        function finalizarCompra() {
             const total = totalCarrito();
 
             if (!correoElectronico.value) {
@@ -210,12 +197,8 @@ createApp({
                 email: correoElectronico.value
             };
 
-            try {
-                console.log("Datos a enviar:", JSON.stringify(datosCompra));
-                const data = await realizarCompra(datosCompra);
+            console.log("Datos a enviar:", JSON.stringify(datosCompra));
 
-<<<<<<< HEAD
-            //            http://tr1g1.daw.inspedralbes.cat/public/api/compras
             fetch('http://tr1g1.daw.inspedralbes.cat/public/api/compras', {
                 method: 'POST',
                 headers: {
@@ -243,16 +226,6 @@ createApp({
                 .catch(error => {
                     console.error('Error al finalizar la compra:', error);
                 });
-=======
-                compraExitosa.productos = carrito.slice();
-                compraExitosa.email = correoElectronico.value;
-                compraExitosa.total = total;
-                canviarDiv('divFinal');
-                carrito.splice(0, carrito.length);
-            } catch (error) {
-                console.error('Error al finalizar la compra:', error);
-            }
->>>>>>> af6b21d1e6212fecbe3818b3044fa2432ddc2146
         }
 
         function totalCarrito() {
@@ -266,13 +239,7 @@ createApp({
         }
 
         return {
-<<<<<<< HEAD
-            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas,productosPaginados,siguientePagina,paginaAnterior,paginaActual,productosPorPagina, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
-=======
-            infoTotal, finalizarCompra, getValoracionRandom, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
-            , paginaAnterior, paginaSiguiente, totalPaginas,
-            paginaActual, productoXpagina
->>>>>>> af6b21d1e6212fecbe3818b3044fa2432ddc2146
+            infoTotal, likes, mostrarLikes, toggleLike, isLiked, carritoVisible, toggleCarritoLateral, mostrarCategorias, canviarDiv, mostrarDiv, mostrar, activeIndex, filtroSexo, filtrarPrendas, productosPaginados, siguientePagina, paginaAnterior, paginaActual, productosPorPagina, productosFiltrados, agregarACesta, quitarCesta, carrito, verInfoPrenda, prendaSeleccionada, tallaSeleccionada, seleccionarTalla, finalizarCompra, correoElectronico, totalCarrito, compraExitosa
         };
     },
 }).mount("#appVue");
