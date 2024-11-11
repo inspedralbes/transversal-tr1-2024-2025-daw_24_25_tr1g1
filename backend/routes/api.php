@@ -2,12 +2,12 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\PasarDatosController;
+    use App\Http\Controllers\CompraController;
 
+    // API Gestionar prendas
+    Route::prefix('prendas')->group(function () {
+        Route::get('/', [PasarDatosController::class, 'listarPrendas'])->name('api.prendas.listar');
+    });
 
-    Route::get('/datos', [PasarDatosController::class, 'listarPrendas']);
-
-    
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    })->middleware('auth:sanctum');
-
+    // Hacer compra
+    Route::post('/compras', [CompraController::class, 'listaCompra'])->name('api.compras.lista');

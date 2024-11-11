@@ -3,14 +3,13 @@ import { getProductes } from './comunicationManager.js';
 
 createApp({
     setup() {
-        // Reacción y referencia de variables
         const infoTotal = reactive({ data: { categorias: [], productos: [] } });
         const mostrar = ref(false);
         const activeIndex = ref(0);
         const filtroSexo = ref(null);
         const carritoVisible = ref(false);
         const carrito = reactive([]);
-        const divActual = ref('portada');  // Estado inicial en 'portada'
+        const divActual = ref('portada');  
         const productosFiltrados = ref([]);
         const tallaSeleccionada = ref(null);
         const prendaSeleccionada = ref(null);
@@ -25,7 +24,6 @@ createApp({
         const paginaActual = ref(1);
         const productosPorPagina = 3;
 
-        // Carga de datos al montar el componente
         onBeforeMount(async () => {
             const data = await getProductes();
             infoTotal.data.categorias = data.categorias;
@@ -62,7 +60,6 @@ createApp({
             }
         }
 
-        // Esta función comprueba si la prenda ya ha sido guardada
         function isLiked(prenda) {
             for (let i = 0; i < likes.length; i++) {
                 if (likes[i].id_prenda === prenda.id_prenda) {
@@ -109,7 +106,7 @@ createApp({
                 mostrar.value = true;
                 productosFiltrados.value = infoTotal.data.categorias[index].prendas;
                 paginaActual.value = 1;
-                divActual.value = 'prendas';  // Cambia de 'portada' a 'prendas'
+                divActual.value = 'prendas'; 
             }
         }
 
@@ -137,7 +134,6 @@ createApp({
                 return;
             }
             
-            // Resto de la lógica para agregar a la cesta
             carrito.push({
                 id_prenda: prenda.id_prenda,
                 nombre: prenda.nombre,
@@ -146,7 +142,6 @@ createApp({
                 talla: talla,
             });
             
-            // Mensaje de éxito para agregar a la cesta
             Swal.fire({
                 title: 'Producto añadido',
                 text: `Has añadido "${prenda.nombre}" a la cesta`,

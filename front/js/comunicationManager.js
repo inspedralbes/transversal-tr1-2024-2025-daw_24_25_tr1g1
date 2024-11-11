@@ -1,5 +1,5 @@
 export async function getProductes() {
-    const response = await fetch('./data.json'); // Ajuste aquí
+    const response = await fetch('http://tr1g1.daw.inspedralbes.cat/public/api/datos'); 
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
